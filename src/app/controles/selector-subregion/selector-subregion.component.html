@@ -1,0 +1,10 @@
+<mat-form-field appearance="fill">
+    <mat-label>SUB REGION</mat-label>
+    <mat-select  required (selectionChange)="selecionoRegion($event)" #selectorsubregion>
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let subregion of subregiones" [value]="subregion.value">
+        {{subregion.label}}
+      </mat-option>
+    </mat-select>
+ 
+</mat-form-field>

@@ -1,0 +1,46 @@
+  <!-- The timeline -->
+  <div class="timeline timeline-inverse" *ngFor="let hospitalizado of hospitalizados">
+    <!-- timeline time label -->
+    <div class="time-label">
+      <span class="bg-danger">
+       {{hospitalizado.fecha_hos}}
+      </span>
+    </div>
+    <!-- /.timeline-label -->
+    <!-- timeline item -->
+    <div>
+      <i class="fas fa-phone bg-primary"></i>
+
+      <div class="timeline-item">
+        <span class="time"><i class="far fa-clock"></i> 12:05</span>
+
+        <h3 class="timeline-header"><a href="#">Servicio</a> {{hospitalizado.servicio}}</h3>
+
+        <div class="timeline-body">
+          <div class="info-box">
+            <span class="info-box-icon bg-info"><i class="fa fa-check"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Evolucion</span>
+              <span class="info-box-number">{{hospitalizado.evolucion}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+
+          <div class="info-box">
+            <span class="info-box-icon bg-info"><i class="fa fa-question"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Ventilacion</span>
+              <span class="info-box-number">{{hospitalizado.ventilacion}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+        </div>
+        <div class="timeline-footer">
+          <a href="#" class="btn btn-primary btn-sm">Leer Mas</a>
+       
+        </div>
+      </div>
+    </div>
+    </div>

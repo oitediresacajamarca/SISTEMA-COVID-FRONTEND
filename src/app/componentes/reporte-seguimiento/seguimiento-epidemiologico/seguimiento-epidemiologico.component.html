@@ -1,0 +1,63 @@
+<mat-card class="example-card">
+    <mat-card-header>
+    
+      <mat-card-title>SEGUIMIENTO EPIDEMIOLOGICO(Ficha 200)</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="jumbotron">
+    <div *ngFor="let ficha200 of ficha200s" class="ficha200">
+
+      <div class="row fila">
+          <div class="col-4">FECHA DE SEGUIMIENTO:  {{ficha200.Ficha_200_28_fecha_notificacion}}</div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+      </div>
+      <div class="row fila">
+                <mat-divider></mat-divider>
+    </div>
+
+      <div class="row fila">
+        <div class="col-4">TOMARON PRUEBA RAPIDA:{{ficha200.Ficha_200_tomaron_prueba_rapida}}</div>
+        <div class="col-4">RESULTADO PRUEBA RAPIDA:{{ficha200.Ficha_200_resultado_prueba_rapida}}</div>
+        <div class="col-4">FECHA PRUEBA RAPIDA:{{ficha200.Ficha_200_fecha_prueba_rapida}}</div>
+        <div class="col-4">HOSPITALIZADO:{{ficha200.Ficha_200_38_hospitalizado}}</div>
+        <div class="col-4">FECHA HOSPITALIZACION:{{ficha200.Ficha_200_39_fecha_hospitalizacion}}</div>
+    </div>
+
+    <div class="row fila">
+        <mat-divider></mat-divider>
+</div>
+
+
+<div class="row fila">
+    <div class="col-12 tituloacapite">SIGNOS:</div>
+    <div class="col-4">TEMPERATURA:{{ficha200.Ficha_200_41_temeratura_paciente}}</div>
+    <div class="col-4">FECHA PRUEBA RAPIDA:{{ficha200.Ficha_200_42_marque_signos_presenta}}</div>
+    <div class="col-4">PRESENTA COMA:{{ficha200.Ficha_200_42_marque_signos_presenta_coma}}</div>
+    <div class="col-4">PRESENTA CONVULSION:{{ficha200.Ficha_200_42_marque_signos_presenta_convulsion}}</div>
+    <div class="col-4">PRESENTA DISNEA TAQUIPNEA:{{ficha200.Ficha_200_42_marque_signos_presenta_disnea_taquipnea}}</div>
+    <div class="col-4">PRESENTA EXUDADOR FARINGEO:{{ficha200.Ficha_200_42_marque_signos_presenta_exudadoFaringeo}}</div>
+    <div class="col-4">PRESENTA INTECCION CONJUNTIVA:{{ficha200.Ficha_200_42_marque_signos_presenta_inteccionConjuntival}}</div>
+</div>
+
+<div class="row fila">
+    <mat-divider></mat-divider>
+</div>
+
+<div class="row fila">
+    <div class="col-12 tituloacapite">CONDICIONES DE COMORBILIDAD:</div>
+    <div class="col-4">ASMA:{{ficha200.Ficha_200_43_condiciones_comorbilidad_asma}}</div>
+    <div class="col-4">CANCER:{{ficha200.Ficha_200_43_condiciones_comorbilidad_cancer}}</div>
+    <div class="col-4">CARDIOVASCULAR:{{ficha200.Ficha_200_43_condiciones_comorbilidad_comorbilidad_cardiovascula}}</div>
+    <div class="col-4">DIABETES:{{ficha200.Ficha_200_43_condiciones_comorbilidad_diabetes}}</div>
+    <div class="col-4">DAÑO HEPATICO:{{ficha200.Ficha_200_43_condiciones_comorbilidad_danoHepatico}}</div>
+    <div class="col-4">OBESIDAD:{{ficha200.Ficha_200_43_condiciones_comorbilidad_obesidad}}</div>
+    <div class="col-4">INMUNO DEFICIENCIA VIH:{{ficha200.Ficha_200_42_marque_signos_presenta_inteccionConjuntival}}</div>
+</div>
+    </div>
+
+</div>
+    </mat-card-content>
+</mat-card>

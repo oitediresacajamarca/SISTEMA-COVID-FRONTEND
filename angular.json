@@ -28,9 +28,23 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/admin-lte/dist/css/adminlte.min.css",
+              "node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css"
+            
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",       
+              "node_modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.js",
+              "node_modules/admin-lte/dist/js/adminlte.js",
+              "node_modules/admin-lte/plugins/chart.js/Chart.min.js",
+              "node_modules/admin-lte/dist/js/demo.js",
+              "node_modules/admin-lte/dist/js/pages/dashboard3.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -92,6 +106,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -123,6 +138,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "sistema-covid-frontend"
+    }
+  },
+  "defaultProject": "sistema-covid-frontend",
+  "cli": {
+    "analytics": "e5e43af0-0d89-4973-8994-f5986b6cbe1b"
+  }
 }

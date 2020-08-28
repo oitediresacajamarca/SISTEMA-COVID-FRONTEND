@@ -1,0 +1,36 @@
+   <!-- Post -->
+   <div class="post" *ngFor="let noti of notis" >
+    <div class="user-block">                    
+      <span class="username">
+          FECHA DE NOTIFICACION
+        <a href="#">{{noti.fecha_not}}</a>
+        <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+      </span>
+      <span class="description"></span>
+    </div>
+    <!-- /.user-block -->
+    <div class="info-box">
+        <span class="info-box-icon bg-danger"><i class="fa fa-virus"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">CLASIFICACION</span>
+          <span class="info-box-number">{{noti.clasificacion}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+
+      <div class="info-box">
+        <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">EVOLUCION</span>
+          <span class="info-box-number">{{noti.evolucion}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+
+  
+
+    
+  </div>
+  <!-- /.post -->

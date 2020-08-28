@@ -1,0 +1,61 @@
+
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="Tipo_Doc">
+      <mat-header-cell *matHeaderCellDef> Tipo_Doc</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Tipo_Doc}} </mat-cell>
+    </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="Numero_Doc">
+          <mat-header-cell *matHeaderCellDef> Numero_Doc </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Numero_Doc}} </mat-cell>
+        </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="Nombres_Paciente">
+      <mat-header-cell *matHeaderCellDef> Nombres </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Nombres_Paciente}} </mat-cell>
+    </ng-container>
+
+
+    
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Fecha_Diagnostico_Positivo">
+      <mat-header-cell *matHeaderCellDef> Fecha_Diagnostico_Positivo </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Fecha_Diagnostico_Positivo}} </mat-cell>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Edad">
+      <mat-header-cell *matHeaderCellDef> Edad </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Edad}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Provincia">
+      <mat-header-cell *matHeaderCellDef> Provincia </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Provincia}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Distrito">
+      <mat-header-cell *matHeaderCellDef> Distrito </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Distrito}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Ipress">
+      <mat-header-cell *matHeaderCellDef> Ipress </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Ipress}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="NombreIpress">
+      <mat-header-cell *matHeaderCellDef> NombreIpress </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.NombreIpress}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Acciones">
+      <mat-header-cell *matHeaderCellDef>Acciones </mat-header-cell>
+      <mat-cell *matCellDef="let element"> <button mat-raised-button color="accent" (click)="verSeguimiento(element.Numero_Doc)">VER</button> </mat-cell>
+    </ng-container> 
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>

@@ -1,0 +1,14 @@
+<mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile>
+       <app-selector-subregion (selecionoRegionEvento)="seleccionoSubregion($event)"></app-selector-subregion>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <app-selector-red #selectorRed (seleccionoRedEvent)="seleccionoRed($event)"></app-selector-red>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <app-selector-microred #selectorMicrored (seleccionoMicroredEvent)="seleccionoMicrored($event)"></app-selector-microred>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <app-selector-ipress #selectorIpress (seleccionoIpressEvent)="seleccionoIpress($event)"></app-selector-ipress>
+    </mat-grid-tile>
+</mat-grid-list>
