@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Hospitalizados } from '../compartido/interfaces/hospitalizados';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -53,8 +54,14 @@ export class HospitalizadosService {
 
 
   }
-  devolverHospitalizadosPorIdentificacion(TIPO_DOC: string, NRO_DOCUMENTO: String) {
-return this.datosEjemplo
+  devolverHospitalizadosPorIdentificacion(TIPO_DOC: string, NRO_DOCUMENTO: string) {
+
+    var headers = new HttpHeaders({ client_id: 'diresa_seguimiento', client_secret: 'WrCcm69SZOVZpUpnYuq4' });
+
+    var params = new HttpParams({ fromObject: { 'tipodoc': TIPO_DOC, 'dni': NRO_DOCUMENTO } })
+
+    return this.http.get<Hospitalizados[]>(environment.urlBackendSiscovid + 'fichas/gethospitalizadospordocumento',{headers,params})
+
 
   }
 }

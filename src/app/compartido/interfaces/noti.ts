@@ -18,7 +18,7 @@ export interface Noti {
     tipo_edad?: string;
     sexo?: string;
     tipodoc?: string;
-    dni?: number;
+    dni?: string;
     telefono?: number;
     pais_residencia?: string;
     departamento_residencia?: string;

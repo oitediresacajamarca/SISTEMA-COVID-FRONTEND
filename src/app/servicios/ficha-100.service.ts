@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Ficha100 } from '../compartido/interfaces/ficha-100';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -200,8 +201,25 @@ export class Ficha100Service {
     ]
   }
   devolverFicha100porIdentificacion(TIPO_DOC: string, NUM_DOC: string) {
+    var headers = new HttpHeaders({client_id:'diresa_seguimiento',client_secret: 'WrCcm69SZOVZpUpnYuq4'});
+   
+    var params = new HttpParams({fromObject:{'tipodoc': TIPO_DOC,'dni': NUM_DOC}})
+  
 
-    return this.ejemplo;
+   return this.http.get<Ficha100[]>(environment.urlBackendSiscovid+'fichas/getficha100pordocumento',{headers,params})
+
+    
+
+  }
+
+  devolverFicha100porNombres(Nombres: string, Apellido_Pat: string,Apellido_Mat:string) {
+
+    var headers = new HttpHeaders({client_id:'diresa_seguimiento',client_secret: 'WrCcm69SZOVZpUpnYuq4'});   
+    var params = new HttpParams({fromObject:{'nombres':'%'+Nombres+'%'+Apellido_Pat+'%'+Apellido_Mat+'%'}}) 
+
+   return this.http.get<Ficha100[]>(environment.urlBackendSiscovid+'fichas/getficha100pornombre',{headers,params})
+
+    
 
   }
 

@@ -1,0 +1,41 @@
+export interface Contactos {
+    id?: number;
+    id_ficha?: number;
+    caso?: string;
+    dniCaso?: number;
+    fecha_inv?: string;
+    tipodoc?: string;
+    dni?: number;
+    nombres?: string;
+    edad?: number;
+    tipo_edad?: string;
+    sexo?: string;
+    email?: string;
+    telefono?: number;
+    direccion?: string;
+    departamento?: string;
+    provincia?: string;
+    distrito?: string;
+    diresa?: number;
+    ubigeo?: number;
+    dameOpciones?: string;
+    otro_tipo?: string;
+    fecha_con?: string;
+    embarazo?: number;
+    trimestre?: number;
+    postparto?: number;
+    cardiovascular?: number;
+    diabetes?: number;
+    hepatica?: number;
+    neurologica?: number;
+    inmunodeficiencia?: number;
+    renal?: number;
+    hepatico?: number;
+    pulmonar?: number;
+    cancer?: number;
+    otros_comorbilidad?: string;
+    sospechoso?: string;
+    investigador?: string;
+    celular?: string;
+
+}

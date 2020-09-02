@@ -1,6 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { PanelResultados } from './panel-resultados.interface';
 import { Router } from '@angular/router';
+import { MatTable } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { EstadosService } from 'src/app/servicios/estados.service';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -17,33 +21,42 @@ export interface PeriodicElement {
 export class PanelResultadosComponent implements OnInit {
 
 
- resultados: PanelResultados[]
-  constructor(private router: Router) {
-    this.resultados = [{
-      Distrito: "CAJAMARCA",
-      Edad: 17,
-      Fecha_Diagnostico_Positivo: "17/02/2020",
-      Ipress: "0000034",
-      NombreIpress: "SAN LORENZO",
-      Nombres_Paciente: "BRIONES SALAZAR QUIROZ",
-      Numero_Doc: "67182712",
-      Provincia: "chota",
-      Tipo_Doc: "DNI"
-    }]
+  @ViewChild('tablaresultados')
+  tablaresultados: MatTable<PanelResultados>
+  @ViewChild('paginator', { static: false }) paginator: MatPaginator;
+
+
+  @Input()
+  resultados: PanelResultados[]
+  constructor(private router: Router, private estados: EstadosService) {
+
   }
 
 
 
 
   displayedColumns: string[] = ['Tipo_Doc', 'Numero_Doc', 'Nombres_Paciente', 'Fecha_Diagnostico_Positivo', 'Edad', 'Provincia', 'Distrito', 'Ipress', 'NombreIpress', 'Acciones'];
-  dataSource
+  dataSource = new MatTableDataSource<PanelResultados>([]);
 
   ngOnInit(): void {
-    this.dataSource = this.resultados
+
+    this.resultados = []
+
+
+    this.dataSource.data = this.resultados
+    this.dataSource.paginator = this.paginator;
+
+
+
+
   }
   verSeguimiento(e) {
-    console.log(e)
-    this.router.navigate(['/reporte/' + e])
+
+
+    this.estados.NRO_DOCUMENTO = e.Numero_Doc;
+    this.estados.TIP_DOCUMENTO = e.Tipo_Doc;
+
+    this.router.navigate(['/reporte/'])
 
   }
 

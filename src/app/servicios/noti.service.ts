@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Noti } from '../compartido/interfaces/noti';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class NotiService {
       "tipo_edad": "AÑOS",
       "sexo": "FEMENINO",
       "tipodoc": "DNI",
-      "dni": 7.251084100000000e+007,
+      "dni": '67182221',
       "telefono": 9.009333700000000e+008,
       "pais_residencia": "Peru",
       "departamento_residencia": "CAJAMARCA",
@@ -118,6 +119,10 @@ export class NotiService {
 
   devolverNotiPorIdentificacion(TIPO_DOCUEMNTO: string, NRO_DOCUMENTO: string) {
 
-    return this.dataEjemplo
+    var headers = new HttpHeaders({client_id:'diresa_seguimiento',client_secret: 'WrCcm69SZOVZpUpnYuq4'});
+   
+    var params = new HttpParams({fromObject:{'tipodoc': TIPO_DOCUEMNTO,'dni': NRO_DOCUMENTO}})
+
+    return this.http.get<any>(environment.urlBackendSiscovid+'fichas/getnotipordocumento',{headers,params})
   }
 }

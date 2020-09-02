@@ -15,23 +15,21 @@
             
               </div>
     
-              <h3 class="profile-username text-center">{{DatosGenerales.APE_PATERNO+' '+DatosGenerales.APE_MATERNO+' '+DatosGenerales.NOMBRES|uppercase}}</h3>
+              <h3 class="profile-username text-center">{{DatosGenerales.NOMBRES_COMPLETOS|uppercase}}</h3>
     
-              <p class="text-muted text-center">NRO DOCUMENTO:{{DatosGenerales.NRO_DOCUMENTO}}</p>
+              <p class="text-muted text-center">NRO DOCUMENTO: {{DatosGenerales.NRO_DOCUMENTO}}</p>
     
               <ul class="list-group list-group-unbordered mb-3">
+               
                 <li class="list-group-item">
-                  <b></b> <a class="float-right">1,322</a>
-                </li>
-                <li class="list-group-item">
-                  <b>Numero de Seguimientos</b> <a class="float-right">8</a>
+                  <b>Numero de Seguimientos</b> <a class="float-right">{{cantidadSeguimientos}}</a>
                 </li>
                 <li class="list-group-item">
                   <b>Evolucion Actual</b> <a class="float-right">Recuperado</a>
                 </li>
               </ul>
     
-              <a href="#" class="btn btn-primary btn-block"><b>Regresar</b></a>
+              <a  routerLink="/" class="btn btn-primary btn-block"><b>Regresar</b></a>
             </div>
             <!-- /.card-body -->
 
@@ -72,19 +70,37 @@
             <!-- /.card-body -->
           </div>
 
+      <app-estado-registro-covid></app-estado-registro-covid>  
+        
+        
+        
         </div>
 
         <div class="col-md-9">
           <div class="card">
             <div class="card-header p-2">
               <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link" href="#ficha0" data-toggle="tab">Ficha 00</a></li>
+                <li class="nav-item"><a class="nav-link" href="#pruebasr" data-toggle="tab">Pruebas Rapidas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab">Notificacion</a></li>
                 <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Seguimiento</a></li>
                 <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Hospitalizacion</a></li>
+                <li class="nav-item"><a class="nav-link" href="#sinadef" data-toggle="tab">Sinadef</a></li>
               </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
               <div class="tab-content">
+                <div class="tab-pane" id="ficha0">
+               
+                 <app-ficha00></app-ficha00> 
+  
+                  </div>
+
+                <div class="tab-pane" id="pruebasr">
+               
+                <app-pruebas-rapidas-detalle></app-pruebas-rapidas-detalle>  
+
+                </div>
                 <div class="tab-pane" id="activity">
                
                   <app-base-noti></app-base-noti>
@@ -93,13 +109,19 @@
                 <!-- /.tab-pane -->
                 <div class="tab-pane active" id="timeline">
                   <!-- The timeline -->
-              <app-seguimiento-clinico></app-seguimiento-clinico>
+              <app-seguimiento-clinico (cargoSeguimientoClinico)="datosSeguimiento($event)"></app-seguimiento-clinico>
                 </div>
                 <!-- /.tab-pane -->
 
                 <div class="tab-pane" id="settings">
-                  <app-hospitalizacion></app-hospitalizacion>
+                  <app-hospitalizacion ></app-hospitalizacion>
                 </div>
+
+                <div class="tab-pane" id="sinadef">
+               
+           <app-sinadef></app-sinadef>
+   
+                   </div>
                 <!-- /.tab-pane -->
               </div>
               <!-- /.tab-content -->

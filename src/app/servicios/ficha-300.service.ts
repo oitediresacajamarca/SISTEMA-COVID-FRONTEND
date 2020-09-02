@@ -186,7 +186,12 @@ export class Ficha300Service {
 
   }]
   devolverFicha300PorIdentificacion(TIPO_DOC: string, NRO_DOCUMENTO: string) {
-    return this.datoejemplo
+    var headers = new HttpHeaders({client_id:'diresa_seguimiento',client_secret: 'WrCcm69SZOVZpUpnYuq4'});
+   
+    var params = new HttpParams({fromObject:{'tipodoc': TIPO_DOC,'dni': NRO_DOCUMENTO}})
+  
+    return this.http.get<Ficha300[]>(environment.urlBackendSiscovid + 'fichas/getficha300pordocumento', {headers:headers
+    , params:params })
   }
 
   devolverFicha300PorIpresFechas(COD_IPRESS: string, DESDE: string, HASTA: string) {
@@ -195,7 +200,14 @@ export class Ficha300Service {
     var params = new HttpParams({fromObject:{'cod_ipress': COD_IPRESS,'fechaDesde': DESDE,'fechaHasta': HASTA}})
 
   
-    return this.http.get(environment.urlBackendSiscovid + 'fichas/getficha300porfecha', {headers:headers
+    return this.http.get<Ficha300[]>(environment.urlBackendSiscovid + 'fichas/getficha300porfecha', {headers:headers
     , params:params })
+  }
+  devolverFicha300PorNombres(Nombres:string,Apellido_Paterno:string,Apellido_Materno:string){
+
+    var headers = new HttpHeaders({client_id:'diresa_seguimiento',client_secret: 'WrCcm69SZOVZpUpnYuq4'});
+   
+
+
   }
 }

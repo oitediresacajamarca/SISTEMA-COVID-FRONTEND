@@ -20,6 +20,10 @@ import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTabsModule} from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
+import {MatPaginatorModule} from '@angular/material/paginator'
+
+
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { SelectorSubregionComponent } from './controles/selector-subregion/selector-subregion.component';
 import { SelectorRedComponent } from './controles/selector-red/selector-red.component';
@@ -37,6 +41,12 @@ import { BaseNotiComponent } from './componentes/reporte-seguimiento/base-noti/b
 import { HospitalizacionComponent } from './componentes/reporte-seguimiento/hospitalizacion/hospitalizacion.component';
 import { BusquedaPorNombreComponent } from './componentes/panel-busqueda/busqueda-por-nombre/busqueda-por-nombre.component';
 import { ColorFondoCalsificacionDirective } from './directivas/color-fondo-calsificacion.directive';
+import { BusquedaPorIdentificacionComponent } from './componentes/panel-busqueda/busqueda-por-identificacion/busqueda-por-identificacion.component';
+import { EstadoRegistroCovidComponent } from './componentes/reporte-seguimiento/encabesado/estado-registro-covid/estado-registro-covid.component';
+import { SinadefComponent } from './componentes/reporte-seguimiento/sinadef/sinadef.component';
+import { Ficha00Component } from './componentes/reporte-seguimiento/ficha00/ficha00.component';
+import { ContactosComponent } from './componentes/reporte-seguimiento/contactos/contactos.component';
+
 
 
 @NgModule({
@@ -59,7 +69,13 @@ import { ColorFondoCalsificacionDirective } from './directivas/color-fondo-calsi
     BaseNotiComponent,
     HospitalizacionComponent,
     BusquedaPorNombreComponent,
-    ColorFondoCalsificacionDirective
+    ColorFondoCalsificacionDirective,
+    BusquedaPorIdentificacionComponent,
+    EstadoRegistroCovidComponent,
+    SinadefComponent,
+    Ficha00Component,
+    ContactosComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -77,7 +93,9 @@ import { ColorFondoCalsificacionDirective } from './directivas/color-fondo-calsi
     HttpClientModule,
     MatCheckboxModule,
     MatTabsModule,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
