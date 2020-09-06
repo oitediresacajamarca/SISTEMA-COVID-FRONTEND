@@ -4,11 +4,11 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    <form role="form">
+    <form role="form" [formGroup]="formIdentificacion">
       <div class="card-body">
         <div class="form-group">
           <label for="Numero_Documento">Numero de Documento</label>
-          <input type="text" class="form-control" id="Numero_Documento" placeholder="Ingrese Numero de Documento">
+          <input type="text" class="form-control" id="Numero_Documento" placeholder="Ingrese Numero de Documento" formControlName="NRO_DOCUMENTO">
         </div>
        
       </div>

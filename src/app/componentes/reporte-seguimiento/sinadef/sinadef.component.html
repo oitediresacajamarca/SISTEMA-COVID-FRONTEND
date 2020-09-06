@@ -1,1 +1,37 @@
-<p>sinadef works!</p>
+   <!-- Post -->
+   <div class="post" *ngFor="let sinadef1 of sinadefs" >
+  
+    <div class="user-block">                    
+      <span class="username">
+          FECHA DE DEFUNCION
+        <a href="#">{{sinadef1.FECHA}}</a>
+        <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+      </span>
+      <span class="description"></span>
+    </div> 
+     
+      
+     
+      <div class="info-box">
+        <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">LUGAR</span>
+          <span class="info-box-number"> {{sinadef1.DESCRIPCION_DE_LUGAR}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+
+      <div class="info-box">
+        <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">SEGURO</span>
+          <span class="info-box-number">{{sinadef1.TIPO_SEGURO}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+
+
+  </div>
+  <!-- /.post -->

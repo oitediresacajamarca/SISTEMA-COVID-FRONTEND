@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Ficha100Service } from 'src/app/servicios/ficha-100.service';
+import { PersonasService } from 'src/app/servicios/personas.service';
 
 
 @Component({
@@ -10,8 +11,8 @@ import { Ficha100Service } from 'src/app/servicios/ficha-100.service';
 })
 export class BusquedaPorIdentificacionComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private ficha100s: Ficha100Service) { }
-  @Output('cargoResultadosEvent') cargoResultadosEvent = new EventEmitter()
+  constructor(private formBuilder: FormBuilder, private ficha100s: Ficha100Service,private personass:PersonasService) { }
+  @Output('cargoResultadosPorIndentificacionEvent') cargoResultadosPorIndentificacionEvent = new EventEmitter()
   formIdentificacion: FormGroup = new FormGroup({
 
   })
@@ -24,8 +25,8 @@ export class BusquedaPorIdentificacionComponent implements OnInit {
   }
 
   cargarRespuesta() {
-    this.ficha100s.devolverFicha100porIdentificacion('DNI', this.formIdentificacion.controls.NRO_DOCUMENTO.value).subscribe((respuesta) => {
-      this.cargoResultadosEvent.emit(respuesta)
+    this.personass.devolverPersonaPorIdentificacion('DNI', this.formIdentificacion.controls.NRO_DOCUMENTO.value).subscribe((respuesta) => {
+      this.cargoResultadosPorIndentificacionEvent.emit(respuesta)
  
     })
 

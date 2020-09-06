@@ -14,7 +14,10 @@ const routes: Routes = [
   {path:"red",component:SelectorRedComponent},
   {path:"microred",component:SelectorMicroredComponent},
   {path:"ipress",component:SelectorIpressComponent},
-  {path:"reporte",component:ReporteSeguimientoComponent}
+  {path:"reporte",component:ReporteSeguimientoComponent},
+  {path:"reporte/:nro_documento",component:ReporteSeguimientoComponent}
+
+  
 
 ];
 

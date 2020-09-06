@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SinadefService } from 'src/app/servicios/sinadef.service';
+import { EstadosService } from 'src/app/servicios/estados.service';
+import { Sinadef } from 'src/app/compartido/interfaces/sinadef';
 
 @Component({
   selector: 'app-sinadef',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SinadefComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private sinadef: SinadefService, private estados: EstadosService) { }
+  sinadefs: Sinadef[]
   ngOnInit(): void {
+    this.sinadef.devolverSindefPorIdentificacion('DNI/LE', this.estados.NRO_DOCUMENTO).subscribe((respuesta) => {
+
+      this.sinadefs = respuesta
+
+    })
   }
 
 }

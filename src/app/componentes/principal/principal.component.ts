@@ -17,7 +17,7 @@ export class PrincipalComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  cargarResultados(e) {
+  async cargarResultados(e) {
 
 
    

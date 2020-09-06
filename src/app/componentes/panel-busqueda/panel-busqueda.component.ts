@@ -15,7 +15,7 @@ export class PanelBusquedaComponent implements OnInit {
   Hasta: Date
   @Output() resultados = new EventEmitter<any>()
 
-
+  @Output() inicioBusqueda = new EventEmitter<any>()
   constructor(private ficha300s: Ficha300Service) { }
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class PanelBusquedaComponent implements OnInit {
     this.COD_IPRESS = e
   }
   buscar() {
-
+    this.inicioBusqueda.emit()
 
     this.ficha300s.devolverFicha300PorIpresFechas(this.COD_IPRESS, this.Desde.toLocaleDateString("fr-CA"), this.Hasta.toLocaleDateString("fr-CA")).subscribe((respuesta) => {
       let respuestaFomrmateada: ResultadoBusqueda[]
@@ -58,19 +58,19 @@ export class PanelBusquedaComponent implements OnInit {
 
 
     let respuestaFomrmateada: ResultadoBusqueda[]
-    respuestaFomrmateada = e.map((ficha100) => {
-      let ficha100_: Ficha100 = ficha100
+    respuestaFomrmateada = e.map((persona) => {
+      let ficha100_: any = persona
 
       let respuesta: ResultadoBusqueda = {
 
-        Tipo_Doc: ficha100_.Tipo_Documento,
-        Numero_Doc: ficha100_.Nro_Documento,
-        Edad: ficha100_.Edad,
-        Nombres_Paciente: ficha100_.nombres + ' ' + ficha100_.Apellido_Paterno + ' ' + ficha100_.Apellido_Materno,
-        Distrito: ficha100_.Distrito,
-        Provincia: ficha100_.Provincia,
+        Tipo_Doc: persona.Tipo_Documento,
+        Numero_Doc: persona.Nro_Documento,
+        Edad: null,
+        Nombres_Paciente:persona.Apellidos_Nombres ,
+        Distrito:'',
+        Provincia: '',
         Fecha_Diagnostico_Positivo: '',
-        Ipress: ficha100_.cod_establecimiento,
+        Ipress: '',
         NombreIpress: ''
       }
 
@@ -84,9 +84,9 @@ export class PanelBusquedaComponent implements OnInit {
 
   }
 
-  cargoResultadosEvent(e){
+  cargoResultadosEvent(e) {
 
-console.log(e)
+
     let respuestaFomrmateada: ResultadoBusqueda[]
     respuestaFomrmateada = e.map((ficha100) => {
       let ficha100_: Ficha100 = ficha100
@@ -112,6 +112,39 @@ console.log(e)
 
     this.resultados.emit(respuestaFomrmateada)
 
+
+
+
+  }
+
+  cargoResultadosPorIndentificacionEvent(e) {
+ 
+
+
+    let respuestaFomrmateada: ResultadoBusqueda[]
+    respuestaFomrmateada = e.map((persona:any) => {
+      let personafo  = persona
+
+      let respuesta: ResultadoBusqueda = {
+
+        Tipo_Doc: personafo.Tipo_Documento,
+        Numero_Doc: personafo.Nro_Documento,
+        Edad: 10,
+        Nombres_Paciente: personafo.Apellidos_Nombres,
+        Distrito: '',
+        Provincia: '',
+        Fecha_Diagnostico_Positivo: '',
+        Ipress: '',
+        NombreIpress: ''
+      }
+
+      return respuesta
+
+    })
+
+
+
+    this.resultados.emit(respuestaFomrmateada)
 
   }
 

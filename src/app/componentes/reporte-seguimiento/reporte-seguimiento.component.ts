@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLink, ActivatedRoute } from '@angular/router';
+import { EstadosService } from 'src/app/servicios/estados.service';
 
 @Component({
   selector: 'app-reporte-seguimiento',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReporteSeguimientoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: ActivatedRoute, private estados: EstadosService) { }
 
   ngOnInit(): void {
+    let dni = this.router.snapshot.params['nro_documento']
+    if (dni != undefined) {
+
+      this.estados.NRO_DOCUMENTO = dni
+
+    }
   }
 
 }

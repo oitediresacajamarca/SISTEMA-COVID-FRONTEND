@@ -5,12 +5,6 @@ import { MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { EstadosService } from 'src/app/servicios/estados.service';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
 
 
 @Component({
@@ -34,8 +28,8 @@ export class PanelResultadosComponent implements OnInit {
 
 
 
-
-  displayedColumns: string[] = ['Tipo_Doc', 'Numero_Doc', 'Nombres_Paciente', 'Fecha_Diagnostico_Positivo', 'Edad', 'Provincia', 'Distrito', 'Ipress', 'NombreIpress', 'Acciones'];
+//  displayedColumns: string[] = ['Tipo_Doc', 'Numero_Doc', 'Nombres_Paciente', 'Edad', 'Provincia', 'Distrito', 'Ipress', 'NombreIpress', 'Acciones'];
+  displayedColumns: string[] = ['Tipo_Doc', 'Numero_Doc', 'Nombres_Paciente', 'Edad', 'Provincia', 'Distrito', 'Acciones'];
   dataSource = new MatTableDataSource<PanelResultados>([]);
 
   ngOnInit(): void {

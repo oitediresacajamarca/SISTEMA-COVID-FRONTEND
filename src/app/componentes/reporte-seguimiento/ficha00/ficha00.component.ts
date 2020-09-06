@@ -21,5 +21,17 @@ export class Ficha00Component implements OnInit {
 
     })
   }
+  Verificar(e){
+    console.log(e)
+
+    if(e=='SI'){
+
+      return true;
+    }
+    else{
+
+      return false;
+    }
+  }
 
 }
