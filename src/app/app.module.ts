@@ -20,7 +20,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTabsModule} from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
-import {MatPaginatorModule} from '@angular/material/paginator'
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -46,6 +47,9 @@ import { EstadoRegistroCovidComponent } from './componentes/reporte-seguimiento/
 import { SinadefComponent } from './componentes/reporte-seguimiento/sinadef/sinadef.component';
 import { Ficha00Component } from './componentes/reporte-seguimiento/ficha00/ficha00.component';
 import { ContactosComponent } from './componentes/reporte-seguimiento/contactos/contactos.component';
+import { MonitorSeguimientoComponent } from './componentes/monitor-seguimiento/monitor-seguimiento.component';
+import { PaginacionDirective } from './directivas/paginacion.directive';
+import { PaginacionPipe } from './pipes/paginacion.pipe';
 
 
 
@@ -75,6 +79,9 @@ import { ContactosComponent } from './componentes/reporte-seguimiento/contactos/
     SinadefComponent,
     Ficha00Component,
     ContactosComponent,
+    MonitorSeguimientoComponent,
+    PaginacionDirective,
+    PaginacionPipe,
   
   ],
   imports: [
@@ -95,7 +102,9 @@ import { ContactosComponent } from './componentes/reporte-seguimiento/contactos/
     MatTabsModule,
     FormsModule,
     MatPaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DragDropModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
