@@ -27,56 +27,13 @@ export class MonitorSeguimientoComponent implements OnInit {
   FichasSeleccionadas: string[] = []
   CargarFichaPrimaria() {
 
-
-
   }
 
 
   async Comparar() {
     let res = await this.cruces.buscarDni().toPromise()
     console.log(res)
-    /*  this.resultadosdni = this.cruces.crusarFichas('', '')
-      this.resultados = await Promise.all(this.resultadosdni.map(async (rdni) => {
-        let resp
-        resp = await this.personass.devolverPersonaPorIdentificacion('DNI', rdni.DNI1).toPromise()
-        let el
-        if (resp.length >= 1) {
-          el = resp[0]
-        }
-        if (rdni.DNI2 == null) {
-  
-          el.existe = false
-          el.clase='bg-danger'
-        } else {
-          el.existe = true
-          el.clase='bg-info'
-        }
-        el.DNI_BUSCA
-  
-        return el
-  
-      }))
-  
-      console.log(this.resultados)*/
-
-    /*  let datosit = res
-      let fichastemp = []
-      Object.assign(fichastemp, this.FichasSeleccionadas)
-  
-      do {
-  
-        datosit = await this.cruces.buscarDnis(datosit, fichastemp[0])
-        fichastemp.splice(0, 1)
-  
-  
-      } while (fichastemp.length > 0);
-  
-      console.log(datosit)
-      console.log(this.FichasSeleccionadas)
-      this.resultados = datosit
-      this.generarPaginas()
-      */
-
+    
   }
   generarPaginas() {
     this.pages = []
@@ -94,6 +51,7 @@ export class MonitorSeguimientoComponent implements OnInit {
   devolverCrucesDnis() {
     this.cruces.devolverCruces().subscribe(respuesta => {
       this.resultados = respuesta
+
       this.generarPaginas()
     })
 

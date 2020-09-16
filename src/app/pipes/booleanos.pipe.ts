@@ -1,0 +1,19 @@
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'booleanos'
+})
+export class BooleanosPipe implements PipeTransform {
+
+  transform(value: any, ...args: unknown[]): unknown {
+    let trans = 'No Tiene'
+    if (value == true) {
+      trans = 'Si Tiene'
+    } else {
+
+      trans = 'No Tiene'
+    }
+    return value;
+  }
+
+}

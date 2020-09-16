@@ -50,6 +50,8 @@ import { ContactosComponent } from './componentes/reporte-seguimiento/contactos/
 import { MonitorSeguimientoComponent } from './componentes/monitor-seguimiento/monitor-seguimiento.component';
 import { PaginacionDirective } from './directivas/paginacion.directive';
 import { PaginacionPipe } from './pipes/paginacion.pipe';
+import { BooleanosPipe } from './pipes/booleanos.pipe';
+
 
 
 
@@ -82,6 +84,7 @@ import { PaginacionPipe } from './pipes/paginacion.pipe';
     MonitorSeguimientoComponent,
     PaginacionDirective,
     PaginacionPipe,
+    BooleanosPipe,
   
   ],
   imports: [

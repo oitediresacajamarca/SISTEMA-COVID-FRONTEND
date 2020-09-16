@@ -119,6 +119,6 @@ export class CrucesService {
   }
 
   devolverCruces(){
-   return this.http.get<any>(environment.urlBackendNode+'cruces/dnis')
+   return this.http.get<any[]>(environment.urlBackendNode+'cruces/dnis')
   }
 }
