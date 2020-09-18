@@ -4,6 +4,7 @@ import { PersonasService } from 'src/app/servicios/personas.service';
 import { DatosGeneralesPersona } from 'src/app/compartido/interfaces/datos-generales-persona';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Chart } from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 import { from } from 'rxjs';
 
 @Component({
@@ -18,81 +19,23 @@ export class MonitorSeguimientoComponent implements OnInit {
   page_number: number = 0
   page_size: number = 10000
   pages: number[]
-
+  dataPie = {}
+  contador = {}
 
   ngOnInit(): void {
     this.fichas = ['ficha0', 'ficha100', 'ficha200', 'ficha300', 'ficha400']
 
-    var myPieChart = new Chart('ficha1', {
-      type: 'bar',
-      data: {
-
-        labels: this.fichas,
-        datasets: [
-          {
-            backgroundColor: ['red', 'blue', 'green', 'red', 'blue'],
-            data: [10, 1, 4, 19, 12],
-            label: 'studiar'
-
-          }
-
-
-        ]
-
-
-      }
-
-    });
 
 
 
-    var myPieChart2 = new Chart('ficha2', {
-      type: 'bar',
-      data: {
-
-        labels: this.fichas,
-        datasets: [
-          {
-            backgroundColor: ['red', 'blue', 'green', 'red', 'blue'],
-            data: [10, 1, 4, 19, 12],
-            label: 'studiar'
-
-          }
-
-
-        ]
-
-
-      }
-
-    });
 
 
 
-    var myPieChart2 = new Chart('ficha3', {
-      type: 'bar',
-      data: {
-
-        labels: this.fichas,
-        datasets: [
-          {
-            backgroundColor: ['red', 'blue', 'green', 'red', 'blue'],
-            data: [10, 1, 4, 19, 12],
-            label: 'studiar'
-
-          }
-
-
-        ]
-
-
-      }
-
-    });
   }
   resultadosCruces: any[] = []
   resultadosdni: any[]
   resultados: any[] = []
+  resultadosfiltrados: any[] = []
   FichasSeleccionadas: string[] = []
   CargarFichaPrimaria() {
 
@@ -101,7 +44,7 @@ export class MonitorSeguimientoComponent implements OnInit {
 
   async Comparar() {
     let res = await this.cruces.buscarDni().toPromise()
-    console.log(res)
+
 
   }
   generarPaginas() {
@@ -116,12 +59,96 @@ export class MonitorSeguimientoComponent implements OnInit {
 
 
   }
+  generarDatosGrafico() {
+
+    this.FichasSeleccionadas.map((ficha) => {
+      this.contador[ficha] = { existe: 0, noexiste: 0 }
+
+
+    })
+
+    this.resultadosfiltrados.map((resultado) => {
+
+
+      this.FichasSeleccionadas.map((ficha) => {
+
+        if (resultado[ficha].existe == true) {
+          this.contador[ficha].existe = this.contador[ficha].existe + 1
+        } else {
+          this.contador[ficha].noexiste = this.contador[ficha].noexiste + 1
+        }
+
+      })
+
+    })
+
+
+  }
+
+  asignarDatosGrafico() {
+    this.FichasSeleccionadas.map((ficha) => {
+      this.dataPie[ficha] = {
+
+        labels: ['Tiene', 'No Tiene'],
+        datasets: [
+          {
+            backgroundColor: ['red', 'blue'],
+            data: [this.contador[ficha].existe, this.contador[ficha].noexiste],
+            label: ficha,
+
+
+          }
+
+
+        ],
+        plugin:[ChartDataLabels],
+        options:{
+
+          plugins: {
+            datalabels: {
+              anchor: 'start',
+              align: 'start',
+              formatter: Math.round,
+              font: {
+                weight: 'bold'
+              }
+            }
+          },
+
+          showTooltips: false,
+          onAnimationComplete: function () {
+      
+              var ctx = this.chart.ctx;
+              ctx.font = this.scale.font;
+              ctx.fillStyle = this.scale.textColor
+              ctx.textAlign = "center";
+              ctx.textBaseline = "bottom";
+      
+              this.datasets.forEach(function (dataset) {
+                  dataset.bars.forEach(function (bar) {
+                      ctx.fillText(bar.value, bar.x, bar.y - 5);
+                  });
+              })
+          }
+        }
+       
+
+
+      }
+
+
+    })
+
+
+  }
 
   devolverCrucesDnis() {
     this.cruces.devolverCruces().subscribe(respuesta => {
       this.resultados = respuesta
-
+      this.resultadosfiltrados = respuesta
       this.generarPaginas()
+      this.generarDatosGrafico()
+      this.asignarDatosGrafico()
     })
 
   }
@@ -139,6 +166,48 @@ export class MonitorSeguimientoComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
+    this.generarDatosGrafico()
+    this.asignarDatosGrafico()
+  }
+
+  selectData(event) {
+    let elementofiltra: any = {}
+
+    if (event.element._view.label == 'Tiene') {
+      elementofiltra.existe = true
+
+    } else {
+      elementofiltra.existe = false
+
+    }
+    elementofiltra.ficha = event.element._view.datasetLabel
+    console.log(elementofiltra)
+
+    this.fitrarSegunSelecGrafico(elementofiltra)
+    //event.element._datasetIndex = Index of the dataset in data
+    //event.element._index = Index of the data in dataset
+  }
+
+
+  fitrarSegunSelecGrafico(elementofiltra) {
+
+    let nuevofiltrado = []
+    this.resultadosfiltrados.map((resul) => {
+      let elementf: any = {}
+
+      if (resul[elementofiltra.ficha].existe == elementofiltra.existe) {
+
+        elementf = resul
+        nuevofiltrado.push(elementf)
+      }
+
+    })
+
+    this.resultadosfiltrados = nuevofiltrado
+    this.generarDatosGrafico()
+    this.asignarDatosGrafico()
+
+
   }
 
 }

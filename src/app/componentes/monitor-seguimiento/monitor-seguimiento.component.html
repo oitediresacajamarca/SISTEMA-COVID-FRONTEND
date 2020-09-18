@@ -143,7 +143,7 @@
                   <tbody>
                     <tr
                       *ngFor="
-                        let resultado of resultados | paginacion: page_number:page_size;
+                        let resultado of resultadosfiltrados | paginacion: page_number:page_size;
                         let i = index
                       "
                     >
@@ -262,10 +262,8 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <canvas id="ficha1" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 420px;" width="420" height="250" class="chartjs-render-monitor"></canvas>
-            <canvas id="ficha2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 420px;" width="420" height="250" class="chartjs-render-monitor"></canvas>
-          
-            <canvas id="ficha3" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 420px;" width="420" height="250" class="chartjs-render-monitor"></canvas>
+            
+            <p-chart type="bar" [data]="dataPie[ficha]" (onDataSelect)="selectData($event)" *ngFor="let ficha of FichasSeleccionadas"></p-chart>
           
           </div>
 

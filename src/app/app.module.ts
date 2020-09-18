@@ -53,6 +53,8 @@ import { PaginacionPipe } from './pipes/paginacion.pipe';
 import { BooleanosPipe } from './pipes/booleanos.pipe';
 
 
+import {ChartModule} from 'primeng/chart';
+
 
 
 @NgModule({
@@ -106,7 +108,10 @@ import { BooleanosPipe } from './pipes/booleanos.pipe';
     FormsModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
+    ChartModule
+
+
     
   ],
   providers: [],
