@@ -20,8 +20,7 @@
             
           </div>
           <!-- /.card-header -->
-          <div class="card-body">
-            
+          <div class="card-body">            
             <app-selector-ipress-completo-horizontal></app-selector-ipress-completo-horizontal>
           </div>
           <!-- /.card-body -->
@@ -117,13 +116,16 @@
             <!-- THE CALENDAR -->
             <div class="row">
               <div class="col">
-                <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                  <i class="fas fa-download"></i> EXPORTAR 
-                </button>
+               
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th style="width: 10px" colspan="6">Resultado</th>
+                      <th style="width: 10px" colspan="6">Resultado
+                        <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;" (click)="Exportar_Excel()">
+                          <i class="fas fa-download"></i> EXPORTAR 
+                        </button>
+                      </th>
+                      
                     </tr>
                   </thead>
 
@@ -140,7 +142,7 @@
                   <tbody>
                     <tr
                       *ngFor="
-                        let resultado of resultados | paginacion: page_number:page_size;
+                        let resultado of resultadosfiltrados | paginacion: page_number:page_size;
                         let i = index
                       "
                     >
@@ -149,7 +151,7 @@
                       <td>{{ resultado.Apellidos_Nombres }}</td>
                       <td *ngFor="let ficha of FichasSeleccionadas">
                         <span class="badge" [ngClass]="resultado[ficha].clase"
-                          >{{ resultado[ficha].existe |booleanos}}.</span
+                          >{{ resultado[ficha].existe |booleanos}}</span
                         >
                       </td>
                     </tr>
@@ -259,8 +261,12 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 420px;" width="420" height="250" class="chartjs-render-monitor"></canvas>
+            
+            <p-chart type="bar" [data]="dataPie[ficha]" (onDataSelect)="selectData($event)" *ngFor="let ficha of FichasSeleccionadas"></p-chart>
+          
           </div>
+
+          
           <!-- /.card-body -->
         </div>
       </div>

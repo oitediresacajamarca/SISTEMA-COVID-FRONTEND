@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {MatCardModule} from '@angular/material/card';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatTableModule} from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,14 +14,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { PanelBusquedaComponent } from './componentes/panel-busqueda/panel-busqueda.component';
 import { PanelResultadosComponent } from './componentes/panel-resultados/panel-resultados.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatSelectModule} from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -34,7 +36,7 @@ import { SelectorIpressCompletoHorizontalComponent } from './controles/selector-
 import { ReporteSeguimientoComponent } from './componentes/reporte-seguimiento/reporte-seguimiento.component';
 import { EncabesadoComponent } from './componentes/reporte-seguimiento/encabesado/encabesado.component';
 import { PruebasRapidasDetalleComponent } from './componentes/reporte-seguimiento/pruebas-rapidas-detalle/pruebas-rapidas-detalle.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EstadosPruebaRapidaComponent } from './componentes/reporte-seguimiento/pruebas-rapidas-detalle/estados-prueba-rapida/estados-prueba-rapida.component';
 import { SeguimientoEpidemiologicoComponent } from './componentes/reporte-seguimiento/seguimiento-epidemiologico/seguimiento-epidemiologico.component';
 import { SeguimientoClinicoComponent } from './componentes/reporte-seguimiento/seguimiento-clinico/seguimiento-clinico.component';
@@ -53,7 +55,14 @@ import { PaginacionPipe } from './pipes/paginacion.pipe';
 import { BooleanosPipe } from './pipes/booleanos.pipe';
 
 
+import { ChartModule } from 'primeng/chart';
+import { AdministracionEquiposComponent } from './componentes/administracion-equipos/administracion-equipos.component';
+import { EscalaAvancePipe } from './pipes/escala-avance.pipe';
+import { EscalaAvanceDirectivaDirective } from './directivas/escala-avance-directiva.directive';
+import { NuevoEquipoComponent } from './componentes/administracion-equipos/nuevo-equipo/nuevo-equipo.component';
 
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { LoginComponent } from './componentes/login/login.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +94,12 @@ import { BooleanosPipe } from './pipes/booleanos.pipe';
     PaginacionDirective,
     PaginacionPipe,
     BooleanosPipe,
-  
+    AdministracionEquiposComponent,
+    EscalaAvancePipe,
+    EscalaAvanceDirectivaDirective,
+    NuevoEquipoComponent,
+    LoginComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -98,7 +112,7 @@ import { BooleanosPipe } from './pipes/booleanos.pipe';
     MatGridListModule,
     MatExpansionModule,
     MatTableModule,
-    MatDatepickerModule,MatNativeDateModule,
+    MatDatepickerModule, MatNativeDateModule,
     MatSelectModule,
     HttpClientModule,
     MatCheckboxModule,
@@ -106,8 +120,13 @@ import { BooleanosPipe } from './pipes/booleanos.pipe';
     FormsModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-    DragDropModule
-    
+    DragDropModule,
+    ChartModule,
+    MatDialogModule,
+    ModalModule.forRoot()
+
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
