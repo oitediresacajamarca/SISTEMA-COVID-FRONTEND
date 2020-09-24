@@ -1,0 +1,96 @@
+<div class="example-card card card-primary">
+  <div class="card-header">
+    <div class="card-title">SEGUIMIENTO A PACIENTE COVID</div>
+  </div>
+
+
+<div class="card-body p-0">
+  <div class="table-responsive">
+    <table class="table m-0">
+      <thead>
+        <tr>
+          <th>CODIGO DE EQUIPO</th>
+          <th>NOMBRE</th>
+          <th>ESTADO</th>
+          <th>NUMERO DE INTEGRANTES</th>
+          <th>NUMERO DE SEGUIMIENTOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipos of listados_equipos">
+          <td>
+            <a href="pages/examples/invoice.html">{{
+              equipos.cod_equipo
+            }}</a>
+          </td>
+          <td>{{ equipos.nombre_equipo }}</td>
+          <td>
+            <span class="badge badge-success">{{
+              equipos.estado
+            }}</span>
+          </td>
+          <td>
+            <div
+              class="sparkbar"
+              data-color="#00a65a"
+              data-height="20"
+            >
+              {{ equipos.nro_integrantes }}
+            </div>
+          </td>
+          <td>
+            <div
+              _ngcontent-asm-c212=""
+              class="progress-group"
+            >
+              {{ equipos.nombre_equipo }}
+              <span
+                _ngcontent-asm-c212=""
+                class="float-right"
+                ><b _ngcontent-asm-c212="">{{
+                  equipos.seguimientos_realizados
+                }}</b
+                >/200</span
+              >
+              <div
+                _ngcontent-asm-c212=""
+                class="progress progress-sm"
+              >
+                <div
+                  _ngcontent-asm-c212=""
+                  class="progress-bar bg-primary"
+                  style="width: 10%"                                
+                  [ngClass]="{'bg-danger':equipos.seguimientos_realizados<5 , 'bg-warning':equipos.seguimientos_realizados>=5}"
+                ></div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /.table-responsive -->
+</div>
+
+
+
+<div class="card-footer clearfix">
+  <button                   
+    class="btn btn-sm btn-info float-left"
+    data-toggle="modal" data-target="#modal-primary" (click)="openModal(template)"
+    >Crear Nuevo Equipo</button>                          
+  <a
+    href="javascript:void(0)"
+    class="btn btn-sm btn-secondary float-right"
+    >Regresar</a
+  >
+</div>
+
+
+</div>
+
+
+
+<ng-template #template>
+<app-nuevo-equipo (guardo)="guardoyactualizar()"></app-nuevo-equipo>
+</ng-template>

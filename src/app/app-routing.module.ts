@@ -7,10 +7,13 @@ import { SelectorMicroredComponent } from './controles/selector-microred/selecto
 import { SelectorIpressComponent } from './controles/selector-ipress/selector-ipress.component';
 import { ReporteSeguimientoComponent } from './componentes/reporte-seguimiento/reporte-seguimiento.component';
 import { MonitorSeguimientoComponent } from './componentes/monitor-seguimiento/monitor-seguimiento.component';
+import { AdministracionEquiposComponent } from './componentes/administracion-equipos/administracion-equipos.component';
+import { LoginComponent } from './componentes/login/login.component';
+import { AuthGuardGuard } from './compartido/guards/auth-guard.guard';
 
 
 const routes: Routes = [
-  {path:"",component:PrincipalComponent},
+  {path:"",component:PrincipalComponent,canActivate:[AuthGuardGuard]},
   {path:"seguimiento",component:PrincipalComponent},
   {path:"subregion",component:SelectorSubregionComponent},
   {path:"red",component:SelectorRedComponent},
@@ -18,9 +21,9 @@ const routes: Routes = [
   {path:"ipress",component:SelectorIpressComponent},
   {path:"reporte",component:ReporteSeguimientoComponent},
   {path:"reporte/:nro_documento",component:ReporteSeguimientoComponent},
-  {path:"monitor",component:MonitorSeguimientoComponent}
-
-  
+  {path:"monitor",component:MonitorSeguimientoComponent},
+  {path:"admin-equipos",component:AdministracionEquiposComponent},
+  {path:"login",component:LoginComponent} 
 
 ];
 
