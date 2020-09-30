@@ -1,6 +1,7 @@
 <div class="example-card card card-primary">
   <div class="card-header">
     <div class="card-title">SEGUIMIENTO A PACIENTE COVID</div>
+    <div class="float-right">Oficina de Informacion Tecnologia y Estadistica Version 1.0</div>
   </div>
 
 
@@ -92,5 +93,5 @@
 
 
 <ng-template #template>
-<app-nuevo-equipo (guardo)="guardoyactualizar()"></app-nuevo-equipo>
+<app-nuevo-equipo (guardo)="guardoyactualizar()" (cerrar)="CerrarModal()"></app-nuevo-equipo>
 </ng-template>

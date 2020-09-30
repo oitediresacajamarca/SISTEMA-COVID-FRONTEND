@@ -11,18 +11,18 @@ import { Noti } from 'src/app/compartido/interfaces/noti';
   templateUrl: './encabesado.component.html',
   styleUrls: ['./encabesado.component.scss']
 })
-export class EncabesadoComponent implements OnInit ,AfterViewInit{
+export class EncabesadoComponent implements OnInit, AfterViewInit {
 
   constructor(private datosg: DatosGeneralesService, private ruta: ActivatedRoute
     , private estados: EstadosService, private notis: NotiService) { }
   async ngAfterViewInit(): Promise<void> {
-  
+
   }
-  DatosGenerales: DatosGeneralesPersona= {
-    APE_PATERNO: "alex",
-    APE_MATERNO: "arana",
-    NOMBRES: "alex",
-  NOMBRES_COMPLETOS:'cargando informacion',
+  DatosGenerales: DatosGeneralesPersona = {
+    APE_PATERNO: "No se encontro resultados",
+    APE_MATERNO: "No se encontro resultados",
+    NOMBRES: "No se encontro resultados",
+    NOMBRES_COMPLETOS: 'cargando informacion',
     FEC_NACIMIENTO: "30/05/1983",
     NRO_DOCUMENTO: "7819821",
     TIPO_DOCUEMNTO: "DNI",
@@ -33,7 +33,7 @@ export class EncabesadoComponent implements OnInit ,AfterViewInit{
     LAT: 76.19922,
     LNG: 4.398293,
     TIPO_DE_SEGURO: "S.I.S",
-    FUENTE:'PRUEBAS'
+    FUENTE: 'PRUEBAS'
   }
   cantidadSeguimientos
 
@@ -41,13 +41,13 @@ export class EncabesadoComponent implements OnInit ,AfterViewInit{
 
     this.DatosGenerales = await this.datosg.devolverDatosGenerales(this.estados.TIP_DOCUMENTO, this.estados.NRO_DOCUMENTO)
     console.log(this.DatosGenerales)
- 
-  
+
+
 
 
   }
   datosSeguimiento(e) {
- 
+
     this.cantidadSeguimientos = e.cantidadSeguimientos
   }
 

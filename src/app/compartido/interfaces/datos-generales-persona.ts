@@ -13,7 +13,8 @@ export interface DatosGeneralesPersona {
     LAT:number;
     LNG:number;
     TIPO_DE_SEGURO:string
-    FUENTE:string
+    FUENTE:string,
+    EVOLUCION_ACTUAL?:string
 
 
 }

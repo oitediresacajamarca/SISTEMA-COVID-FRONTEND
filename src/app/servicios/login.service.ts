@@ -34,11 +34,8 @@ export class LoginService {
 
   devolverUsuario() {
     let token = localStorage.getItem('ACCESS_TOKEN')
-    console.log(token)
 
-    let headers = new HttpHeaders({Authorization:'Bearer ' + token});
-
-  
+    let headers = new HttpHeaders({Authorization:'Bearer ' + token});  
 
     return this.http.get(environment.urlBackendSiscovid + 'accesos/obtenerPersonaUsuario',{headers})
   }
