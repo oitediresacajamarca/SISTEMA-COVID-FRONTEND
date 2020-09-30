@@ -14,15 +14,15 @@ import { AuthGuardGuard } from './compartido/guards/auth-guard.guard';
 
 const routes: Routes = [
   {path:"",component:PrincipalComponent,canActivate:[AuthGuardGuard]},
-  {path:"seguimiento",component:PrincipalComponent},
+  {path:"seguimiento",component:PrincipalComponent,canActivate:[AuthGuardGuard]},
   {path:"subregion",component:SelectorSubregionComponent},
   {path:"red",component:SelectorRedComponent},
   {path:"microred",component:SelectorMicroredComponent},
   {path:"ipress",component:SelectorIpressComponent},
   {path:"reporte",component:ReporteSeguimientoComponent},
   {path:"reporte/:nro_documento",component:ReporteSeguimientoComponent},
-  {path:"monitor",component:MonitorSeguimientoComponent},
-  {path:"admin-equipos",component:AdministracionEquiposComponent},
+  {path:"monitor",component:MonitorSeguimientoComponent,canActivate:[AuthGuardGuard]},
+  {path:"admin-equipos",component:AdministracionEquiposComponent,canActivate:[AuthGuardGuard]},
   {path:"login",component:LoginComponent} 
 
 ];

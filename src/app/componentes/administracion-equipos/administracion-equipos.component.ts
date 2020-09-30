@@ -48,4 +48,8 @@ export class AdministracionEquiposComponent implements OnInit {
     this.modalRef.hide()
     this.cargarEquipos()
   }
+
+  CerrarModal(){
+    this.modalRef.hide()
+  }
 }

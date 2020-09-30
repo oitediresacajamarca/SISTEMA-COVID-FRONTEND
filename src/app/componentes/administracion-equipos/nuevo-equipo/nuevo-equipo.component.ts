@@ -13,6 +13,7 @@ export class NuevoEquipoComponent implements OnInit {
 
   constructor(private equipos: EquiposCovidService, private formBuilder: FormBuilder) { }
   @Output('guardo') guardo= new EventEmitter()
+  @Output('cerrar') cerrar= new EventEmitter()
 
   formularioNuevo: FormGroup
 
@@ -26,7 +27,11 @@ export class NuevoEquipoComponent implements OnInit {
     console.log(this.formularioNuevo.value)
     this.equipos.guardarEquipo(this.formularioNuevo.value).subscribe((respuesta)=>{console.log(respuesta)
     
-    this.guardo.emit()})
-    
+    this.guardo.emit()})    
+  }
+
+  Cerrar(){
+    console.log(this.cerrar)
+this.cerrar.emit()
   }
 }
