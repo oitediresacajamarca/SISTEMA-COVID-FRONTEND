@@ -50,7 +50,7 @@ export class PanelResultadosComponent implements OnInit {
     this.estados.NRO_DOCUMENTO = e.Numero_Doc;
     this.estados.TIP_DOCUMENTO = e.Tipo_Doc;
 
-    this.router.navigate(['/reporte/'])
+    this.router.navigate(['seguimiento/reporte'])
 
   }
 
