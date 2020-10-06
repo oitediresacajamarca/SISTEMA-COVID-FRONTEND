@@ -19,7 +19,6 @@ export class BusquedaPorIdentificacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.formIdentificacion = this.formBuilder.group({
-
       NRO_DOCUMENTO: ''
     })
   }

@@ -21,6 +21,13 @@ export class PersonasService {
     var headers = new HttpHeaders({client_id:'diresa_seguimiento',client_secret: 'WrCcm69SZOVZpUpnYuq4'});
    
     var params = new HttpParams({fromObject:{'nombres': '%'+NOMBRES+'%'+APE_PATERNO+'%'+APE_MATERNO+'%'}})
-    return this.http.get(environment.urlBackendSiscovid + 'fichas/getpersonapornombre',{headers,params})
+
+    return this.http.get<any[]>(environment.urlBackendSiscovid + 'fichas/getpersonapornombre',{headers,params})
+  }
+
+  devolverDatosGeneralesPersona(Nro_Documento:string) {
+
+     
+    return this.http.get<any>(environment.urlBackendNode + 'datos-generales/'+Nro_Documento)
   }
 }

@@ -23,6 +23,7 @@ import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
+import {GMapModule} from 'primeng/gmap';
 
 
 
@@ -63,6 +64,11 @@ import { NuevoEquipoComponent } from './componentes/administracion-equipos/nuevo
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LoginComponent } from './componentes/login/login.component';
+import { LayoutPrincipalComponent } from './layouts/layout-principal/layout-principal.component';
+import { GeoreferenciaComponent } from './componentes/mapas/georeferencia/georeferencia.component';
+import { GeoreferenciasUbicacionesFallecidosComponent } from './componentes/mapas/georeferencias-ubicaciones-fallecidos/georeferencias-ubicaciones-fallecidos.component';
+import { GeoreferenciasUbicacionesPositivasComponent } from './componentes/mapas/georeferencias-ubicaciones-positivas/georeferencias-ubicaciones-positivas.component';
+import { SelectorGeograficoVerticalMaterialComponent } from './controles/selector-geografico-vertical-material/selector-geografico-vertical-material.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +105,11 @@ import { LoginComponent } from './componentes/login/login.component';
     EscalaAvanceDirectivaDirective,
     NuevoEquipoComponent,
     LoginComponent,
+    LayoutPrincipalComponent,
+    GeoreferenciaComponent,
+    GeoreferenciasUbicacionesFallecidosComponent,
+    GeoreferenciasUbicacionesPositivasComponent,
+    SelectorGeograficoVerticalMaterialComponent
 
   ],
   imports: [
@@ -123,7 +134,8 @@ import { LoginComponent } from './componentes/login/login.component';
     DragDropModule,
     ChartModule,
     MatDialogModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    GMapModule
 
 
 

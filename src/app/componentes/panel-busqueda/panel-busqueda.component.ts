@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Ficha300Service } from 'src/app/servicios/ficha-300.service';
 import { ResultadoBusqueda } from 'src/app/compartido/interfaces/resultado-busqueda';
 import { Ficha100 } from 'src/app/compartido/interfaces/ficha-100';
+import { PersonasService } from 'src/app/servicios/personas.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class PanelBusquedaComponent implements OnInit {
   @Output() resultados = new EventEmitter<any>()
 
   @Output() inicioBusqueda = new EventEmitter<any>()
-  constructor(private ficha300s: Ficha300Service) { }
+  constructor(private ficha300s: Ficha300Service, private persons:PersonasService) { }
 
   ngOnInit(): void {
   }
@@ -65,10 +66,10 @@ export class PanelBusquedaComponent implements OnInit {
 
         Tipo_Doc: persona.Tipo_Documento,
         Numero_Doc: persona.Nro_Documento,
-        Edad: null,
+        Edad: persona.edad,
         Nombres_Paciente:persona.Apellidos_Nombres ,
-        Distrito:'',
-        Provincia: '',
+        Distrito:persona.DISTRITO,
+        Provincia: persona.PROVINCIA,
         Fecha_Diagnostico_Positivo: '',
         Ipress: '',
         NombreIpress: ''
@@ -117,22 +118,26 @@ export class PanelBusquedaComponent implements OnInit {
 
   }
 
-  cargoResultadosPorIndentificacionEvent(e) {
+  async cargoResultadosPorIndentificacionEvent(e) {
  
 
 
     let respuestaFomrmateada: ResultadoBusqueda[]
-    respuestaFomrmateada = e.map((persona:any) => {
+
+
+    respuestaFomrmateada = await Promise.all(e.map(async (persona:any) => {
       let personafo  = persona
+
+     let personadat=  await this.persons.devolverDatosGeneralesPersona(personafo.Nro_Documento).toPromise()
 
       let respuesta: ResultadoBusqueda = {
 
         Tipo_Doc: personafo.Tipo_Documento,
         Numero_Doc: personafo.Nro_Documento,
-        Edad: 10,
+        Edad: personadat.edad,
         Nombres_Paciente: personafo.Apellidos_Nombres,
-        Distrito: '',
-        Provincia: '',
+        Distrito: personadat.DISTRITO,
+        Provincia: personadat.PROVINCIA,
         Fecha_Diagnostico_Positivo: '',
         Ipress: '',
         NombreIpress: ''
@@ -141,6 +146,8 @@ export class PanelBusquedaComponent implements OnInit {
       return respuesta
 
     })
+
+    )
 
 
 

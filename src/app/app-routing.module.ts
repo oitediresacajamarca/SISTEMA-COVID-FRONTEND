@@ -10,19 +10,30 @@ import { MonitorSeguimientoComponent } from './componentes/monitor-seguimiento/m
 import { AdministracionEquiposComponent } from './componentes/administracion-equipos/administracion-equipos.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { AuthGuardGuard } from './compartido/guards/auth-guard.guard';
+import { LayoutPrincipalComponent } from './layouts/layout-principal/layout-principal.component';
+import { GeoreferenciaComponent } from './componentes/mapas/georeferencia/georeferencia.component';
 
 
 const routes: Routes = [
-  {path:"",component:PrincipalComponent,canActivate:[AuthGuardGuard]},
-  {path:"seguimiento",component:PrincipalComponent,canActivate:[AuthGuardGuard]},
+
+
+  {path:"seguimiento",component:LayoutPrincipalComponent,children:[
+   
+    {path:"busqueda",component:PrincipalComponent,canActivate:[AuthGuardGuard]},
+    {path:"reporte",component:ReporteSeguimientoComponent},
+    {path:"reporte/:nro_documento",component:ReporteSeguimientoComponent},
+    {path:"monitor",component:MonitorSeguimientoComponent,canActivate:[AuthGuardGuard]},
+    {path:"admin-equipos",component:AdministracionEquiposComponent,canActivate:[AuthGuardGuard]},
+
+
+  ]},
+  {path:"mapa",component:GeoreferenciaComponent},
+  {path:"reporte",component:ReporteSeguimientoComponent},
   {path:"subregion",component:SelectorSubregionComponent},
   {path:"red",component:SelectorRedComponent},
   {path:"microred",component:SelectorMicroredComponent},
   {path:"ipress",component:SelectorIpressComponent},
-  {path:"reporte",component:ReporteSeguimientoComponent},
-  {path:"reporte/:nro_documento",component:ReporteSeguimientoComponent},
-  {path:"monitor",component:MonitorSeguimientoComponent,canActivate:[AuthGuardGuard]},
-  {path:"admin-equipos",component:AdministracionEquiposComponent,canActivate:[AuthGuardGuard]},
+ 
   {path:"login",component:LoginComponent} 
 
 ];

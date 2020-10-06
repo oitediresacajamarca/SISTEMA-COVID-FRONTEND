@@ -1,0 +1,76 @@
+
+<div class="container">
+  <div class="row">
+   
+    <div class="col-3">
+      <mat-card fxFlex="650">
+        <app-selector-geografico-vertical-material
+          (selecionoDistrito)="selecionoDistrito($event)" (selecionoProvincia)="seleccionoProvincia($event)"
+        ></app-selector-geografico-vertical-material>
+      </mat-card>
+    </div>
+    <div class="col-9">
+      <div
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        fxLayoutGap="20px"
+        class="stats-cards"
+      >
+        <mat-card fxFlex="650">
+          <mat-tab-group>
+            <mat-tab label="MAPA DE CALOR">
+              <p-gmap
+                #gmap
+                [style]="{
+                  width: '100%',
+                  height: '600px',
+                  'margin-bottom': '1em'
+                }"
+                [options]="options"
+                [overlays]="overlays"
+              ></p-gmap>
+
+              <button
+                type="button"
+                pButton
+                label="Limpiar"
+                icon="pi pi-times"
+                (click)="clear()"
+                style="margin-right: 0.25em;"
+              ></button>
+              <button
+                type="button"
+                pButton
+                label="Acercar"
+                icon="pi pi-plus"
+                (click)="zoomIn(gmap.getMap())"
+                style="margin-right: 0.25em;"
+              ></button>
+              <button
+                type="button"
+                pButton
+                label="Alejar"
+                icon="pi pi-minus"
+                (click)="zoomOut(gmap.getMap())"
+              ></button>
+              <button
+                type="button"
+                pButton
+                label="Cargar"
+                icon="pi pi-load"
+                (click)="cargarGeoreferencias()"
+              ></button>
+            </mat-tab>
+            <mat-tab label="UBICACIONES">
+              <app-georeferencias-ubicaciones-positivas #ub></app-georeferencias-ubicaciones-positivas>
+            </mat-tab>
+            <mat-tab label="FALLECIMIENTOS"> 
+              <app-georeferencias-ubicaciones-fallecidos #fall></app-georeferencias-ubicaciones-fallecidos> 
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+</div>
