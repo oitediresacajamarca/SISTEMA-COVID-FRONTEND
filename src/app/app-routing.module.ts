@@ -17,8 +17,8 @@ import { GeoreferenciaComponent } from './componentes/mapas/georeferencia/georef
 const routes: Routes = [
 
 
-  {path:"seguimiento",component:LayoutPrincipalComponent,children:[
-   
+  {
+    path:"seguimiento",component:LayoutPrincipalComponent,children:[   
     {path:"busqueda",component:PrincipalComponent,canActivate:[AuthGuardGuard]},
     {path:"reporte",component:ReporteSeguimientoComponent},
     {path:"reporte/:nro_documento",component:ReporteSeguimientoComponent},
