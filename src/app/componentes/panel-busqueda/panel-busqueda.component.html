@@ -3,6 +3,7 @@
   <mat-card-content>
     <mat-tab-group>
       <mat-tab label="BUSQUEDA GENERAL">
+        <p>{{tipo_ambito}} {{codigo_ambito}}</p>
         <app-selector-ipress-completo-horizontal
           (selecionoIpressEvent)="selecionoIpess($event)"
         ></app-selector-ipress-completo-horizontal>

@@ -2,8 +2,8 @@
     <mat-label>RED</mat-label>
     <mat-select  required (selectionChange)="seleccionoRed($event)">
       <mat-option>--</mat-option>
-      <mat-option *ngFor="let red of redes_filtradas" [value]="red.value">
-        {{red.label}}
+      <mat-option *ngFor="let red of redes_filtradas" [value]="red.ID_RED">
+        {{red.NOMBRE}}
       </mat-option>
     </mat-select> 
 </mat-form-field>

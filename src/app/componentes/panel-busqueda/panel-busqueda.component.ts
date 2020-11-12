@@ -14,12 +14,17 @@ export class PanelBusquedaComponent implements OnInit {
   COD_IPRESS
   Desde: Date
   Hasta: Date
+  public tipo_ambito : string ;
+  public codigo_ambito : string;
+
   @Output() resultados = new EventEmitter<any>()
 
   @Output() inicioBusqueda = new EventEmitter<any>()
   constructor(private ficha300s: Ficha300Service, private persons:PersonasService) { }
 
   ngOnInit(): void {
+    this.tipo_ambito = sessionStorage.getItem('tipo_ambito');
+    this.codigo_ambito = sessionStorage.getItem('codigo_ambito');
   }
 
   selecionoIpess(e) {

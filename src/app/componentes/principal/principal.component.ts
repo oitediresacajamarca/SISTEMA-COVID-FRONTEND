@@ -11,6 +11,9 @@ import { PanelResultadosComponent } from '../panel-resultados/panel-resultados.c
 })
 export class PrincipalComponent implements OnInit {
 
+  public tipo_ambito : string ;
+  public codigo_ambito : string;
+  
   constructor() { }
   resulatdosCargas
   @ViewChild('panelresultados') panelresultados:PanelResultadosComponent

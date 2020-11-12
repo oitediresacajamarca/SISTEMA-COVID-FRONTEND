@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { MatSelect } from '@angular/material/select';
+import { SubRegion } from 'src/app/compartido/interfaces/subregion';
+import { DistribucionAdministrativaService } from 'src/app/servicios/distribucion-administrativa.service';
 
 
 @Component({
@@ -8,21 +10,27 @@ import { MatSelect } from '@angular/material/select';
   styleUrls: ['./selector-subregion.component.scss']
 })
 export class SelectorSubregionComponent implements OnInit {
-subregiones
+
+  tipo_ambito : string;
+  codigo_ambito : string;
+  constructor(private distadmins: DistribucionAdministrativaService) { }
+
+subregiones: SubRegion[]
 @Output('selecionoRegionEvento') selecionoRegionEvento= new EventEmitter()
 @ViewChild('selectorsubregion') selectorsubregion:MatSelect
-  constructor() { }
-
 
   ngOnInit(): void {
-    this.subregiones = [
-
-      { label: "CAJAMARCA", value: 1 },
-      { label: "CHOTA", value: 2 },
-      { label: "CUTERVO", value: 3 },
-      { label: "JAEN", value: 4 }
-    ];
+    this.tipo_ambito  = sessionStorage.getItem('tipo_ambito');
+    this.codigo_ambito = sessionStorage.getItem('codigo_ambito');
+    this.cargarSubRegiones();
   }
+
+cargarSubRegiones(){
+  this.distadmins.devolverSubRegionAmbito(this.tipo_ambito, this.codigo_ambito).subscribe(resp=>{
+    this.subregiones = resp;
+  })
+}
+
   selecionoRegion(e){
 
     this.selecionoRegionEvento.emit( e.value)
