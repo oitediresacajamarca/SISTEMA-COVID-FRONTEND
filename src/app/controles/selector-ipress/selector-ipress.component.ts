@@ -36,7 +36,10 @@ export class SelectorIpressComponent implements OnInit {
 
   }
   seleccionoIpress(e) {
-       this.seleccionoIpressEvent.emit(e.COD_IPRESS)
+    if(e){
+      this.seleccionoIpressEvent.emit(e.COD_IPRESS)
+    }
+      
   }
 
   compareObjects(a : Ipress, b: Ipress){
