@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MicroRed } from 'src/app/compartido/interfaces/microred';
 import { DistribucionAdministrativaService } from 'src/app/servicios/distribucion-administrativa.service';
+import { LoginService } from 'src/app/servicios/login.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class SelectorMicroredComponent implements OnInit {
   tipo_ambito : string;
   codigo_ambito : string;
 
-  constructor(private distadmins: DistribucionAdministrativaService) { }
+  constructor(private distadmins: DistribucionAdministrativaService, private logins : LoginService) { }
   @Input() cod_red: number = 13
   microredesfiltardas : MicroRed[]
 
@@ -22,23 +23,34 @@ export class SelectorMicroredComponent implements OnInit {
   @Output() seleccionoMicroredEvent = new EventEmitter<any>()
 
   ngOnInit(): void {
-    this.tipo_ambito  = sessionStorage.getItem('tipo_ambito');
-    this.codigo_ambito = sessionStorage.getItem('codigo_ambito');
-    this.devolverMicrored()
+
+    
+    this.logins.devolverUsuario().subscribe(resp=>{
+      
+      this.tipo_ambito = resp.usuarioAmbito.tipo_ambito;
+      this.codigo_ambito = resp.usuarioAmbito.codigo_ambito;
+      
+      this.devolverMicrored()
+
+    });
+    
   }
   devolverMicrored() {
-    
+ 
     this.distadmins.devolverMicroredPorRed(this.cod_red, this.tipo_ambito, this.codigo_ambito).subscribe((resp) => {      
       this.microredesfiltardas = resp.filter(r=>r.ID_RED == this.cod_red);
       if(this.microredesfiltardas){
         this.microRedSel = this.microredesfiltardas[0];
-        this.seleccionoMicrored(this.microRedSel);
+        this.seleccionoMicrored({value: this.microRedSel});
       }
     })
   }
 
   seleccionoMicrored(e) {
-    this.seleccionoMicroredEvent.emit(e.ID_MICRORED)
+    if(e){
+      this.seleccionoMicroredEvent.emit(e.value.ID_MICRORED)
+    }
+    
   }
 
   compareObjects(a : MicroRed, b: MicroRed){

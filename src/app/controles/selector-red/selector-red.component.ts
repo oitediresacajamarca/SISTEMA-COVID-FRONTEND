@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Red } from 'src/app/compartido/interfaces/Red';
 import { DistribucionAdministrativaService } from 'src/app/servicios/distribucion-administrativa.service';
+import { LoginService } from 'src/app/servicios/login.service';
 
 @Component({
   selector: 'app-selector-red',
@@ -12,33 +13,41 @@ export class SelectorRedComponent implements OnInit {
   tipo_ambito : string;
   codigo_ambito : string;
   redSel : Red
-  constructor(private distadmins: DistribucionAdministrativaService) { }
+  constructor(private distadmins: DistribucionAdministrativaService, private logins : LoginService) { }
   @Input('SUBREGION') COD_SUBREGION = 1
   redes_filtradas : Red[]
   @Output() seleccionoRedEvent = new EventEmitter<any>()
 
   ngOnInit(): void {
 
-    this.tipo_ambito  = sessionStorage.getItem('tipo_ambito');
-    this.codigo_ambito = sessionStorage.getItem('codigo_ambito');
+    this.logins.devolverUsuario().subscribe(resp=>{
+      
+      this.tipo_ambito = resp.usuarioAmbito.tipo_ambito;
+      this.codigo_ambito = resp.usuarioAmbito.codigo_ambito;
+      
+      this.cargarRedes(this.COD_SUBREGION)
+
+    });
     
-    this.cargarRedes(this.COD_SUBREGION)
+    
   }
 
   cargarRedes(subregion: number) {
-
+    
     this.distadmins.devolverRedAmbito(this.tipo_ambito, this.codigo_ambito).subscribe(resp=>{
       this.redes_filtradas = resp.filter(r=>r.ID_SUBREGION == subregion);
       if(this.redes_filtradas){
         this.redSel = this.redes_filtradas[0];
-        this.seleccionoRed(this.redSel);
+        this.seleccionoRed({value: this.redSel} );
       }
     })
 
   }
   seleccionoRed(e) {
-  
-    this.seleccionoRedEvent.emit(e.ID_RED)
+    if(e){
+      this.seleccionoRedEvent.emit(e.value.ID_RED)
+    }
+    
   }
 
   compareObjects(a : Red, b: Red){

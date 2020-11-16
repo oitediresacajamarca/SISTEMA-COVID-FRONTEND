@@ -45,11 +45,14 @@ export class PanelBusquedaComponent implements OnInit {
   };
 
   selecionoIpess(e) {
+
     this.COD_IPRESS = e
   }
   buscar() {
     this.inicioBusqueda.emit()
     let ipress = this.COD_IPRESS
+    console.log("CODIGO ==== Ipres")
+    console.log(ipress)
     if(ipress == undefined) ipress = '0'
     
     if(this.flgSinIpress) ipress = '0'
