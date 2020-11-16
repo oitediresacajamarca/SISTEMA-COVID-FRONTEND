@@ -16,6 +16,9 @@ export class SelectorMicroredComponent implements OnInit {
   constructor(private distadmins: DistribucionAdministrativaService) { }
   @Input() cod_red: number = 13
   microredesfiltardas : MicroRed[]
+
+  microRedSel : MicroRed
+
   @Output() seleccionoMicroredEvent = new EventEmitter<any>()
 
   ngOnInit(): void {
@@ -27,11 +30,19 @@ export class SelectorMicroredComponent implements OnInit {
     
     this.distadmins.devolverMicroredPorRed(this.cod_red, this.tipo_ambito, this.codigo_ambito).subscribe((resp) => {      
       this.microredesfiltardas = resp.filter(r=>r.ID_RED == this.cod_red);
+      if(this.microredesfiltardas){
+        this.microRedSel = this.microredesfiltardas[0];
+        this.seleccionoMicrored(this.microRedSel);
+      }
     })
   }
 
   seleccionoMicrored(e) {
-    this.seleccionoMicroredEvent.emit(e.value)
+    this.seleccionoMicroredEvent.emit(e.ID_MICRORED)
+  }
+
+  compareObjects(a : MicroRed, b: MicroRed){
+    return a.ID_MICRORED === b.ID_MICRORED;
   }
 
 }

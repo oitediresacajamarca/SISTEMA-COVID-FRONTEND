@@ -17,6 +17,7 @@ export class SelectorIpressComponent implements OnInit {
   @Input() id_microred: number = 90
   @Output() seleccionoIpressEvent = new EventEmitter<any>()
   ipressfiltradas : Ipress[]
+  ipressSel : Ipress
   ngOnInit(): void {
     this.tipo_ambito  = sessionStorage.getItem('tipo_ambito');
     this.codigo_ambito = sessionStorage.getItem('codigo_ambito');
@@ -26,11 +27,20 @@ export class SelectorIpressComponent implements OnInit {
   devolverIpressPorMicrored() {
     this.distadms.devolverIpressPorMicrored(this.id_microred,this.tipo_ambito, this.codigo_ambito).subscribe(resp => {
       this.ipressfiltradas = resp.filter(m=>m.ID_MICRORED== this.id_microred);
+      if(this.ipressfiltradas){
+        this.ipressSel = this.ipressfiltradas[0];
+        this.seleccionoIpress(this.ipressSel)
+
+      }
     })
 
   }
   seleccionoIpress(e) {
-       this.seleccionoIpressEvent.emit(e.value)
+       this.seleccionoIpressEvent.emit(e.COD_IPRESS)
+  }
+
+  compareObjects(a : Ipress, b: Ipress){
+    return a.COD_IPRESS === b.COD_IPRESS;
   }
 
 

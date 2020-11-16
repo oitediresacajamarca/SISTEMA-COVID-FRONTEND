@@ -13,6 +13,7 @@ export class SelectorSubregionComponent implements OnInit {
 
   tipo_ambito : string;
   codigo_ambito : string;
+  subregionSel : SubRegion;
   constructor(private distadmins: DistribucionAdministrativaService) { }
 
 subregiones: SubRegion[]
@@ -28,13 +29,23 @@ subregiones: SubRegion[]
 cargarSubRegiones(){
   this.distadmins.devolverSubRegionAmbito(this.tipo_ambito, this.codigo_ambito).subscribe(resp=>{
     this.subregiones = resp;
+    if(this.subregiones){
+      this.subregionSel = this.subregiones[0]
+      this.selecionoRegion(this.subregionSel);
+    }
   })
 }
 
   selecionoRegion(e){
 
-    this.selecionoRegionEvento.emit( e.value)
+    this.selecionoRegionEvento.emit(e.ID_SUBREGION)
   }
+
+
+  compareObjects(a : SubRegion, b: SubRegion){
+    return a.ID_SUBREGION === b.ID_SUBREGION;
+  }
+
 
 
 }
