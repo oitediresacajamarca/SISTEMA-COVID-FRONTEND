@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/cor
 import { MatSelect } from '@angular/material/select';
 import { SubRegion } from 'src/app/compartido/interfaces/subregion';
 import { DistribucionAdministrativaService } from 'src/app/servicios/distribucion-administrativa.service';
+import { LoginService } from 'src/app/servicios/login.service';
 
 
 @Component({
@@ -14,31 +15,47 @@ export class SelectorSubregionComponent implements OnInit {
   tipo_ambito : string;
   codigo_ambito : string;
   subregionSel : SubRegion;
-  constructor(private distadmins: DistribucionAdministrativaService) { }
+  constructor(private distadmins: DistribucionAdministrativaService, private logins: LoginService) { }
 
 subregiones: SubRegion[]
 @Output('selecionoRegionEvento') selecionoRegionEvento= new EventEmitter()
 @ViewChild('selectorsubregion') selectorsubregion:MatSelect
 
   ngOnInit(): void {
-    this.tipo_ambito  = sessionStorage.getItem('tipo_ambito');
-    this.codigo_ambito = sessionStorage.getItem('codigo_ambito');
-    this.cargarSubRegiones();
+
+    //obtener usuario
+    this.logins.devolverUsuario().subscribe(resp=>{
+      
+      this.tipo_ambito = resp.usuarioAmbito.tipo_ambito;
+      this.codigo_ambito = resp.usuarioAmbito.codigo_ambito;
+      
+      this.cargarSubRegiones();
+
+    });
+
+    
   }
 
 cargarSubRegiones(){
+    
+
   this.distadmins.devolverSubRegionAmbito(this.tipo_ambito, this.codigo_ambito).subscribe(resp=>{
     this.subregiones = resp;
     if(this.subregiones){
       this.subregionSel = this.subregiones[0]
-      this.selecionoRegion(this.subregionSel);
+      this.selecionoRegion({value: this.subregionSel});
     }
   })
 }
 
   selecionoRegion(e){
-
-    this.selecionoRegionEvento.emit(e.ID_SUBREGION)
+    if(e){
+      console.log("Subregion")
+      console.log(e)
+      
+      this.selecionoRegionEvento.emit(e.value.ID_SUBREGION)
+    }
+    
   }
 
 
