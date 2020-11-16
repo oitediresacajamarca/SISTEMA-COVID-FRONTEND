@@ -19,9 +19,13 @@ export class SelectorIpressCompletoHorizontalComponent implements OnInit {
   selectorIpress: SelectorIpressComponent
   @Output() selecionoIpressEvent= new EventEmitter<any>()
 
+  tipo_ambito : string;
+  codigo_ambito : string;
 
 
   ngOnInit(): void {
+    this.tipo_ambito = sessionStorage.getItem('tipo_ambito');
+    this.codigo_ambito = sessionStorage.getItem('codigo_ambito');
   }
   seleccionoSubregion(e) {
     this.selectorRed.COD_SUBREGION = e

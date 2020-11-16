@@ -186,7 +186,7 @@ export class Ficha300Service {
 
   }]
   devolverFicha300PorIdentificacion(TIPO_DOC: string, NRO_DOCUMENTO: string) {
-    var headers = new HttpHeaders({client_id:'diresa_seguimiento',client_secret: 'WrCcm69SZOVZpUpnYuq4'});
+    var headers = new HttpHeaders({client_id:environment.siscovid_client_id,client_secret: environment.siscovid_cient_secret});
    
     var params = new HttpParams({fromObject:{'tipodoc': TIPO_DOC,'dni': NRO_DOCUMENTO}})
   
@@ -194,20 +194,36 @@ export class Ficha300Service {
     , params:params })
   }
 
-  devolverFicha300PorIpresFechas(COD_IPRESS: string, DESDE: string, HASTA: string) {
-    var headers = new HttpHeaders({client_id:'diresa_seguimiento',client_secret: 'WrCcm69SZOVZpUpnYuq4'});
+  devolverFicha300PorIpresFechas(COD_IPRESS: string, DESDE: string, HASTA: string, tipo_ambito: string, codigo_ambito : string) {
+    var headers = new HttpHeaders({client_id:environment.siscovid_client_id,client_secret: environment.siscovid_cient_secret});
    
-    var params = new HttpParams({fromObject:{'cod_ipress': COD_IPRESS,'fechaDesde': DESDE,'fechaHasta': HASTA}})
+    var params = new HttpParams({fromObject:{'cod_ipress': COD_IPRESS,'fechaDesde': DESDE,'fechaHasta': HASTA, clase : 'ADM', tipoambito: tipo_ambito,codigoambito : codigo_ambito  }})
 
   
-    return this.http.get<Ficha300[]>(environment.urlBackendSiscovid + 'fichas/getficha300porfecha', {headers:headers
+    return this.http.get<Ficha300[]>(environment.urlBackendSiscovid + 'fichas/getficha300porfechaAmbito', {headers:headers
     , params:params })
   }
-  devolverFicha300PorNombres(Nombres:string,Apellido_Paterno:string,Apellido_Materno:string){
+  devolverFicha300PorNombres(Nombres:string,Apellido_Paterno:string,Apellido_Materno:string,tipo_ambito: string, codigo_ambito : string){
 
-    var headers = new HttpHeaders({client_id:'diresa_seguimiento',client_secret: 'WrCcm69SZOVZpUpnYuq4'});
-   
+    var cad = `${Nombres} ${Apellido_Paterno} ${Apellido_Materno}`
 
+    var headers = new HttpHeaders({client_id:environment.siscovid_client_id,client_secret: environment.siscovid_cient_secret});
+    var params = new HttpParams({fromObject:{'nombres': cad, clase : 'ADM', tipoambito: tipo_ambito,codigoambito : codigo_ambito  }});
+
+    return this.http.get<Ficha300[]>(environment.urlBackendSiscovid + 'fichas/getficha300pornombreAmbito', {headers:headers
+      , params:params })
 
   }
+
+
+  devolverFicha300PorIdentificacionAmbito(TIPO_DOC: string, NRO_DOCUMENTO: string, tipo_ambito: string, codigo_ambito : string) {
+    var headers = new HttpHeaders({client_id:environment.siscovid_client_id,client_secret: environment.siscovid_cient_secret});
+   
+    var params = new HttpParams({fromObject:{'tipodoc': TIPO_DOC,'dni': NRO_DOCUMENTO,tipoambito: tipo_ambito,clase : 'ADM',codigoambito : codigo_ambito}})
+  
+    return this.http.get<Ficha300[]>(environment.urlBackendSiscovid + 'fichas/getficha300pordocumentoAmbito', {headers:headers
+    , params:params })
+  }
+
+
 }

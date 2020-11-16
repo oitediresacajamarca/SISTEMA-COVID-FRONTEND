@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { eventNames } from 'process';
 import { environment } from 'src/environments/environment';
+import { Usuario } from '../compartido/interfaces/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class LoginService {
 
     let headers = new HttpHeaders({Authorization:'Bearer ' + token});  
 
-    return this.http.get(environment.urlBackendSiscovid + 'accesos/obtenerPersonaUsuario',{headers})
+    return this.http.get<Usuario>(environment.urlBackendAuth + 'accesos/obtenerUsuario',{headers})
   }
 
 
