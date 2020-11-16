@@ -69,6 +69,7 @@ import { GeoreferenciaComponent } from './componentes/mapas/georeferencia/georef
 import { GeoreferenciasUbicacionesFallecidosComponent } from './componentes/mapas/georeferencias-ubicaciones-fallecidos/georeferencias-ubicaciones-fallecidos.component';
 import { GeoreferenciasUbicacionesPositivasComponent } from './componentes/mapas/georeferencias-ubicaciones-positivas/georeferencias-ubicaciones-positivas.component';
 import { SelectorGeograficoVerticalMaterialComponent } from './controles/selector-geografico-vertical-material/selector-geografico-vertical-material.component';
+import { EntregaMedicamentosComponent } from './componentes/reporte-seguimiento/seguimiento-clinico/entrega-medicamentos/entrega-medicamentos.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { SelectorGeograficoVerticalMaterialComponent } from './controles/selecto
     GeoreferenciaComponent,
     GeoreferenciasUbicacionesFallecidosComponent,
     GeoreferenciasUbicacionesPositivasComponent,
-    SelectorGeograficoVerticalMaterialComponent
+    SelectorGeograficoVerticalMaterialComponent,
+    EntregaMedicamentosComponent
 
   ],
   imports: [

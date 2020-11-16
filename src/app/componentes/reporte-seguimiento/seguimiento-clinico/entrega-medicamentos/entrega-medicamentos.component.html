@@ -1,0 +1,23 @@
+<table class="table table-head-fixed text-nowrap">
+    <thead>
+      <tr>
+        <th>Codigo</th>
+        <th>Medicamento</th>
+        <th>Forma Farmaceutica- Presentacion-Concentracion</th>
+        <th>Cantidad</th>
+        <th>Cantidad Entregada</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entrega of entregas"> 
+        <td>{{entrega.cod_medicamento}}</td>
+        <td>{{entrega.medicamento}}</td>
+        <td>{{entrega.ff}}-{{entrega.presentacion}}-{{entrega.concentracion}}</td>
+        <td>{{entrega.cantidad}}</td>
+        <td>{{entrega.entregado}}</td>
+      </tr>
+     
+  
+    </tbody>
+  </table>

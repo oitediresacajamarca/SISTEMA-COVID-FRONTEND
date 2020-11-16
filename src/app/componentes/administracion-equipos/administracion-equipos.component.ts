@@ -38,10 +38,10 @@ export class AdministracionEquiposComponent implements OnInit {
     alert()
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+          openModal(template: TemplateRef<any>) {
+            this.modalRef = this.modalService.show(template);
 
-  }
+          }
 
   guardoyactualizar() {
 

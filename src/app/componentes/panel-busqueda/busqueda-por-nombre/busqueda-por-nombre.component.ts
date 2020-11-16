@@ -4,6 +4,8 @@ import { Ficha300Service } from 'src/app/servicios/ficha-300.service';
 import { Ficha100Service } from 'src/app/servicios/ficha-100.service';
 import { environment } from 'src/environments/environment';
 import { PersonasService } from 'src/app/servicios/personas.service';
+import { ResultadoBusqueda } from 'src/app/compartido/interfaces/resultado-busqueda';
+import { PanelResultados } from '../../panel-resultados/panel-resultados.interface';
 
 
 @Component({
@@ -15,24 +17,31 @@ export class BusquedaPorNombreComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private ficha300s: Ficha300Service, private personas: PersonasService, private ficha100s: Ficha100Service) { }
   formNombres: FormGroup = new FormGroup({})
+  tipo_ambito : string;
+  codigo_ambito : string;
   @Output('cargoResultadosPorNombreEvent') cargoResultadosPorNombreEvent = new EventEmitter<any>()
 
   ngOnInit(): void {
+    this.tipo_ambito  = sessionStorage.getItem('tipo_ambito');
+    this.codigo_ambito = sessionStorage.getItem('codigo_ambito');
     this.formNombres = this.formBuilder.group({
       'Nombres': '',
       'Apellido_Pat': '',
       'Apellido_Mat': ''
-    })
+    });
+
   }
 
   cargarResultados() {
 
-    /*  this.ficha100s.devolverFicha100porNombres(this.formNombres.controls.Nombres.value, this.formNombres.controls.Apellido_Pat.value, this.formNombres.controls.Apellido_Mat.value).subscribe(resultado => {
-       this.cargoResultadosPorNombreEvent.emit(resultado)
-  
-      })*/
 
+      this.ficha300s.devolverFicha300PorNombres(this.formNombres.controls.Nombres.value, this.formNombres.controls.Apellido_Pat.value, 
+        this.formNombres.controls.Apellido_Mat.value,this.tipo_ambito, this.codigo_ambito).subscribe(res=>{
+          
+          this.cargoResultadosPorNombreEvent.emit(res);
+        })
 
+      /*
     this.personas.devolverPersonaPorNombres(this.formNombres.controls.Nombres.value, this.formNombres.controls.Apellido_Pat.value, this.formNombres.controls.Apellido_Mat.value).subscribe(async resultado => {
       let resultadocom =
         await Promise.all(resultado.map(async res => {
@@ -40,10 +49,11 @@ export class BusquedaPorNombreComponent implements OnInit {
           return { ...res, ...datosgen }
         })
         )
-
+        
 
       this.cargoResultadosPorNombreEvent.emit(resultadocom)
     })
+    */
 
 
   }

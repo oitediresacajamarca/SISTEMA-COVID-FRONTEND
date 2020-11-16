@@ -1,8 +1,8 @@
 <mat-form-field appearance="fill">
     <mat-label>ESTABLECIMIENTO</mat-label>
-    <mat-select  required (selectionChange)="seleccionoIpress($event)">
-      <mat-option>--</mat-option>
-      <mat-option *ngFor="let IPRESS of ipressfiltradas" [value]="IPRESS.COD_IPRESS">
+    <mat-select  required (selectionChange)="seleccionoIpress($event)" [(ngModel)]="ipressSel" [compareWith] = "compareObjects">
+     <!-- <mat-option>--</mat-option> -->
+      <mat-option *ngFor="let IPRESS of ipressfiltradas" [value]="IPRESS">
         {{IPRESS.NOMBRE}}
       </mat-option>
     </mat-select> 

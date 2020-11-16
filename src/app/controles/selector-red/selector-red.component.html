@@ -1,9 +1,9 @@
 <mat-form-field appearance="fill">
     <mat-label>RED</mat-label>
-    <mat-select  required (selectionChange)="seleccionoRed($event)">
-      <mat-option>--</mat-option>
-      <mat-option *ngFor="let red of redes_filtradas" [value]="red.value">
-        {{red.label}}
+    <mat-select  required (selectionChange)="seleccionoRed($event)" [(ngModel)]="redSel" [compareWith] = "compareObjects">
+     <!-- <mat-option>--</mat-option> -->
+      <mat-option *ngFor="let red of redes_filtradas" [value]="red">
+        {{red.NOMBRE}}
       </mat-option>
     </mat-select> 
 </mat-form-field>

@@ -14,21 +14,48 @@ export class PanelBusquedaComponent implements OnInit {
   COD_IPRESS
   Desde: Date
   Hasta: Date
+  public tipo_ambito : string ;
+  public codigo_ambito : string;
+
+  public flgSinIpress : boolean;
+
   @Output() resultados = new EventEmitter<any>()
 
   @Output() inicioBusqueda = new EventEmitter<any>()
   constructor(private ficha300s: Ficha300Service, private persons:PersonasService) { }
 
   ngOnInit(): void {
+    this.tipo_ambito = sessionStorage.getItem('tipo_ambito');
+    this.codigo_ambito = sessionStorage.getItem('codigo_ambito');
+    this.flgSinIpress = false;  
+    //establecer fecha por defecto
+    this.Hasta = new Date();
+    this.Desde = new Date(this.Hasta.getFullYear(),this.Hasta.getMonth()-1, this.Hasta.getDate())
+
+    
+    
+    
   }
+
+ groupBy(xs, key) {
+    return xs.reduce(function(rv, x) {
+      (rv[x[key]] = rv[x[key]] || []).push(x);
+      return rv;
+    }, {});
+  };
 
   selecionoIpess(e) {
     this.COD_IPRESS = e
   }
   buscar() {
     this.inicioBusqueda.emit()
+    let ipress = this.COD_IPRESS
+    if(ipress == undefined) ipress = '0'
+    
+    if(this.flgSinIpress) ipress = '0'
 
-    this.ficha300s.devolverFicha300PorIpresFechas(this.COD_IPRESS, this.Desde.toLocaleDateString("fr-CA"), this.Hasta.toLocaleDateString("fr-CA")).subscribe((respuesta) => {
+    this.ficha300s.devolverFicha300PorIpresFechas(ipress, this.Desde.toLocaleDateString("fr-CA"), this.Hasta.toLocaleDateString("fr-CA"), this.tipo_ambito, this.codigo_ambito).subscribe((respuesta) => {
+      console.log(respuesta);
       let respuestaFomrmateada: ResultadoBusqueda[]
       respuestaFomrmateada = respuesta.map((ficha300) => {
         let respuesta: ResultadoBusqueda = {
@@ -43,11 +70,11 @@ export class PanelBusquedaComponent implements OnInit {
           Ipress: ficha300.cod_establecimiento,
           NombreIpress: ''
         }
-
         return respuesta
-
       })
 
+      
+      
       this.resultados.emit(respuestaFomrmateada)
     })
   }
@@ -57,29 +84,23 @@ export class PanelBusquedaComponent implements OnInit {
 
   cargoResultadosPorNombreEvent(e) {
 
-
+    console.log("cargoResultadosPorNombreEvent")
     let respuestaFomrmateada: ResultadoBusqueda[]
-    respuestaFomrmateada = e.map((persona) => {
-      let ficha100_: any = persona
-
+    respuestaFomrmateada = e.map((ficha300) => {
       let respuesta: ResultadoBusqueda = {
 
-        Tipo_Doc: persona.Tipo_Documento,
-        Numero_Doc: persona.Nro_Documento,
-        Edad: persona.edad,
-        Nombres_Paciente:persona.Apellidos_Nombres ,
-        Distrito:persona.DISTRITO,
-        Provincia: persona.PROVINCIA,
-        Fecha_Diagnostico_Positivo: '',
-        Ipress: '',
+        Tipo_Doc: ficha300.Tipo_Documento,
+        Numero_Doc: ficha300.Nro_Documento,
+        Edad: parseInt(ficha300.Edad),
+        Nombres_Paciente: ficha300.Nombres + ' ' + ficha300.Apellido_Paterno + ' ' + ficha300.Apellido_Materno,
+        Distrito: ficha300.Distrito,
+        Provincia: ficha300.Provincia,
+        Fecha_Diagnostico_Positivo: ficha300.Ficha_300_fecha_resultado,
+        Ipress: ficha300.cod_establecimiento,
         NombreIpress: ''
       }
-
       return respuesta
-
     })
-
-
 
     this.resultados.emit(respuestaFomrmateada)
 
@@ -120,37 +141,23 @@ export class PanelBusquedaComponent implements OnInit {
 
   async cargoResultadosPorIndentificacionEvent(e) {
  
-
-
     let respuestaFomrmateada: ResultadoBusqueda[]
-
-
-    respuestaFomrmateada = await Promise.all(e.map(async (persona:any) => {
-      let personafo  = persona
-
-     let personadat=  await this.persons.devolverDatosGeneralesPersona(personafo.Nro_Documento).toPromise()
-
+    respuestaFomrmateada = e.map((ficha300) => {
       let respuesta: ResultadoBusqueda = {
 
-        Tipo_Doc: personafo.Tipo_Documento,
-        Numero_Doc: personafo.Nro_Documento,
-        Edad: personadat.edad,
-        Nombres_Paciente: personafo.Apellidos_Nombres,
-        Distrito: personadat.DISTRITO,
-        Provincia: personadat.PROVINCIA,
-        Fecha_Diagnostico_Positivo: '',
-        Ipress: '',
+        Tipo_Doc: ficha300.Tipo_Documento,
+        Numero_Doc: ficha300.Nro_Documento,
+        Edad: parseInt(ficha300.Edad),
+        Nombres_Paciente: ficha300.Nombres + ' ' + ficha300.Apellido_Paterno + ' ' + ficha300.Apellido_Materno,
+        Distrito: ficha300.Distrito,
+        Provincia: ficha300.Provincia,
+        Fecha_Diagnostico_Positivo: ficha300.Ficha_300_fecha_resultado,
+        Ipress: ficha300.cod_establecimiento,
         NombreIpress: ''
       }
-
       return respuesta
-
     })
-
-    )
-
-
-
+    
     this.resultados.emit(respuestaFomrmateada)
 
   }

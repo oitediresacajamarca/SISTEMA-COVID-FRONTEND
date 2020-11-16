@@ -43,6 +43,7 @@ export class MonitorSeguimientoComponent implements OnInit {
 
 
   async Comparar() {
+    console.log('datos')
     let res = await this.cruces.buscarDni().toPromise()
 
 
@@ -92,7 +93,7 @@ export class MonitorSeguimientoComponent implements OnInit {
         labels: ['Tiene', 'No Tiene'],
         datasets: [
           {
-            backgroundColor: ['red', 'blue'],
+            backgroundColor: ['blue', 'red'],
             data: [this.contador[ficha].existe, this.contador[ficha].noexiste],
             label: ficha,
 

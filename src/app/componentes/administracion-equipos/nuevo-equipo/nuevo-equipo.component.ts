@@ -24,14 +24,14 @@ export class NuevoEquipoComponent implements OnInit {
   }
 
   GuardarEquipo() {
-    console.log(this.formularioNuevo.value)
+   
     this.equipos.guardarEquipo(this.formularioNuevo.value).subscribe((respuesta)=>{console.log(respuesta)
     
     this.guardo.emit()})    
   }
 
   Cerrar(){
-    console.log(this.cerrar)
+ 
 this.cerrar.emit()
   }
 }
