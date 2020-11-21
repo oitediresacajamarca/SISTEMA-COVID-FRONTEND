@@ -49,7 +49,7 @@ cargarSubRegiones(){
 }
 
   selecionoRegion(e){
-    if(e){
+    if(e && e.value){
       console.log("Subregion")
       console.log(e)
       

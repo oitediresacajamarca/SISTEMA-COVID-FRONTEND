@@ -48,7 +48,7 @@ export class SelectorIpressComponent implements OnInit {
 
   }
   seleccionoIpress(e) {
-    if(e){
+    if(e && e.value){
       this.seleccionoIpressEvent.emit(e.value.COD_IPRESS)
     }
       

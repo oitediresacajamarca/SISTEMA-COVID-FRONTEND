@@ -3,6 +3,7 @@ import { Ficha300Service } from 'src/app/servicios/ficha-300.service';
 import { ResultadoBusqueda } from 'src/app/compartido/interfaces/resultado-busqueda';
 import { Ficha100 } from 'src/app/compartido/interfaces/ficha-100';
 import { PersonasService } from 'src/app/servicios/personas.service';
+import { LoginService } from 'src/app/servicios/login.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class PanelBusquedaComponent implements OnInit {
   @Output() resultados = new EventEmitter<any>()
 
   @Output() inicioBusqueda = new EventEmitter<any>()
-  constructor(private ficha300s: Ficha300Service, private persons:PersonasService) { }
+  constructor(private ficha300s: Ficha300Service, private persons:PersonasService,  private logins : LoginService) { }
 
   ngOnInit(): void {
     this.tipo_ambito = sessionStorage.getItem('tipo_ambito');
@@ -32,9 +33,6 @@ export class PanelBusquedaComponent implements OnInit {
     this.Hasta = new Date();
     this.Desde = new Date(this.Hasta.getFullYear(),this.Hasta.getMonth()-1, this.Hasta.getDate())
 
-    
-    
-    
   }
 
  groupBy(xs, key) {
@@ -53,10 +51,10 @@ export class PanelBusquedaComponent implements OnInit {
     let ipress = this.COD_IPRESS
     console.log("CODIGO ==== Ipres")
     console.log(ipress)
-    if(ipress == undefined) ipress = '0'
-    
+    if(ipress == undefined) ipress = '0'    
     if(this.flgSinIpress) ipress = '0'
 
+    
     this.ficha300s.devolverFicha300PorIpresFechas(ipress, this.Desde.toLocaleDateString("fr-CA"), this.Hasta.toLocaleDateString("fr-CA"), this.tipo_ambito, this.codigo_ambito).subscribe((respuesta) => {
       console.log(respuesta);
       let respuestaFomrmateada: ResultadoBusqueda[]
@@ -76,10 +74,11 @@ export class PanelBusquedaComponent implements OnInit {
         return respuesta
       })
 
-      
-      
-      this.resultados.emit(respuestaFomrmateada)
+      this.resultados.emit(respuestaFomrmateada);
     })
+     
+      
+    
   }
 
 

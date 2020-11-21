@@ -47,7 +47,7 @@ export class SelectorMicroredComponent implements OnInit {
   }
 
   seleccionoMicrored(e) {
-    if(e){
+    if(e && e.value){
       this.seleccionoMicroredEvent.emit(e.value.ID_MICRORED)
     }
     

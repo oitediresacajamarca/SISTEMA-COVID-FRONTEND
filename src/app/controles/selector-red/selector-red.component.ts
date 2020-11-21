@@ -44,7 +44,7 @@ export class SelectorRedComponent implements OnInit {
 
   }
   seleccionoRed(e) {
-    if(e){
+    if(e && e.value){
       this.seleccionoRedEvent.emit(e.value.ID_RED)
     }
     
