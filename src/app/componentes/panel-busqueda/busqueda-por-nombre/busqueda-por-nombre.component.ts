@@ -23,8 +23,8 @@ export class BusquedaPorNombreComponent implements OnInit {
   @Output('cargoResultadosPorNombreEvent') cargoResultadosPorNombreEvent = new EventEmitter<any>()
 
   ngOnInit(): void {
-    this.tipo_ambito  = sessionStorage.getItem('tipo_ambito');
-    this.codigo_ambito = sessionStorage.getItem('codigo_ambito');
+    this.tipo_ambito  = localStorage.getItem('tipo_ambito');
+    this.codigo_ambito = localStorage.getItem('codigo_ambito');
     this.formNombres = this.formBuilder.group({
       'Nombres': '',
       'Apellido_Pat': '',

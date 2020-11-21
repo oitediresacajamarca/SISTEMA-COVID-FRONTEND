@@ -24,15 +24,10 @@ export class SelectorMicroredComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
-    this.logins.devolverUsuario().subscribe(resp=>{
-      
-      this.tipo_ambito = resp.usuarioAmbito.tipo_ambito;
-      this.codigo_ambito = resp.usuarioAmbito.codigo_ambito;
-      
-      this.devolverMicrored()
-
-    });
+  
+    this.tipo_ambito = localStorage.getItem("tipo_ambito");
+    this.codigo_ambito = localStorage.getItem("codigo_ambito");
+    this.devolverMicrored()
     
   }
   devolverMicrored() {

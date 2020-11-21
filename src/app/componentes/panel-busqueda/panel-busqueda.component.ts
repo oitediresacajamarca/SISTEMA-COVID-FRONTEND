@@ -26,8 +26,8 @@ export class PanelBusquedaComponent implements OnInit {
   constructor(private ficha300s: Ficha300Service, private persons:PersonasService,  private logins : LoginService) { }
 
   ngOnInit(): void {
-    this.tipo_ambito = sessionStorage.getItem('tipo_ambito');
-    this.codigo_ambito = sessionStorage.getItem('codigo_ambito');
+    this.tipo_ambito = localStorage.getItem('tipo_ambito');
+    this.codigo_ambito = localStorage.getItem('codigo_ambito');
     this.flgSinIpress = false;  
     //establecer fecha por defecto
     this.Hasta = new Date();

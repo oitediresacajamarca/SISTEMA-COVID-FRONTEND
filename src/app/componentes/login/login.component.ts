@@ -29,9 +29,9 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('ACCESS_TOKEN', respuesta.access_token)
       this.logins.devolverUsuario().subscribe(resp=>{
 
-        sessionStorage.setItem('usuario',JSON.stringify(resp));
-        sessionStorage.setItem('tipo_ambito', resp.usuarioAmbito.tipo_ambito)
-        sessionStorage.setItem('codigo_ambito', resp.usuarioAmbito.codigo_ambito)
+        localStorage.setItem('usuario',JSON.stringify(resp));
+        localStorage.setItem('tipo_ambito', resp.usuarioAmbito.tipo_ambito)
+        localStorage.setItem('codigo_ambito', resp.usuarioAmbito.codigo_ambito)
 
         this.router.navigate(['seguimiento/busqueda'])
       })
