@@ -118,7 +118,12 @@ export class CrucesService {
 
   }
 
-  devolverCruces(){
-   return this.http.get<any[]>(environment.urlBackendNode+'cruces/dnis')
+  devolverCruces(COD_IPRESS: string, tipo_ambito: string, codigo_ambito : string){
+
+    var headers = new HttpHeaders({client_id:environment.siscovid_client_id,client_secret: environment.siscovid_cient_secret});
+   
+    var params = new HttpParams({fromObject:{'cod_ipress': COD_IPRESS, clase : 'ADM', tipoambito: tipo_ambito,codigoambito : codigo_ambito  }})
+
+   return this.http.get<any[]>(environment.urlBackendSiscovid+'fichas/getcrucefichasambito',{headers:headers, params:params })
   }
 }

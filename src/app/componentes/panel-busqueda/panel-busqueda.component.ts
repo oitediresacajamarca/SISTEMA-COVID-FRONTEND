@@ -43,7 +43,6 @@ export class PanelBusquedaComponent implements OnInit {
   };
 
   selecionoIpess(e) {
-
     this.COD_IPRESS = e
   }
   buscar() {
