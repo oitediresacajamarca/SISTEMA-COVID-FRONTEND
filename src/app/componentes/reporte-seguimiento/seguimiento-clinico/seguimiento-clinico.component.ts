@@ -39,8 +39,8 @@ this.openModal(template)
 
   async cargarMedicacion(ficha300:any){
 
-  /*const medicmentos=await this.medicamentoss.devolverMedicamentos(ficha300.Nro_Documento).toPromise()
-  return medicmentos*/
+  const medicmentos=await this.medicamentoss.devolverMedicamentos(ficha300.Nro_Documento, ficha300.fecha_registro).toPromise()
+  return medicmentos
   
   }
   entregas:any
