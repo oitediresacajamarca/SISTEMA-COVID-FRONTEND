@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { PersonasService } from 'src/app/servicios/personas.service';
 import { ResultadoBusqueda } from 'src/app/compartido/interfaces/resultado-busqueda';
 import { PanelResultados } from '../../panel-resultados/panel-resultados.interface';
+import { LoginService } from 'src/app/servicios/login.service';
 
 
 @Component({
@@ -15,15 +16,15 @@ import { PanelResultados } from '../../panel-resultados/panel-resultados.interfa
 })
 export class BusquedaPorNombreComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private ficha300s: Ficha300Service, private personas: PersonasService, private ficha100s: Ficha100Service) { }
+  constructor(private formBuilder: FormBuilder, private ficha300s: Ficha300Service, private personas: PersonasService, private ficha100s: Ficha100Service, private logins: LoginService) { }
   formNombres: FormGroup = new FormGroup({})
   tipo_ambito : string;
   codigo_ambito : string;
   @Output('cargoResultadosPorNombreEvent') cargoResultadosPorNombreEvent = new EventEmitter<any>()
 
   ngOnInit(): void {
-    this.tipo_ambito  = sessionStorage.getItem('tipo_ambito');
-    this.codigo_ambito = sessionStorage.getItem('codigo_ambito');
+    this.tipo_ambito  = localStorage.getItem('tipo_ambito');
+    this.codigo_ambito = localStorage.getItem('codigo_ambito');
     this.formNombres = this.formBuilder.group({
       'Nombres': '',
       'Apellido_Pat': '',
@@ -34,27 +35,11 @@ export class BusquedaPorNombreComponent implements OnInit {
 
   cargarResultados() {
 
-
-      this.ficha300s.devolverFicha300PorNombres(this.formNombres.controls.Nombres.value, this.formNombres.controls.Apellido_Pat.value, 
-        this.formNombres.controls.Apellido_Mat.value,this.tipo_ambito, this.codigo_ambito).subscribe(res=>{
-          
-          this.cargoResultadosPorNombreEvent.emit(res);
-        })
-
-      /*
-    this.personas.devolverPersonaPorNombres(this.formNombres.controls.Nombres.value, this.formNombres.controls.Apellido_Pat.value, this.formNombres.controls.Apellido_Mat.value).subscribe(async resultado => {
-      let resultadocom =
-        await Promise.all(resultado.map(async res => {
-          let datosgen = await this.personas.devolverDatosGeneralesPersona(res.Nro_Documento).toPromise()
-          return { ...res, ...datosgen }
-        })
-        )
-        
-
-      this.cargoResultadosPorNombreEvent.emit(resultadocom)
-    })
-    */
-
+        this.ficha300s.devolverFicha300PorNombres(this.formNombres.controls.Nombres.value, this.formNombres.controls.Apellido_Pat.value, 
+          this.formNombres.controls.Apellido_Mat.value,this.tipo_ambito, this.codigo_ambito).subscribe(res=>{
+            this.cargoResultadosPorNombreEvent.emit(res);
+          });
+      
 
   }
 

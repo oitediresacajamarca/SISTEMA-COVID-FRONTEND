@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +18,7 @@ import { PanelResultadosComponent } from './componentes/panel-resultados/panel-r
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -70,6 +71,9 @@ import { GeoreferenciasUbicacionesFallecidosComponent } from './componentes/mapa
 import { GeoreferenciasUbicacionesPositivasComponent } from './componentes/mapas/georeferencias-ubicaciones-positivas/georeferencias-ubicaciones-positivas.component';
 import { SelectorGeograficoVerticalMaterialComponent } from './controles/selector-geografico-vertical-material/selector-geografico-vertical-material.component';
 import { EntregaMedicamentosComponent } from './componentes/reporte-seguimiento/seguimiento-clinico/entrega-medicamentos/entrega-medicamentos.component';
+import { LoaderComponent } from './componentes/loader/loader.component';
+import { LoaderService } from './servicios/loader.service';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
 
 @NgModule({
   declarations: [
@@ -111,7 +115,8 @@ import { EntregaMedicamentosComponent } from './componentes/reporte-seguimiento/
     GeoreferenciasUbicacionesFallecidosComponent,
     GeoreferenciasUbicacionesPositivasComponent,
     SelectorGeograficoVerticalMaterialComponent,
-    EntregaMedicamentosComponent
+    EntregaMedicamentosComponent,
+    LoaderComponent
 
   ],
   imports: [
@@ -137,12 +142,15 @@ import { EntregaMedicamentosComponent } from './componentes/reporte-seguimiento/
     ChartModule,
     MatDialogModule,
     ModalModule.forRoot(),
-    GMapModule
-
-
+    GMapModule,
+    MatProgressSpinnerModule 
 
   ],
-  providers: [],
+  providers: [
+    LoaderService,
+    {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi:true}
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

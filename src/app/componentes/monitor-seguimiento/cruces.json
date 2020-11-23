@@ -1,0 +1,161 @@
+[{
+  "Nro_Documento": "",
+  "numero": 0,
+  "ficha0": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "ficha100": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha200": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha300": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "Apellidos_Nombres": ""
+}, {
+  "Nro_Documento": "",
+  "numero": 1,
+  "ficha0": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "ficha100": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha200": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha300": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "Apellidos_Nombres": "ALCARAZO VIERA RN"
+}, {
+  "Nro_Documento": "",
+  "numero": 2,
+  "ficha0": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "ficha100": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha200": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha300": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "Apellidos_Nombres": "ARRIBASPLATA YDRUGO RN"
+}, {
+  "Nro_Documento": "",
+  "numero": 3,
+  "ficha0": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "ficha100": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha200": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha300": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "Apellidos_Nombres": "BARRANTES CHILON RN"
+}, {
+  "Nro_Documento": "",
+  "numero": 4,
+  "ficha0": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "ficha100": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha200": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha300": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "Apellidos_Nombres": "BUSTAMANTE REY YOBANI"
+}, {
+  "Nro_Documento": "",
+  "numero": 5,
+  "ficha0": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "ficha100": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha200": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha300": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "Apellidos_Nombres": "CALDERON JULCA RN"
+}, {
+  "Nro_Documento": "",
+  "numero": 6,
+  "ficha0": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "ficha100": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha200": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha300": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "Apellidos_Nombres": "CARVAJAL CASTILLO YUNAILLY ANDREINA"
+}, {
+  "Nro_Documento": "",
+  "numero": 7,
+  "ficha0": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "ficha100": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha200": {
+    "existe": true,
+    "clase": "bg-info"
+  },
+  "ficha300": {
+    "existe": false,
+    "clase": "bg-danger"
+  },
+  "Apellidos_Nombres": "CASTILLO RIVAS PEDRO"
+}]
