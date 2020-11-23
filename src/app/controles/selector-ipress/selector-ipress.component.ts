@@ -22,14 +22,9 @@ export class SelectorIpressComponent implements OnInit {
   ngOnInit(): void {
     
 
-    this.logins.devolverUsuario().subscribe(resp=>{
-      
-      this.tipo_ambito = resp.usuarioAmbito.tipo_ambito;
-      this.codigo_ambito = resp.usuarioAmbito.codigo_ambito;
-      
-      this.devolverIpressPorMicrored()
-
-    });
+    this.tipo_ambito = localStorage.getItem("tipo_ambito");
+    this.codigo_ambito = localStorage.getItem("codigo_ambito");
+    this.devolverIpressPorMicrored()
 
     
   }
@@ -48,7 +43,7 @@ export class SelectorIpressComponent implements OnInit {
 
   }
   seleccionoIpress(e) {
-    if(e){
+    if(e && e.value){
       this.seleccionoIpressEvent.emit(e.value.COD_IPRESS)
     }
       

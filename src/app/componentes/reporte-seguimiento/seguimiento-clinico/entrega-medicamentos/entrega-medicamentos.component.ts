@@ -16,12 +16,19 @@ export class EntregaMedicamentosComponent implements OnInit {
   entregas: any
   async ngOnInit(): Promise<void> {
 
-    if (this.numero_documento == undefined) {
+    /*
+      if (this.numero_documento == undefined) {
       this.entregas = await this.medicamentos.devolverMedicamentos(this.estadoss.NRO_DOCUMENTO,'Todos').toPromise()
     }else {
     
       this.entregas = await this.medicamentos.devolverMedicamentos(this.numero_documento, this.fecha).toPromise()
     }
+    */    
+   if(this.numero_documento && this.fecha){
+    this.entregas = await this.medicamentos.devolverMedicamentos(this.numero_documento, this.fecha).toPromise()
+   }
+   
+   
 
   }
 

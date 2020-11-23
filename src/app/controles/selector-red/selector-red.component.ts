@@ -20,14 +20,11 @@ export class SelectorRedComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.logins.devolverUsuario().subscribe(resp=>{
-      
-      this.tipo_ambito = resp.usuarioAmbito.tipo_ambito;
-      this.codigo_ambito = resp.usuarioAmbito.codigo_ambito;
-      
-      this.cargarRedes(this.COD_SUBREGION)
 
-    });
+    this.tipo_ambito = localStorage.getItem("tipo_ambito");
+    this.codigo_ambito = localStorage.getItem("codigo_ambito");
+    this.cargarRedes(this.COD_SUBREGION);
+
     
     
   }
@@ -44,7 +41,7 @@ export class SelectorRedComponent implements OnInit {
 
   }
   seleccionoRed(e) {
-    if(e){
+    if(e && e.value){
       this.seleccionoRedEvent.emit(e.value.ID_RED)
     }
     

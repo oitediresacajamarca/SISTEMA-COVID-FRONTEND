@@ -24,15 +24,10 @@ subregiones: SubRegion[]
   ngOnInit(): void {
 
     //obtener usuario
-    this.logins.devolverUsuario().subscribe(resp=>{
-      
-      this.tipo_ambito = resp.usuarioAmbito.tipo_ambito;
-      this.codigo_ambito = resp.usuarioAmbito.codigo_ambito;
-      
-      this.cargarSubRegiones();
 
-    });
-
+    this.tipo_ambito = localStorage.getItem("tipo_ambito");
+    this.codigo_ambito = localStorage.getItem("codigo_ambito");
+    this.cargarSubRegiones();
     
   }
 
@@ -49,7 +44,7 @@ cargarSubRegiones(){
 }
 
   selecionoRegion(e){
-    if(e){
+    if(e && e.value){
       console.log("Subregion")
       console.log(e)
       

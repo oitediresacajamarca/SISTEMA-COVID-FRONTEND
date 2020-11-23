@@ -15,21 +15,20 @@ import { from } from 'rxjs';
 export class MonitorSeguimientoComponent implements OnInit {
 
   constructor(private cruces: CrucesService, private personass: PersonasService) { }
-  fichas: string[] = ['ficha0', 'ficha100', 'ficha200', 'ficha300', 'ficha400']
+  fichas: string[] = ['ficha0', 'ficha100', 'ficha200', 'ficha300', 'medicamentos']
   page_number: number = 0
   page_size: number = 10000
   pages: number[]
   dataPie = {}
   contador = {}
+  COD_IPRESS
+  public tipo_ambito : string ;
+  public codigo_ambito : string;
 
   ngOnInit(): void {
-    this.fichas = ['ficha0', 'ficha100', 'ficha200', 'ficha300', 'ficha400']
-
-
-
-
-
-
+    this.fichas = ['ficha0', 'ficha100', 'ficha200', 'ficha300', 'medicamentos']
+    this.tipo_ambito = localStorage.getItem("tipo_ambito");
+    this.codigo_ambito = localStorage.getItem("codigo_ambito");
 
   }
   resultadosCruces: any[] = []
@@ -39,6 +38,12 @@ export class MonitorSeguimientoComponent implements OnInit {
   FichasSeleccionadas: string[] = []
   CargarFichaPrimaria() {
 
+  }
+
+  selecionoIpess(e) {
+    this.COD_IPRESS = e
+    console.log("Ipress Seleccionada")
+    console.log(this.COD_IPRESS)
   }
 
 
@@ -64,7 +69,6 @@ export class MonitorSeguimientoComponent implements OnInit {
 
     this.FichasSeleccionadas.map((ficha) => {
       this.contador[ficha] = { existe: 0, noexiste: 0 }
-
 
     })
 
@@ -144,7 +148,14 @@ export class MonitorSeguimientoComponent implements OnInit {
   }
 
   devolverCrucesDnis() {
-    this.cruces.devolverCruces().subscribe(respuesta => {
+    //obtener ipress seleccionada
+    let ipress = this.COD_IPRESS
+    console.log("CODIGO ==== Ipres")
+    console.log(ipress)
+    if(ipress == undefined) ipress = '0'    
+
+
+    this.cruces.devolverCruces(ipress,this.tipo_ambito,this.codigo_ambito).subscribe(respuesta => {
       this.resultados = respuesta
       this.resultadosfiltrados = respuesta
       this.generarPaginas()
