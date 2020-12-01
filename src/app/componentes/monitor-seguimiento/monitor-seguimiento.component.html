@@ -20,8 +20,55 @@
             
           </div>
           <!-- /.card-header -->
-          <div class="card-body">            
-            <app-selector-ipress-completo-horizontal (selecionoIpressEvent)="selecionoIpess($event)"></app-selector-ipress-completo-horizontal>
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <app-selector-ipress-completo-horizontal (selecionoIpressEvent)="selecionoIpess($event)"></app-selector-ipress-completo-horizontal>
+              </div>
+            </div>            
+            <div class="row">
+              <div class="col">
+                <mat-grid-list cols="4" rowHeight="100px">
+                  <!--<mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                      <mat-label>DESDE </mat-label>
+                      <input matInput [matDatepicker]="desde" [(ngModel)]="Desde" />
+                      <mat-datepicker-toggle
+                        matSuffix
+                        [for]="desde"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #desde></mat-datepicker>
+                    </mat-form-field>
+
+                  </mat-grid-tile>
+
+                  <mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                      <mat-label>HASTA </mat-label>
+                      <input matInput [matDatepicker]="hasta" [(ngModel)]="Hasta" />
+                      <mat-datepicker-toggle
+                        matSuffix
+                        [for]="hasta"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #hasta></mat-datepicker>
+                    </mat-form-field>
+    
+                  </mat-grid-tile>-->
+
+                  <mat-grid-tile>
+                    <mat-checkbox [(ngModel)]="flgSinIpress" value="" color="primary">Mostrar Registros sin IPRESS</mat-checkbox>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile>
+                    <mat-checkbox [(ngModel)]="flgBuscarEnAmbito" value="" color="primary">Buscar en Todo el Ámbito</mat-checkbox>
+
+                  </mat-grid-tile>
+                </mat-grid-list>
+
+              </div>
+
+            </div>
+
           </div>
           <!-- /.card-body -->
         </div>

@@ -35,6 +35,9 @@
               <mat-checkbox [(ngModel)]="flgSinIpress" value="" color="primary">Mostrar Registros sin IPRESS</mat-checkbox>
             
           </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-checkbox [(ngModel)]="flgBuscarEnAmbito" value="" color="primary">Buscar en Todo el Ámbito</mat-checkbox>
+          </mat-grid-tile>
 
           <mat-grid-tile>
             <button mat-raised-button color="primary" (click)="buscar()">
