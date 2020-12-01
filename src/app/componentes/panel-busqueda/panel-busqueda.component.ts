@@ -19,6 +19,7 @@ export class PanelBusquedaComponent implements OnInit {
   public codigo_ambito : string;
 
   public flgSinIpress : boolean;
+  public flgBuscarEnAmbito : boolean;
 
   @Output() resultados = new EventEmitter<any>()
 
@@ -29,6 +30,7 @@ export class PanelBusquedaComponent implements OnInit {
     this.tipo_ambito = localStorage.getItem('tipo_ambito');
     this.codigo_ambito = localStorage.getItem('codigo_ambito');
     this.flgSinIpress = false;  
+    this.flgBuscarEnAmbito = false;
     //establecer fecha por defecto
     this.Hasta = new Date();
     this.Desde = new Date(this.Hasta.getFullYear(),this.Hasta.getMonth()-1, this.Hasta.getDate())
@@ -50,8 +52,10 @@ export class PanelBusquedaComponent implements OnInit {
     let ipress = this.COD_IPRESS
     console.log("CODIGO ==== Ipres")
     console.log(ipress)
-    if(ipress == undefined) ipress = '0'    
+    if(ipress == undefined) ipress = 'todos'    
     if(this.flgSinIpress) ipress = '0'
+
+    if(this.flgBuscarEnAmbito) ipress='todos'
 
     
     this.ficha300s.devolverFicha300PorIpresFechas(ipress, this.Desde.toLocaleDateString("fr-CA"), this.Hasta.toLocaleDateString("fr-CA"), this.tipo_ambito, this.codigo_ambito).subscribe((respuesta) => {
