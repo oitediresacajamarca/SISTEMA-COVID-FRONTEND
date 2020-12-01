@@ -24,11 +24,21 @@ export class MonitorSeguimientoComponent implements OnInit {
   COD_IPRESS
   public tipo_ambito : string ;
   public codigo_ambito : string;
+  Desde: Date;
+  Hasta: Date;
+  
+  public flgSinIpress : boolean;
+  public flgBuscarEnAmbito : boolean;
+
 
   ngOnInit(): void {
     this.fichas = ['ficha0', 'ficha100', 'ficha200', 'ficha300', 'medicamentos']
     this.tipo_ambito = localStorage.getItem("tipo_ambito");
     this.codigo_ambito = localStorage.getItem("codigo_ambito");
+    this.flgSinIpress = false;
+    this.flgBuscarEnAmbito = false;
+    this.Hasta = new Date();
+    this.Desde = new Date(this.Hasta.getFullYear(),this.Hasta.getMonth()-1, this.Hasta.getDate())
 
   }
   resultadosCruces: any[] = []
@@ -152,8 +162,9 @@ export class MonitorSeguimientoComponent implements OnInit {
     let ipress = this.COD_IPRESS
     console.log("CODIGO ==== Ipres")
     console.log(ipress)
-    if(ipress == undefined) ipress = '0'    
-
+    if(ipress == undefined) ipress = 'todos'
+    if(this.flgSinIpress) ipress = '0'
+    if(this.flgBuscarEnAmbito) ipress = 'todos'
 
     this.cruces.devolverCruces(ipress,this.tipo_ambito,this.codigo_ambito).subscribe(respuesta => {
       this.resultados = respuesta
