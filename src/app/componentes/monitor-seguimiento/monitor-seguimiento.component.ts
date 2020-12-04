@@ -26,6 +26,8 @@ export class MonitorSeguimientoComponent implements OnInit {
   public codigo_ambito : string;
   Desde: Date;
   Hasta: Date;
+  flgBuscarFecha : boolean;
+
   
   public flgSinIpress : boolean;
   public flgBuscarEnAmbito : boolean;
@@ -37,6 +39,7 @@ export class MonitorSeguimientoComponent implements OnInit {
     this.codigo_ambito = localStorage.getItem("codigo_ambito");
     this.flgSinIpress = false;
     this.flgBuscarEnAmbito = false;
+    this.flgBuscarFecha = true;
     this.Hasta = new Date();
     this.Desde = new Date(this.Hasta.getFullYear(),this.Hasta.getMonth()-1, this.Hasta.getDate())
 
@@ -166,7 +169,7 @@ export class MonitorSeguimientoComponent implements OnInit {
     if(this.flgSinIpress) ipress = '0'
     if(this.flgBuscarEnAmbito) ipress = 'todos'
 
-    this.cruces.devolverCruces(ipress,this.tipo_ambito,this.codigo_ambito).subscribe(respuesta => {
+    this.cruces.devolverCruces(ipress,this.tipo_ambito,this.codigo_ambito,this.flgBuscarFecha,this.Desde.toLocaleDateString("fr-CA"),this.Hasta.toLocaleDateString("fr-CA")).subscribe(respuesta => {
       this.resultados = respuesta
       this.resultadosfiltrados = respuesta
       this.generarPaginas()
