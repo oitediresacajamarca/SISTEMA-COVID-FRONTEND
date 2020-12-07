@@ -118,12 +118,17 @@ export class CrucesService {
 
   }
 
-  devolverCruces(COD_IPRESS: string, tipo_ambito: string, codigo_ambito : string){
+  devolverCruces(COD_IPRESS: string, tipo_ambito: string, codigo_ambito : string, flg_buscar_fecha : boolean, desde : string, hasta : string){
 
     var headers = new HttpHeaders({client_id:environment.siscovid_client_id,client_secret: environment.siscovid_cient_secret});
    
-    var params = new HttpParams({fromObject:{'cod_ipress': COD_IPRESS, clase : 'ADM', tipoambito: tipo_ambito,codigoambito : codigo_ambito  }})
+    if(flg_buscar_fecha){
+      var params = new HttpParams({fromObject:{'cod_ipress': COD_IPRESS, clase : 'ADM', tipoambito: tipo_ambito,codigoambito : codigo_ambito, fechaDesde : desde, fechaHasta : hasta  }})
+      return this.http.get<any[]>(environment.urlBackendSiscovid+'fichas/getcrucefichasambitofecha',{headers:headers, params:params })
 
-   return this.http.get<any[]>(environment.urlBackendSiscovid+'fichas/getcrucefichasambito',{headers:headers, params:params })
+    }
+
+    var params = new HttpParams({fromObject:{'cod_ipress': COD_IPRESS, clase : 'ADM', tipoambito: tipo_ambito,codigoambito : codigo_ambito  }})
+    return this.http.get<any[]>(environment.urlBackendSiscovid+'fichas/getcrucefichasambito',{headers:headers, params:params })
   }
 }
