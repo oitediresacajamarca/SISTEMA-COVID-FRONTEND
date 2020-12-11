@@ -181,6 +181,8 @@
                       <th style="width: 10px">#</th>
                       <th style="width: 10px">Numero de Documento</th>
                       <th>Nombres</th>
+                      <th>Ultima Ficha Actualizada</th>
+                      <th>Fecha Actualización</th>
                       <th *ngFor="let ficha of FichasSeleccionadas">
                         {{ ficha }}
                       </th>
@@ -195,7 +197,9 @@
                     >
                       <td>{{resultado.numero}}</td>
                       <td>{{resultado.Nro_Documento}}</td>
-                      <td>{{ resultado.Apellidos_Nombres }}</td>
+                      <td>{{resultado.Apellidos_Nombres }}</td>
+                      <td>{{resultado.ultima_ficha_actualizada}}</td>
+                      <td>{{resultado.fecha_actual | date: 'dd/MM/yyyy'}}</td>
                       <td *ngFor="let ficha of FichasSeleccionadas">
                         <span class="badge" [ngClass]="resultado[ficha].clase"
                           >{{ resultado[ficha].existe |booleanos}}</span
