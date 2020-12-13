@@ -28,10 +28,10 @@ export class MonitorSeguimientoComponent implements OnInit {
   Desde: Date;
   Hasta: Date;
   flgBuscarFecha : boolean;
-
-  
+  public flgMostrarFiltroAmbito : boolean; 
   public flgSinIpress : boolean;
   public flgBuscarEnAmbito : boolean;
+  public filtroDni : string;
 
 
   ngOnInit(): void {
@@ -43,6 +43,10 @@ export class MonitorSeguimientoComponent implements OnInit {
     this.flgBuscarFecha = true;
     this.Hasta = new Date();
     this.Desde = new Date(this.Hasta.getFullYear(),this.Hasta.getMonth()-1, this.Hasta.getDate())
+
+    if(this.tipo_ambito=="REGION" || this.tipo_ambito == "SUBREGION"  || this.tipo_ambito == "RED"){
+      this.flgMostrarFiltroAmbito = true;
+    }
 
   }
   resultadosCruces: any[] = []
@@ -181,7 +185,7 @@ export class MonitorSeguimientoComponent implements OnInit {
     }, [])
       
       this.resultados = docs
-      this.resultadosfiltrados = docs
+      this.resultadosfiltrados = docs.slice() //copiar por valor
       this.generarPaginas()
       this.generarDatosGrafico()
       this.asignarDatosGrafico()
@@ -243,8 +247,28 @@ export class MonitorSeguimientoComponent implements OnInit {
     this.generarDatosGrafico()
     this.asignarDatosGrafico()
 
-
   }
+
+  filtrarSegunDNI(e){
+   
+    if(this.filtroDni!=null && this.filtroDni != ""){
+      this.resultadosfiltrados = this.resultadosfiltrados.filter(r=>r.Nro_Documento==this.filtroDni);
+      
+    } else{
+      //copiar por referencia
+      this.resultadosfiltrados = this.resultados.slice();
+    }
+    this.generarDatosGrafico()
+    this.asignarDatosGrafico()
+    
+  }
+
+  limpiarFiltros(e){
+    this.filtroDni = "";
+    this.filtrarSegunDNI(e);
+  }
+
+
 
   Exportar_Excel(){
     //preparar para la exportacion
@@ -254,16 +278,30 @@ export class MonitorSeguimientoComponent implements OnInit {
       let fila : any = {
         numero: r.numero,
         Nro_Documento: r.Nro_Documento,
-        Apellidos_Nombres: r.Apellidos_Nombres,
-        ficha0: r.ficha0.existe ? "SI" : "NO",
-        ficha100: r.ficha100.existe ? "SI" : "NO",
-        ficha200: r.ficha200.existe ? "SI" : "NO",
-        ficha300: r.ficha300.existe ? "SI" : "NO",
-        medicamentos: r.medicamentos.existe ? "SI" : "NO",
-        notiweb : r.notiweb.existe ? "SI" : "NO",
-        fecha_actualizacion : r.fecha_actual,
+        Apellidos_Nombres: r.Apellidos_Nombres,        
+        fecha_actualizacion : new Date(r.fecha_actual).toLocaleDateString("es-Pe"),
         ultima_ficha_actualizada : r.ultima_ficha_actualizada
       }
+
+      if(this.FichasSeleccionadas.indexOf("ficha0") >= 0){
+        fila.ficha0 = r.ficha0.existe ? "SI" : "NO";
+      }
+      if(this.FichasSeleccionadas.indexOf("ficha100") >= 0){
+        fila.ficha100 = r.ficha100.existe ? "SI" : "NO";
+      }
+      if(this.FichasSeleccionadas.indexOf("ficha200") >= 0){
+        fila.ficha200 = r.ficha200.existe ? "SI" : "NO";
+      }
+      if(this.FichasSeleccionadas.indexOf("ficha300") >= 0){
+        fila.ficha300 = r.ficha300.existe ? "SI" : "NO";
+      }
+      if(this.FichasSeleccionadas.indexOf("medicamentos") >= 0){
+        fila.medicamentos = r.medicamentos.existe ? "SI" : "NO";
+      }
+      if(this.FichasSeleccionadas.indexOf("notiweb") >= 0){
+        fila.notiweb = r.notiweb.existe ? "SI" : "NO";
+      }
+
       datos.push(fila)
     })
 
