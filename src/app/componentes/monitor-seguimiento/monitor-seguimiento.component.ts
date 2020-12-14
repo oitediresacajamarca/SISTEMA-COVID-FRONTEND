@@ -6,6 +6,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Chart } from 'chart.js'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 import { from } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-monitor-seguimiento',
@@ -15,7 +16,7 @@ import { from } from 'rxjs';
 export class MonitorSeguimientoComponent implements OnInit {
 
   constructor(private cruces: CrucesService, private personass: PersonasService) { }
-  fichas: string[] = ['ficha0', 'ficha100', 'ficha200', 'ficha300', 'medicamentos']
+  fichas: string[] = ['ficha0', 'ficha100', 'ficha200', 'ficha300', 'medicamentos','notiweb']
   page_number: number = 0
   page_size: number = 10000
   pages: number[]
@@ -27,14 +28,14 @@ export class MonitorSeguimientoComponent implements OnInit {
   Desde: Date;
   Hasta: Date;
   flgBuscarFecha : boolean;
-
-  
+  public flgMostrarFiltroAmbito : boolean; 
   public flgSinIpress : boolean;
   public flgBuscarEnAmbito : boolean;
+  public filtroDni : string;
 
 
   ngOnInit(): void {
-    this.fichas = ['ficha0', 'ficha100', 'ficha200', 'ficha300', 'medicamentos']
+    this.fichas = ['ficha0', 'ficha100', 'ficha200', 'ficha300', 'medicamentos','notiweb']
     this.tipo_ambito = localStorage.getItem("tipo_ambito");
     this.codigo_ambito = localStorage.getItem("codigo_ambito");
     this.flgSinIpress = false;
@@ -42,6 +43,10 @@ export class MonitorSeguimientoComponent implements OnInit {
     this.flgBuscarFecha = true;
     this.Hasta = new Date();
     this.Desde = new Date(this.Hasta.getFullYear(),this.Hasta.getMonth()-1, this.Hasta.getDate())
+
+    if(this.tipo_ambito=="REGION" || this.tipo_ambito == "SUBREGION"  || this.tipo_ambito == "RED"){
+      this.flgMostrarFiltroAmbito = true;
+    }
 
   }
   resultadosCruces: any[] = []
@@ -159,7 +164,7 @@ export class MonitorSeguimientoComponent implements OnInit {
 
 
   }
-
+  
   devolverCrucesDnis() {
     //obtener ipress seleccionada
     let ipress = this.COD_IPRESS
@@ -170,8 +175,17 @@ export class MonitorSeguimientoComponent implements OnInit {
     if(this.flgBuscarEnAmbito) ipress = 'todos'
 
     this.cruces.devolverCruces(ipress,this.tipo_ambito,this.codigo_ambito,this.flgBuscarFecha,this.Desde.toLocaleDateString("fr-CA"),this.Hasta.toLocaleDateString("fr-CA")).subscribe(respuesta => {
-      this.resultados = respuesta
-      this.resultadosfiltrados = respuesta
+      
+      // eliminar duplicados
+    let docs = respuesta.reduce((ac, cv)=>{
+      if(ac.map(a=>a.Nro_Documento).indexOf(cv.Nro_Documento)===-1){
+        ac.push(cv)
+      }
+      return ac
+    }, [])
+      
+      this.resultados = docs
+      this.resultadosfiltrados = docs.slice() //copiar por valor
       this.generarPaginas()
       this.generarDatosGrafico()
       this.asignarDatosGrafico()
@@ -233,13 +247,66 @@ export class MonitorSeguimientoComponent implements OnInit {
     this.generarDatosGrafico()
     this.asignarDatosGrafico()
 
-
   }
 
+  filtrarSegunDNI(e){
+   
+    if(this.filtroDni!=null && this.filtroDni != ""){
+      this.resultadosfiltrados = this.resultadosfiltrados.filter(r=>r.Nro_Documento==this.filtroDni);
+      
+    } else{
+      //copiar por referencia
+      this.resultadosfiltrados = this.resultados.slice();
+    }
+    this.generarDatosGrafico()
+    this.asignarDatosGrafico()
+    
+  }
+
+  limpiarFiltros(e){
+    this.filtroDni = "";
+    this.filtrarSegunDNI(e);
+  }
+
+
+
   Exportar_Excel(){
+    //preparar para la exportacion
+    //console.log(this.resultadosfiltrados);
+    let datos : any = []
+    this.resultadosfiltrados.forEach(r=>{
+      let fila : any = {
+        numero: r.numero,
+        Nro_Documento: r.Nro_Documento,
+        Apellidos_Nombres: r.Apellidos_Nombres,        
+        fecha_actualizacion : new Date(r.fecha_actual).toLocaleDateString("es-Pe"),
+        ultima_ficha_actualizada : r.ultima_ficha_actualizada
+      }
+
+      if(this.FichasSeleccionadas.indexOf("ficha0") >= 0){
+        fila.ficha0 = r.ficha0.existe ? "SI" : "NO";
+      }
+      if(this.FichasSeleccionadas.indexOf("ficha100") >= 0){
+        fila.ficha100 = r.ficha100.existe ? "SI" : "NO";
+      }
+      if(this.FichasSeleccionadas.indexOf("ficha200") >= 0){
+        fila.ficha200 = r.ficha200.existe ? "SI" : "NO";
+      }
+      if(this.FichasSeleccionadas.indexOf("ficha300") >= 0){
+        fila.ficha300 = r.ficha300.existe ? "SI" : "NO";
+      }
+      if(this.FichasSeleccionadas.indexOf("medicamentos") >= 0){
+        fila.medicamentos = r.medicamentos.existe ? "SI" : "NO";
+      }
+      if(this.FichasSeleccionadas.indexOf("notiweb") >= 0){
+        fila.notiweb = r.notiweb.existe ? "SI" : "NO";
+      }
+
+      datos.push(fila)
+    })
 
     import("xlsx").then(xlsx => {
-      const worksheet = xlsx.utils.json_to_sheet(this.resultadosfiltrados);
+      const worksheet = xlsx.utils.json_to_sheet(datos);
       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
       this.saveAsExcelFile(excelBuffer, "resultado");
