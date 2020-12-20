@@ -27,6 +27,7 @@ export class SeguimientoClinicoComponent implements OnInit {
       this.cargoSeguimientoClinico.emit({cantidadSeguimientos:this.ficha300datos.length})
       this.estados.ESTADO_REGISTRO_COVID.ficha_300= this.ficha300datos.length
       
+      console.log(respuesta);
 
     })
   }

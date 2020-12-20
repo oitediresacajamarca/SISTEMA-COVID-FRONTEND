@@ -37,11 +37,14 @@
             <!-- /.info-box-content -->
           </div>
         </div>
-        <div class="timeline-footer">
-         
-       
+        <div class="timeline-footer"> 
           <app-entrega-medicamentos [numero_documento]="ficha300.Nro_Documento" [fecha]=" ficha300.Ficha_300_fecha_del_seguimiento">
           </app-entrega-medicamentos>
+          <div class="info-box">
+            <div class="info-box-content">
+              <span class="info-box-text"><b> Registrado por: </b> {{ficha300.Ficha_nombres_apellidos_registrador}} </span>
+             </div>
+          </div>
         </div>
       </div>
     </div>
