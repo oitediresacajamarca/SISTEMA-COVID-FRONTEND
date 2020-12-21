@@ -15,8 +15,21 @@ export class PruebasRapidasDetalleComponent implements OnInit {
 
   ngOnInit(): void {
     this.f100s.devolverFicha100porIdentificacion(this.estados.TIP_DOCUMENTO, this.estados.NRO_DOCUMENTO).subscribe((respuesta) => {
-      this.ficha100s = respuesta
-      this.estados.ESTADO_REGISTRO_COVID.ficha_100=this.ficha100s.length
+      if(respuesta){
+        this.ficha100s = respuesta.sort((a,b)=>{
+          if(a.Fecha_Prueba > b.Fecha_Prueba) return -1;
+          if(a.Fecha_Prueba < b.Fecha_Prueba) return 1;
+
+          return 0;
+        })
+        console.log("Ficha 100")
+        console.log(this.ficha100s)
+        this.estados.ESTADO_REGISTRO_COVID.ficha_100=this.ficha100s.length
+
+      }
+      
+      
+      
     })
   }
 
