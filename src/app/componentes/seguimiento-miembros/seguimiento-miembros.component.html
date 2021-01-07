@@ -1,0 +1,153 @@
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Equipo: {{equipo.descripcion}}</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Apellidos y Nombres:</label>
+                            <input type="text" name="nombres" [(ngModel)]="miembro.nombres" class="form-control" readonly="readonly" />
+                        </div>
+    
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Profesión:</label>
+                            <input type="text" name="profesion" [(ngModel)]="miembro.profesion" class="form-control" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tipo Documento:</label>
+                            <input type="text" name="tipo_documento" [(ngModel)]="miembro.tipo_documento" class="form-control" readonly="readonly" />
+    
+                        </div>
+    
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Número de Documento:</label>
+                            <input type="text" name="nro_documento" [(ngModel)]="miembro.nro_documento" class="form-control" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Mes Registro:</label>
+                            <select name="mes_registro" class="form-control" [(ngModel)]="mes_registro">
+                                <option value="1">Enero</option>
+                                <option value="2">Febrero</option>
+                                <option value="3">Marzo</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Mayo</option>
+                                <option value="6">Junio</option>
+                                <option value="7">Julio</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+    
+                            </select>
+                        </div>
+    
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Fecha Registro:</label>
+                            <input type="date" name="fecha_registro" [(ngModel)]="fecha_registro" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Cantidad de Seguimientos Presenciales:</label>
+                            <input type="text" name="nro_int_presencial" [(ngModel)]="nro_int_presencial" class="form-control"  />
+                        </div>
+    
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Cantidad de Seguimientos Remotos:</label>
+                            <input type="text" name="nro_int_remoto" [(ngModel)]="nro_int_remoto" class="form-control"  />
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary" name="btnAgregar" (click)="agregarSeguimiento()">Agregar Registro</button>
+            </div>
+    
+        </div>
+    
+        <div class="card" style="margin-top:20px">
+            <div class="card-header">
+                <h5>Seguimientos</h5>
+            </div>
+            <div class="card-body">
+    
+                <table class="table table-hover table-striped table-bordered">
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Id Miembro
+                        </th>
+                        <th>
+                            Fecha
+                        </th>
+                        <th>
+                            Mes
+                        </th>
+                        <th>
+                            Cant. Seguimientos Presenciales
+                        </th>
+                        <th>
+                            Cant. Seguimientos Remotos
+                        </th>
+                        <th></th>
+                    </tr>
+    
+                        <tr *ngFor="let item of seguimientos">
+                            <td>
+                                {{item.id_registro}}
+                            </td>
+                            <td>
+                               {{item.id_miembro}}
+                            </td>
+                            <td>
+                                {{item.fecha_registro}}
+                            </td>
+                            <td>
+                                {{item.mes_registro}}
+                            </td>
+                            <td>
+                                {{item.nro_int_presencial}}
+                            </td>
+                            <td>
+                                {{item.nro_int_remoto}}
+                            </td>
+                            <td>
+                               
+                                <button class="btn btn-danger" (click)="eliminarSeguimiento(item)" title="Eliminar"><i class="fas fa-trash"></i> </button>
+                                
+                            </td>
+                        </tr>
+                    
+    
+                </table>
+            </div>
+        </div>
+    
+    
