@@ -74,6 +74,9 @@ import { EntregaMedicamentosComponent } from './componentes/reporte-seguimiento/
 import { LoaderComponent } from './componentes/loader/loader.component';
 import { LoaderService } from './servicios/loader.service';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { RegistroEquiposComponent } from './componentes/registro-equipos/registro-equipos.component';
+import { IntegrantesEquipoComponent } from './componentes/integrantes-equipo/integrantes-equipo.component';
+import { SeguimientoMiembrosComponent } from './componentes/seguimiento-miembros/seguimiento-miembros.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +119,10 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
     GeoreferenciasUbicacionesPositivasComponent,
     SelectorGeograficoVerticalMaterialComponent,
     EntregaMedicamentosComponent,
-    LoaderComponent
+    LoaderComponent,
+    RegistroEquiposComponent,
+    IntegrantesEquipoComponent,
+    SeguimientoMiembrosComponent
 
   ],
   imports: [

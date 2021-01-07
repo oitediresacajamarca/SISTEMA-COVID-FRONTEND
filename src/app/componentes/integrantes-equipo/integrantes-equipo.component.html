@@ -1,0 +1,167 @@
+
+<div class="card">
+    <div class="card-header">
+        <h3>Equipo: {{equipo.descripcion}}</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Apellidos y Nombres:</label>
+                    <input type="text" name="nombres" value="" class="form-control" [(ngModel)]="nombres"/>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Profesión:</label>
+                    <input type="text" name="profesion" value="" class="form-control" [(ngModel)]="profesion"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Tipo Documento:</label>
+                    <select name="tipo_documento" class="form-control" [(ngModel)]="tipo_documento">
+                        <option value="DNI">DNI</option>
+                        <option value="PASAPORTE">PASAPORTE</option>
+                        <option value="CARNET DE EXTRANJERÍA">CARNET DE EXTRANJERÍA</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Número de Documento:</label>
+                    <input type="text" name="nro_documento" value="" class="form-control" [(ngModel)]="nro_documento"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Teléfono:</label>
+                    <input type="text" name="telefono" value="" class="form-control" [(ngModel)]="telefono"/>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Correo Electrónico:</label>
+                    <input type="email" name="email" value="" class="form-control" [(ngModel)]="email"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Tipo de Seguimiento:</label>
+                    <select name="tipo_seguimiento" class="form-control" [(ngModel)]="tipo_seguimiento">
+                        <option value="PRESENCIAL">PRESENCIAL</option>
+                        <option value="REMOTO">REMOTO</option>
+
+                    </select>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-primary" name="btnAgregar" (click)="addMiembro()"><i class="fas fa-save"></i>  Guardar</button>
+    </div>
+
+</div>
+<div class="alert alert-danger" *ngIf="mensajeError">{{mensajeError}}</div>
+
+<div class="card" style="margin-top:20px">
+    <div class="card-header">
+        <h3>Integrantes</h3>
+    </div>
+    <div class="card-body">
+
+        <table class="table table-hover table-striped table-bordered">
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Id Equipo
+                </th>
+                <th>
+                    Nombres
+                </th>
+                <th>
+                    Profesión
+                </th>
+                <th>
+                    Tipo Documento
+                </th>
+                <th>
+                    Número Documento
+                </th>
+                <th>
+                    Teléfono
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Tipo Seguimiento
+                </th>
+                <th>
+                    Activo
+                </th>
+                <th></th>
+            </tr>
+
+                <tr *ngFor="let item of miembros">
+                    <td>
+                        {{item.id_miembro}}
+                    </td>
+                    <td>
+                        {{item.id_equipo}}
+                    </td>
+                    <td>
+                        {{item.nombres}}
+                    </td>
+                    <td>
+                         {{item.profesion}}
+                    </td>
+                    <td>
+                        {{item.tipo_documento}}
+                    </td>
+                    <td>
+                        {{item.nro_documento}}
+                    </td>
+                    <td>
+                        {{item.telefono}}
+                    </td>
+                    <td>
+                        {{item.email}}
+                    </td>
+                    <td>
+                         {{item.tipo_seguimiento}}
+                    </td>
+                    <td>
+                         {{item.flg_activo}}
+                    </td>
+                    <td>
+                        <button class="btn btn-success" (click)="editarMiembro(item)" title="Editar"><i class="fas fa-edit"></i> </button>
+                        <button class="btn btn-danger" (click)="eliminarMiembro(item)" title="Eliminar"><i class="fas fa-trash"></i> </button>
+                        <button class="btn btn-info" title="Registrar Seguimientos" (click)="seguimientos(item)"><i class="fas fa-table"></i></button>
+                      
+                    </td>
+                </tr>
+            
+        </table>
+    </div>
+</div>

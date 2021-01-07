@@ -12,6 +12,9 @@ import { LoginComponent } from './componentes/login/login.component';
 import { AuthGuardGuard } from './compartido/guards/auth-guard.guard';
 import { LayoutPrincipalComponent } from './layouts/layout-principal/layout-principal.component';
 import { GeoreferenciaComponent } from './componentes/mapas/georeferencia/georeferencia.component';
+import { RegistroEquiposComponent } from './componentes/registro-equipos/registro-equipos.component';
+import { IntegrantesEquipoComponent } from './componentes/integrantes-equipo/integrantes-equipo.component';
+import { SeguimientoMiembrosComponent } from './componentes/seguimiento-miembros/seguimiento-miembros.component';
 
 
 const routes: Routes = [
@@ -24,7 +27,10 @@ const routes: Routes = [
     {path:"reporte/:nro_documento",component:ReporteSeguimientoComponent},
     {path:"monitor",component:MonitorSeguimientoComponent,canActivate:[AuthGuardGuard]},
     {path:"admin-equipos",component:AdministracionEquiposComponent,canActivate:[AuthGuardGuard]},
-
+    {path:"registro-equipos", component: RegistroEquiposComponent},
+    {path:"integrantes-equipo/:id_equipo", component: IntegrantesEquipoComponent},
+    {path:"seguimiento-miembros/:id_miembro",component:SeguimientoMiembrosComponent}
+    
 
   ]},
   {path:"mapa",component:GeoreferenciaComponent},
@@ -33,8 +39,9 @@ const routes: Routes = [
   {path:"red",component:SelectorRedComponent},
   {path:"microred",component:SelectorMicroredComponent},
   {path:"ipress",component:SelectorIpressComponent},
- 
-  {path:"login",component:LoginComponent} 
+  {path:"login",component:LoginComponent},
+  
+  
 
 ];
 
