@@ -208,8 +208,6 @@ export class Ficha100Service {
 
    return this.http.get<Ficha100[]>(environment.urlBackendSiscovid+'fichas/getficha100pordocumento',{headers,params})
 
-    
-
   }
 
   devolverFicha100porNombres(Nombres: string, Apellido_Pat: string,Apellido_Mat:string) {
