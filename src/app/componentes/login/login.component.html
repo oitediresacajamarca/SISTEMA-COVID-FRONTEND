@@ -1,13 +1,18 @@
 
 <div class="login-page">
 <div class="login-box">
+  <div class="login-title"><b>Módulo de Seguimiento Nominal del Paciente COVID-19</b></div>
     <div class="login-logo">
-      <a href="../../index2.html"><b>DIRESA</b>LTE</a>
+      
+      <img src="http://sir.diresacajamarca.gob.pe/covid/Content/img/grc_icono.svg" style="display:inline;" alt="Dirección Regional de Salud Cajamarca">
+      <span>
+        <img src="http://sir.diresacajamarca.gob.pe/covid/Content/img/texto_diresa-pagina-2.svg" alt="Dirección Regional de Salud Cajamarca" style="display: inline-block;">
+    </span>
     </div>
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Login para iniciar sesion</p>
+        <p class="login-box-msg">Ingresa tu usuario para iniciar sesión</p>
   
         <form action="http://sir.diresacajamarca.gob.pe/dir_autenticacion/token" method="post" [formGroup]="loginForm" (ngSubmit)="loguear()">
           <div class="input-group mb-3">
@@ -43,7 +48,7 @@
           </div>
         </form>
   
-        <div class="social-auth-links text-center mb-3">
+        <!-- <div class="social-auth-links text-center mb-3">
           <p>- O -</p>
           <a href="#" class="btn btn-block btn-primary">
             <i class="fab fa-facebook mr-2"></i> Iniciar sesion con Facebook
@@ -51,15 +56,15 @@
           <a href="#" class="btn btn-block btn-danger">
             <i class="fab fa-google-plus mr-2"></i> Iniciar sesion con Google+
           </a>
-        </div>
+        </div> -->
         <!-- /.social-auth-links -->
   
-        <p class="mb-1">
+        <!-- <p class="mb-1">
           <a href="forgot-password.html">Olvide mi contraseña</a>
         </p>
         <p class="mb-0">
           <a href="register.html" class="text-center">Registrar nuevo Usuario</a>
-        </p>
+        </p> -->
       </div>
       <!-- /.login-card-body -->
     </div>
