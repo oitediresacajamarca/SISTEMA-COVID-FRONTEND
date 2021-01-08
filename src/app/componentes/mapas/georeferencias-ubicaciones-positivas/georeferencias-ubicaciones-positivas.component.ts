@@ -50,7 +50,8 @@ export class GeoreferenciasUbicacionesPositivasComponent implements OnInit {
 
     this.covid.devolverGeoReferencias().subscribe((geo) => {
       geo.forEach(element => {
-        this.overlays.push(new google.maps.Marker({ position: { lat: element.lat, lng: element.lng }, title: "Konyaalti" }))
+        console.log(element)
+        this.overlays.push(new google.maps.Marker({ position: { lat: element.lat, lng: element.lng }, title: element.id+'' }))
       });
     })
 
