@@ -1,0 +1,167 @@
+<div style="margin:10px; padding:10px">
+    <b> Reporte de casos positivos </b> <br>
+    <span class="text-xs">Fuente: Ficha100 y NotiWeb</span> <br>
+    <div class="card" style="margin-top: 20px;">
+        <div class="card-header">
+          Opciones de Búsqueda 
+        </div>
+        <div class="card-body">
+      
+          <div class="row">
+      
+            <div class="col-md-3 form-group">
+      
+              <label for="txtDepartamento" style="margin-right:10px;">Departamento: </label>
+              <input type="text" name="txtDepartamento" id="txtDepartamento" value="CAJAMARCA" class="form-control"
+                readonly="readonly" />
+      
+            </div>
+            <div class="col-md-3 form-group">
+              <label for="cmbProvincia" style="margin-right:10px;">Provincia: </label>
+              <select class="form-control" name="cmbProvincia" id="cmbProvincia" [(ngModel)]="provinciaSel" (change)="provinciaChange()">
+                <option value="0">Todas</option>
+                <option *ngFor="let prov of provincias" [value]="prov">{{prov}}</option>
+              </select>
+            </div>
+            <div class="col-md-3 form-group">
+              <label for="cmbDistrito" style="margin-right:10px;">Distrito: </label>
+              <select class="form-control" name="cmbDistrito" id="cmbDistrito" [(ngModel)]="distritoSel" (change)="distritoChange()">
+                <option value="0">Todos</option>
+                <option *ngFor="let dist of distritos" [value] = "dist">{{dist}}</option>
+              </select>
+            </div>
+      
+            <div class="col-md-3 form-group">
+              <label for="cmbEstablecimiento" style="margin-right:10px;">Establecimiento: </label>
+              <select class="form-control" name="cmbEstablecimiento" id="cmbEstablecimiento" [(ngModel)]="establecimientoSel">
+                <option value="0">Todos</option>
+                <option *ngFor="let est of establecimientos" [value] = "est.Nombre_Establecimiento">
+                  {{est.Nombre_Establecimiento}}</option>
+              </select>
+            </div>
+      
+          </div>
+          <div class="row">
+      
+      
+            <div class="col-md-3 form-group">
+              <label for="txtFechaDesde" style="margin-right:10px;">Desde: </label>
+              <input type="date" name="txtFechaDesde" id="txtFechaDesde" [(ngModel)]="fechaDesde" class="form-control" />
+      
+            </div>
+            <div class="col-md-3 form-group">
+              <label for="txtFechaHasta" style="margin-right:10px;">Hasta: </label>
+              <input type="date" name="txtFechaHasta" id="txtFechaHasta" [(ngModel)]="fechaHasta" class="form-control" />
+            </div>
+            <div class="col-md-6">
+      
+            </div>
+      
+      
+      
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="btn btn-primary" name="btnConsultar" (click)="generarReporte()"> <i class="fas fa-search"></i> Consultar</button>
+          <button type="button" class="btn btn-success" name="btnExportar" (click)="exportarExcel()" ><i class="fas fa-file-excel"></i> Exportar</button>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-body">
+      
+          <div class="table-responsive">
+      
+            <table class="table table-hover table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>
+                    Tipo Doc.
+                  </th>
+                  <th>
+                    Nro. Documento
+                  </th>
+                  <th>
+                    Nombres
+                  </th>
+                  <th>
+                    Resultado
+                  </th>
+                  <th>
+                    Fecha
+                  </th>
+                  <th>
+                    Dirección
+                  </th>
+                  <th>
+                    Teléfono
+                  </th>
+                  <th>
+                    Departamento
+                  </th>
+                  <th>
+                    Provincia
+                  </th>
+                  <th>
+                    Distrito
+                  </th>
+                  <th>
+                    Establecimiento
+                  </th>
+                  <th>
+                    Fuente
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+      
+                <tr *ngFor="let item of reporteSamu">
+                  <td>
+                    {{item.tipodoc}}
+                  </td>
+                  <td>
+                    {{item.dni}}
+                  </td>
+                  <td>
+                    {{item.nombre}}
+                  </td>
+                  <td>
+                    {{item.resultado}}
+                  </td>
+                  <td>
+                    {{item.fecha}}
+                  </td>
+                  <td>
+                    {{item.direccion}}
+                  </td>
+                  <td>
+                    {{item.telefono}}
+                  </td>
+                  <td>
+                    {{item.departamento}}
+                  </td>
+                  <td>
+                    {{item.provincia}}
+                  </td>
+                  <td>
+                    {{item.distrito}}
+                  </td>
+                  <td>
+                    {{item.establecimiento}}
+                  </td>
+                  <td>
+                    {{item.fuente}}
+                  </td>
+      
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      
+      </div>
+</div>
+
+
+
