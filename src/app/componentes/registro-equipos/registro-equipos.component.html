@@ -1,75 +1,94 @@
-
 <div class="card">
-    <div class="card-header">
-        Equipos COVID
-    </div>
-    <div class="card-body">
+  <div class="card-header">
+    Equipos COVID
+  </div>
+  <div class="card-body">
 
-        <div class="card">
-            <div class="card-header">
-                Registrar Equipo
+    <div class="card">
+      <div class="card-header">
+        Registrar Equipo
+      </div>
+      <div class="card-body">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <div class="row">
+              <label for="descripcion" class="control-label col-md-2">Nombre</label>
+              <div class="col-md-6">
+                <input type="text" name="descripcion" id="descripcion" class="form-control" [(ngModel)]="nombre">
+
+              </div>
             </div>
-            <div class="card-body">
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <label for="descripcion" class="control-label col-md-2">Nombre</label>
-                        <div class="col-md-10">
-                            <input type="text" name="descripcion" id="descripcion" class="form-control" [(ngModel)]="nombre">
-                            
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="cod_establecimiento" class="control-label col-md-2">Codigo IPRESS</label>
-                       
-                        <div class="col-md-10">
-                            <input type="text" name="cod_establecimiento" id="cod_establecimiento" class="form-control" [(ngModel)]="cod_establecimiento">
-                           
-                        </div>
-                    </div>
-                </div>
+
+          </div>
+          <div class="row">
+            <label class="control-label col-md-2">Establecimiento:</label>
+            <div class="col-md-6">
+              <app-selector-ipress-completo-horizontal (selecionoIpressEvent)="selecionoIpess($event)">
+              </app-selector-ipress-completo-horizontal>
             </div>
-            <div class="card-footer">
-                <button class="btn btn-primary" (click)="registrarEquipo()"><i class="fas fa-save"></i>  Guardar</button>
+
+          </div>
+
+          <div class="form-group" style="display: none;">
+            <div class="row">
+              <label for="cod_establecimiento" class="control-label col-md-2">Codigo IPRESS</label>
+
+              <div class="col-md-6">
+                <input type="text" name="cod_establecimiento" id="cod_establecimiento" class="form-control"
+                  [(ngModel)]="cod_establecimiento">
+
+              </div>
 
             </div>
+
+          </div>
         </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary" (click)="registrarEquipo()"><i class="fas fa-save"></i> Guardar</button>
 
-        <table class="table table-bordered table-hover table-striped">
-            <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Nombre Equipo
-                </th>
-                <th>
-                    Establecimiento
-                </th>
-                <th>
-                    Activo
-                </th>
-                <th></th>
-            </tr>
-                <tr *ngFor="let item of equipos">
-                    <td>
-                        {{item.id_equipo}}
-                    </td>
-                    <td>
-                        {{item.descripcion}}
-                    </td>
-                    <td>
-                        {{item.cod_establecimiento}}
-                    </td>
-                    <td>
-                        {{item.flg_activo}}
-                    </td>
-                    <td>
-                        <button class="btn btn-success" (click)="editarEquipo(item)" title="Editar"><i class="fas fa-edit"></i> </button>
-                        <button class="btn btn-danger" (click)="eliminarEquipo(item)" title="Eliminar"><i class="fas fa-trash"></i> </button>
-                        <button class="btn btn-info" title="Integrantes" (click)="integrantesEquipo(item)"><i class="fas fa-user-friends"></i></button>
-                        
-                    </td>
-                </tr>
-        </table>
-    </div>    
+      </div>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped">
+      <tr>
+        <th>
+          Id
+        </th>
+        <th>
+          Nombre Equipo
+        </th>
+        <th>
+          Establecimiento
+        </th>
+        <th>
+          Activo
+        </th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let item of equipos">
+        <td>
+          {{item.id_equipo}}
+        </td>
+        <td>
+          {{item.descripcion}}
+        </td>
+        <td>
+          {{item.cod_establecimiento}}
+        </td>
+        <td>
+          {{item.flg_activo}}
+        </td>
+        <td>
+          <button class="btn btn-success" (click)="editarEquipo(item)" title="Editar"><i class="fas fa-edit"></i>
+          </button>
+          <button class="btn btn-danger" (click)="eliminarEquipo(item)" title="Eliminar"><i class="fas fa-trash"></i>
+          </button>
+          <button class="btn btn-info" title="Integrantes" (click)="integrantesEquipo(item)"><i
+              class="fas fa-user-friends"></i></button>
+
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>

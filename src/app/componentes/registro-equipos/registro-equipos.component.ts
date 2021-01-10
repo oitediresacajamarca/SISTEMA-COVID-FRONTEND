@@ -31,6 +31,11 @@ export class RegistroEquiposComponent implements OnInit {
     })
   }
 
+  selecionoIpess(ev:any){
+    console.log(`IPRESS: ${ev}`)
+    this.cod_establecimiento = parseInt(ev).toString();
+  }
+
   registrarEquipo() : void{
 
     if(this.flgEditar){
