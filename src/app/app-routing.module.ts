@@ -15,6 +15,8 @@ import { GeoreferenciaComponent } from './componentes/mapas/georeferencia/georef
 import { RegistroEquiposComponent } from './componentes/registro-equipos/registro-equipos.component';
 import { IntegrantesEquipoComponent } from './componentes/integrantes-equipo/integrantes-equipo.component';
 import { SeguimientoMiembrosComponent } from './componentes/seguimiento-miembros/seguimiento-miembros.component';
+import { ReporteSamuComponent } from './componentes/reporte-samu/reporte-samu.component';
+import { SeguimientoFamiliarComponent } from './componentes/seguimiento-familiar/seguimiento-familiar.component';
 
 
 const routes: Routes = [
@@ -29,7 +31,9 @@ const routes: Routes = [
     {path:"admin-equipos",component:AdministracionEquiposComponent,canActivate:[AuthGuardGuard]},
     {path:"registro-equipos", component: RegistroEquiposComponent},
     {path:"integrantes-equipo/:id_equipo", component: IntegrantesEquipoComponent},
-    {path:"seguimiento-miembros/:id_miembro",component:SeguimientoMiembrosComponent}
+    {path:"seguimiento-miembros/:id_miembro",component:SeguimientoMiembrosComponent},
+    {path:"reporte-samu", component: ReporteSamuComponent },
+    {path:"seguimiento-familiar", component: SeguimientoFamiliarComponent}
     
 
   ]},
