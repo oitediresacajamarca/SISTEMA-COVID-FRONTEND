@@ -78,6 +78,7 @@ import { RegistroEquiposComponent } from './componentes/registro-equipos/registr
 import { IntegrantesEquipoComponent } from './componentes/integrantes-equipo/integrantes-equipo.component';
 import { SeguimientoMiembrosComponent } from './componentes/seguimiento-miembros/seguimiento-miembros.component';
 import { ReporteSamuComponent } from './componentes/reporte-samu/reporte-samu.component';
+import { SeguimientoFamiliarComponent } from './componentes/seguimiento-familiar/seguimiento-familiar.component';
 
 @NgModule({
   declarations: [
@@ -124,7 +125,8 @@ import { ReporteSamuComponent } from './componentes/reporte-samu/reporte-samu.co
     RegistroEquiposComponent,
     IntegrantesEquipoComponent,
     SeguimientoMiembrosComponent,
-    ReporteSamuComponent
+    ReporteSamuComponent,
+    SeguimientoFamiliarComponent
 
   ],
   imports: [
