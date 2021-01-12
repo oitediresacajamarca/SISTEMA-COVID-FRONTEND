@@ -77,6 +77,8 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { RegistroEquiposComponent } from './componentes/registro-equipos/registro-equipos.component';
 import { IntegrantesEquipoComponent } from './componentes/integrantes-equipo/integrantes-equipo.component';
 import { SeguimientoMiembrosComponent } from './componentes/seguimiento-miembros/seguimiento-miembros.component';
+import { ReporteSamuComponent } from './componentes/reporte-samu/reporte-samu.component';
+import { SeguimientoFamiliarComponent } from './componentes/seguimiento-familiar/seguimiento-familiar.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +124,9 @@ import { SeguimientoMiembrosComponent } from './componentes/seguimiento-miembros
     LoaderComponent,
     RegistroEquiposComponent,
     IntegrantesEquipoComponent,
-    SeguimientoMiembrosComponent
+    SeguimientoMiembrosComponent,
+    ReporteSamuComponent,
+    SeguimientoFamiliarComponent
 
   ],
   imports: [

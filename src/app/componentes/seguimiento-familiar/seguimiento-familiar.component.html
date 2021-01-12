@@ -1,0 +1,94 @@
+<div class="contenedor">
+    <div class="card">
+        <div class="card-body">
+            <div class="form-inline justify-content-center">
+                <div class="form-group">
+                    <label for="dni">Ingrese el número de documento:</label>
+                    <input type="text" class="form-control" name="dni" id="dni">
+
+                </div>
+                <button type="button" class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
+            </div>
+
+        </div>
+    </div>
+    <!-- Nombre Paciente -->
+    <div class="card">
+        <div class="card-body">
+            <div class="justify-content-center text-center">
+                <h1 class="nombre">{{nombrePersona}}</h1>
+                <span class="etiqueta">{{dni}}</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Resumen -->
+    <div class="card">
+        <div class="card-body">
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <span class="valor">04/08/2020</span> <br>
+                    <span class="etiqueta">Fecha Ingreso</span>
+                </div>
+                <div class="col-md-3">
+                    <span class="valor">60</span> <br>
+                    <span class="etiqueta">Días Hospitalizado</span>
+                </div>
+                <div class="col-md-3">
+                    <span class="valor">06</span> <br>
+                    <span class="etiqueta">Cama</span>
+                </div>
+                <div class="col-md-3">
+                    <span class="valor">65 años</span> <br>
+                    <span class="etiqueta">Edad</span>
+                </div>
+
+            </div>
+            <div class="row text-center" style="margin-top: 1rem;">
+                <div class="col-md-6">
+                    <span class="badge badge-primary">Moderado</span> <br>
+                    <span class="etiqueta">Estado Actual</span>
+                </div>
+                <div class="col-md-6">
+                    <span class="valor">Simón Bolivar</span> <br>
+                    <span class="etiqueta">Establecimiento</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Linea de Tiempo -->
+    <div class="lineaTiempo">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <!-- Timeline start -->
+                        <div class="timeline">
+                            <div class="timeline-row" *ngFor="let item of evolucion">
+                                <div class="timeline-time">
+                                    7:45PM<small>May 21</small>
+                                </div>
+                                <div class="timeline-dot fb-bg"></div>
+                                <div class="timeline-content">
+                                    <i class="fas fa-smile"></i>
+                                    <h4>{{item}}</h4>
+                                    <p>{{item}}</p>
+                                    <div class="">
+                                        <span class="badge badge-light">Design</span>
+                                        <span class="badge badge-light">Admin</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Timeline end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
