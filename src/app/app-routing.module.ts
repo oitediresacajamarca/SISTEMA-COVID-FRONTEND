@@ -32,8 +32,7 @@ const routes: Routes = [
     {path:"registro-equipos", component: RegistroEquiposComponent},
     {path:"integrantes-equipo/:id_equipo", component: IntegrantesEquipoComponent},
     {path:"seguimiento-miembros/:id_miembro",component:SeguimientoMiembrosComponent},
-    {path:"reporte-samu", component: ReporteSamuComponent },
-    {path:"seguimiento-familiar", component: SeguimientoFamiliarComponent}
+    {path:"reporte-samu", component: ReporteSamuComponent }
     
 
   ]},
@@ -44,6 +43,7 @@ const routes: Routes = [
   {path:"microred",component:SelectorMicroredComponent},
   {path:"ipress",component:SelectorIpressComponent},
   {path:"login",component:LoginComponent},
+  {path:"seguimiento-familiar", component: SeguimientoFamiliarComponent}
   
   
 

@@ -79,6 +79,7 @@ import { IntegrantesEquipoComponent } from './componentes/integrantes-equipo/int
 import { SeguimientoMiembrosComponent } from './componentes/seguimiento-miembros/seguimiento-miembros.component';
 import { ReporteSamuComponent } from './componentes/reporte-samu/reporte-samu.component';
 import { SeguimientoFamiliarComponent } from './componentes/seguimiento-familiar/seguimiento-familiar.component';
+import { SeguimientoFamiliarDesign2Component } from './componentes/seguimiento-familiar-design2/seguimiento-familiar-design2.component';
 
 @NgModule({
   declarations: [
@@ -126,7 +127,8 @@ import { SeguimientoFamiliarComponent } from './componentes/seguimiento-familiar
     IntegrantesEquipoComponent,
     SeguimientoMiembrosComponent,
     ReporteSamuComponent,
-    SeguimientoFamiliarComponent
+    SeguimientoFamiliarComponent,
+    SeguimientoFamiliarDesign2Component
 
   ],
   imports: [
