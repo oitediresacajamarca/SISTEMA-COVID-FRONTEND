@@ -14,7 +14,8 @@ export class EstadoRegistroCovidComponent implements OnInit {
       ficha_00: number,
       ficha_100: number,
       ficha_200: number,
-      ficha_300: number
+      ficha_300: number,
+      hospitalizacion : number
     }
   ngOnInit(): void {
     this.ESTADO_REGISTRO_COVID = this.estados.ESTADO_REGISTRO_COVID

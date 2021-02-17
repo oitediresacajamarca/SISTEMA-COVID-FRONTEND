@@ -1,4 +1,4 @@
-export interface Noti {    
+export class Noti {    
     id?: number;
     ano?: number;
     semana?: number;

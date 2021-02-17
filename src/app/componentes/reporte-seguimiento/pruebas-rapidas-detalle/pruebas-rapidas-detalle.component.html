@@ -1,44 +1,99 @@
    <!-- Post -->
-   <div class="post" *ngFor="let ficha100 of ficha100s" >
-  
-    <div class="user-block">                    
-      <span class="username">
-          FECHA DE PRUEBA
-        <a href="#">{{ficha100.Fecha_Prueba}}</a>
-        <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-      </span>
-      <span class="description"></span>
-    </div> 
-     
-      
-     
-      <div class="info-box">
-        <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">Resultado de Prueba Rapida</span>
-          <span class="info-box-number"> {{ficha100.Resultado}}</span>
-        </div>
-        <!-- /.info-box-content -->
-      </div>
-
-      <div class="info-box">
-        <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">Clasificacion</span>
-          <span class="info-box-number">{{ficha100.Clasificacion_Clinica_Severidad}}</span>
-        </div>
-        <!-- /.info-box-content -->
-      </div>
-
-      <div class="info-box">
-        <div class="info-box-content">
-          <span class="info-box-text"> <b> Registrado por: </b>  {{ficha100.Registrador}}</span>
-        </div>
-      </div>
-
+<div class="card">
+  <div class="card-header">
+    <h3>Pruebas Rápidas</h3>
   </div>
+  <div class="card-body">
+    <div class="post" *ngFor="let ficha100 of ficha100s" >
+      <div class="user-block">                    
+        <span class="username">
+            FECHA DE PRUEBA
+          <a href="#">{{ficha100.Fecha_Prueba}}</a>
+          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+        </span>
+        <span class="description"></span>
+      </div> 
+        <div class="info-box">
+          <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Resultado de Prueba Rapida</span>
+            <span class="info-box-number"> {{ficha100.Resultado}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+
+        <div class="info-box">
+          <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Clasificacion</span>
+            <span class="info-box-number">{{ficha100.Clasificacion_Clinica_Severidad}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+
+        <div class="info-box">
+          <div class="info-box-content">
+            <span class="info-box-text"> <b> Registrado por: </b>  {{ficha100.Registrador}}</span>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h3>Pruebas Moleculares</h3>
+  </div>
+  <div class="card-body">
+    <div class="post" *ngFor="let prueba of pruebas" >
+    
+      <div class="user-block">                    
+        <span class="username">
+            FECHA DE PRUEBA
+          <a href="#">{{prueba.fecha}}</a>
+          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+        </span>
+        <span class="description"></span>
+      </div> 
+
+      <div class="info-box">
+        <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Muestra</span>
+          <span class="info-box-number"> {{prueba.muestra}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      
+        <div class="info-box">
+          <span class="info-box-icon bg-info"><i class="far fa-check-circle"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Resultado</span>
+            <span class="info-box-number"> {{prueba.resultado}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+
+        <div class="info-box">
+          <span class="info-box-icon bg-info"><i class="far fa-calendar"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Fecha Resultado</span>
+            <span class="info-box-number">{{prueba.fecha_res}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+
+
+    </div>
+</div>
+
+</div>
   <!-- /.post -->
 
   
