@@ -16,11 +16,11 @@ export class LoaderInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.loaderService.show();
-    console.log(".....LOADING....")
+    //console.log(".....LOADING....")
     return next.handle(request).pipe(
       finalize(()=>{
         this.loaderService.hide()
-        console.log("......TERMINADO........")
+        //console.log("......TERMINADO........")
       })
     );
   }

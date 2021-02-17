@@ -19,8 +19,12 @@ export class HospitalizacionComponent implements OnInit {
     this.hospitals.devolverHospitalizadosPorIdentificacion(this.estadoss.TIP_DOCUMENTO, this.estadoss.NRO_DOCUMENTO).subscribe((respuesta) => {
 
       this.hospitalizados = respuesta
+      if(this.hospitalizados){
+        this.estadoss.ESTADO_REGISTRO_COVID.hospitalizacion = this.hospitalizados.length
+      }
 
     })
+    
   }
 
 }
