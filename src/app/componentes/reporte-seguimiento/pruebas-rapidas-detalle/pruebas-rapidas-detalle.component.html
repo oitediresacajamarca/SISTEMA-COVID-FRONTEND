@@ -95,5 +95,48 @@
 
 </div>
   <!-- /.post -->
-
+  <div class="card">
+    <div class="card-header">
+      <h3>Pruebas Antígenas</h3>
+    </div>
+    <div class="card-body">
+      <div class="post" *ngFor="let prueba of pruebasDiagnostico" >
+      
+        <div class="user-block">                    
+          <span class="username">
+              FECHA DE PRUEBA
+            <a href="#">{{prueba.Fecha_Ejecucion_Prueba}}</a>
+            <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+          </span>
+          <span class="description"></span>
+        </div> 
+  
+        <div class="info-box">
+          <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+  
+          <div class="info-box-content">
+            <span class="info-box-text">Tipo</span>
+            <span class="info-box-number"> {{prueba.Tipo_de_Prueba}}</span>
+          </div>
+          <div class="info-box-content">
+            <span class="info-box-text">Muestra</span>
+            <span class="info-box-number"> {{prueba.Tipo_de_Muestra}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        
+          <div class="info-box">
+            <span class="info-box-icon bg-info"><i class="far fa-check-circle"></i></span>
+  
+            <div class="info-box-content">
+              <span class="info-box-text">Resultado</span>
+              <span class="info-box-number"> {{prueba.Resultado}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+  
+      </div>
+  </div>
+  
+  </div>
   
