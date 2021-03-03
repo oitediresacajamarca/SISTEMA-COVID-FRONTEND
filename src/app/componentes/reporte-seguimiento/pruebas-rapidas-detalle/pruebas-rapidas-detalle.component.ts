@@ -4,6 +4,8 @@ import { Ficha100 } from 'src/app/compartido/interfaces/ficha-100';
 import { EstadosService } from 'src/app/servicios/estados.service';
 import { NotiService } from 'src/app/servicios/noti.service';
 import { Noti } from 'src/app/compartido/interfaces/noti';
+import { PruebaDiagnosticoService } from 'src/app/servicios/prueba-diagnostico.service';
+import { PruebaDiagnostico } from 'src/app/compartido/interfaces/pruebaDiagnostico';
 
 @Component({
   selector: 'app-pruebas-rapidas-detalle',
@@ -15,7 +17,8 @@ export class PruebasRapidasDetalleComponent implements OnInit {
   ficha100s: Ficha100[]
   notiweb : Noti
   pruebas : any[]
-  constructor(private f100s: Ficha100Service, private estados: EstadosService, private notis: NotiService) { }
+  pruebasDiagnostico : PruebaDiagnostico[]
+  constructor(private f100s: Ficha100Service, private estados: EstadosService, private notis: NotiService, private pruebaService: PruebaDiagnosticoService) { }
   
   ngOnInit(): void {
     console.log("Pruebas rapidas detalle")
@@ -35,6 +38,21 @@ export class PruebasRapidasDetalleComponent implements OnInit {
       }
       
     })
+    //obtener pruebas diagnostico
+    this.pruebaService.devolverPruebasDni(this.estados.NRO_DOCUMENTO).subscribe((resp)=>{
+      if(resp){
+        this.pruebasDiagnostico = resp.sort((a,b)=>{
+          if(a.Fecha_Ejecucion_Prueba > b.Fecha_Ejecucion_Prueba) return -1;
+          if(a.Fecha_Ejecucion_Prueba < b.Fecha_Ejecucion_Prueba) return 1;
+
+          return 0;
+        })
+
+      }
+    })
+
+
+
     //buscar en noti
     this.notis.devolverNotiPorIdentificacion(this.estados.TIP_DOCUMENTO, this.estados.NRO_DOCUMENTO).subscribe((resp)=>{
       
