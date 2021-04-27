@@ -17,6 +17,8 @@ import { IntegrantesEquipoComponent } from './componentes/integrantes-equipo/int
 import { SeguimientoMiembrosComponent } from './componentes/seguimiento-miembros/seguimiento-miembros.component';
 import { ReporteSamuComponent } from './componentes/reporte-samu/reporte-samu.component';
 import { SeguimientoFamiliarComponent } from './componentes/seguimiento-familiar/seguimiento-familiar.component';
+import { VacunacionCovidComponent } from './componentes/vacunacion-covid/vacunacion-covid.component';
+import { ValidacionDniComponent } from './componentes/vacunacion-covid/validacion-dni/validacion-dni.component';
 
 
 const routes: Routes = [
@@ -43,7 +45,10 @@ const routes: Routes = [
   {path:"microred",component:SelectorMicroredComponent},
   {path:"ipress",component:SelectorIpressComponent},
   {path:"login",component:LoginComponent},
-  {path:"seguimiento-familiar", component: SeguimientoFamiliarComponent}
+  {path:"seguimiento-familiar", component: SeguimientoFamiliarComponent},
+  {path:"vacunacion-covid", component: VacunacionCovidComponent},
+  {path:"validacion-covid", component: ValidacionDniComponent}
+
   
   
 

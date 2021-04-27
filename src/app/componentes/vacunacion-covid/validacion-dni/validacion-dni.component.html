@@ -1,0 +1,31 @@
+<DIV class="register-page" style="min-height: 800.391px;">
+    <div class="card card-success" style="width: 900px;">
+        <div class="card-header">
+          <h3 class="card-title">ACTUALIZE SU INFORMACION DE VACUNACION AQUI</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form role="form" [formGroup]="formGroup">
+          <div class="card-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">INGRESE SU NUMERO DE DOCUMENTO</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" formControlName="numero_documento">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">INGRESE SU FECHA DE NACIMIENTO</label>
+                <input type="email" class="form-control" id="exampleInputEmail1"  formControlName="fecha_nacimiento">
+              </div>
+      
+        
+          </div>
+          <!-- /.card-body -->
+
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary BOTON" (click)="validarDni()">ENVIAR</button>
+          </div>
+        </form>
+      </div>
+ 
+    
+    
+</DIV>

@@ -9,6 +9,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -80,6 +81,10 @@ import { SeguimientoMiembrosComponent } from './componentes/seguimiento-miembros
 import { ReporteSamuComponent } from './componentes/reporte-samu/reporte-samu.component';
 import { SeguimientoFamiliarComponent } from './componentes/seguimiento-familiar/seguimiento-familiar.component';
 import { SeguimientoFamiliarDesign2Component } from './componentes/seguimiento-familiar-design2/seguimiento-familiar-design2.component';
+import { VacunacionCovidComponent } from './componentes/vacunacion-covid/vacunacion-covid.component';
+import { ValidacionDniComponent } from './componentes/vacunacion-covid/validacion-dni/validacion-dni.component';
+
+
 
 @NgModule({
   declarations: [
@@ -128,7 +133,11 @@ import { SeguimientoFamiliarDesign2Component } from './componentes/seguimiento-f
     SeguimientoMiembrosComponent,
     ReporteSamuComponent,
     SeguimientoFamiliarComponent,
-    SeguimientoFamiliarDesign2Component
+    SeguimientoFamiliarDesign2Component,
+    VacunacionCovidComponent,
+    ValidacionDniComponent,
+    
+    
 
   ],
   imports: [
