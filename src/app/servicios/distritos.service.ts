@@ -20,5 +20,9 @@ export class DistritosService {
   devolverGeoreferncia(coddist:string){
     return this.http.get<any>(environment.urlBackendNode+'ubigeos-distritos/'+coddist);
   }
+
+  devolverDistritosN(codprov:string){
+    return this.http.get<any[]>(environment.urlBackendNode+'ubigeos-distritos/PROVINCIA/'+codprov);
+  }
   
 }
