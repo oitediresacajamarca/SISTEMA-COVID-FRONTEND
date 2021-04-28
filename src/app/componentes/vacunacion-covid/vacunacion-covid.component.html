@@ -304,7 +304,10 @@
               <div class="col-4">
                 <div class="form-group">
                   <label>SELECCIONE DISTRITO</label>
-                  <select class="form-control"  formControlName="DISTRITO"  (change)="FITRAR_PUNTOS_VACUNACION()">
+                  <select class="form-control"  formControlName="DISTRITO"  (change)="FITRAR_PUNTOS_VACUNACION()" (click)="FITRAR_PUNTOS_VACUNACION()">
+                   
+                    <option value="" 
+                    >"SELECCIONE DISTRITO"</option>
 
                     <option [value]="distrito.codigo_distrito" *ngFor="let distrito of distritos_filtrados"
                    >{{distrito.nombre_distrito}}</option>
@@ -313,13 +316,13 @@
                 </div>
               </div>
               <div class="col-5">
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label>SELECCIONE CENTRO POBLADO</label>
                   <select class="form-control">
                     <option>CAJAMARCA</option>
                     <option>CELENDIN</option>
                   </select>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -476,6 +479,17 @@
                 <option>SANIDAD PNP</option>
               </select>
             </div>
+
+            <div class="form-group">
+              <label>INDIQUE SI TIENE ALGUNA DISCAPACIDAD</label> 
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                <label class="custom-control-label" for="customSwitch1">TENGO DISCAPACIAD</label>
+              </div>
+
+              </div>
+
+           
           </div>
           <!-- /.card-body -->
 

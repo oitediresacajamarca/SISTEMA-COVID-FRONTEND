@@ -101,6 +101,8 @@ this.rout.navigate(['/cita-programada-resultado'])
 
   FILTRAR_DISTRITOS() {
 
+
+   
     this.distritoss.devolverDistritosN(this.formGroup2.value.PROVINCIA).subscribe((res) => {
 
       this.distritos_filtrados=  res.map((dato)=>{
@@ -109,9 +111,13 @@ this.rout.navigate(['/cita-programada-resultado'])
      return { nombre_distrito:dato.DISTRITO, codigo_distrito: dato.COD_UBIGEO }
 
       })
+
+
+
+
   
     })
- 
+   
 
 
 
@@ -120,6 +126,8 @@ this.rout.navigate(['/cita-programada-resultado'])
   async FITRAR_PUNTOS_VACUNACION(){
 
     console.log(this.formGroup2.value)
+
+    
   this.PuntoVacunacionServic.devolverPuntosPorDistrito(this.formGroup2.value.DISTRITO).subscribe((puntos)=>{
 
     this.puntos_vacunacion=puntos.map((punto)=>{
