@@ -19,6 +19,8 @@ import { ReporteSamuComponent } from './componentes/reporte-samu/reporte-samu.co
 import { SeguimientoFamiliarComponent } from './componentes/seguimiento-familiar/seguimiento-familiar.component';
 import { VacunacionCovidComponent } from './componentes/vacunacion-covid/vacunacion-covid.component';
 import { ValidacionDniComponent } from './componentes/vacunacion-covid/validacion-dni/validacion-dni.component';
+import { ModalConfirmacionComponent } from './componentes/vacunacion-covid/modal-confirmacion/modal-confirmacion.component';
+import { CitaProgramadaResultadoComponent } from './componentes/vacunacion-covid/cita-programada-resultado/cita-programada-resultado.component';
 
 
 const routes: Routes = [
@@ -47,7 +49,9 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"seguimiento-familiar", component: SeguimientoFamiliarComponent},
   {path:"vacunacion-covid", component: VacunacionCovidComponent},
-  {path:"validacion-covid", component: ValidacionDniComponent}
+  {path:"validacion-covid", component: ValidacionDniComponent},
+  {path:"cita-programada-resultado", component: CitaProgramadaResultadoComponent},
+  {path:"modal", component: ModalConfirmacionComponent}
 
   
   

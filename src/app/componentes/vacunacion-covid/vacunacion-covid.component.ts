@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DistritosService } from 'src/app/servicios/distritos.service';
+import { EstadosService } from 'src/app/servicios/estados.service';
 import { CitaVacunacionService } from 'src/app/servicios/vacunacion/cita-vacunacion.service';
 import { PadronVacunacionService } from 'src/app/servicios/vacunacion/padron-vacunacion.service';
 import { PuntoVacunacionService } from 'src/app/servicios/vacunacion/punto-vacunacion.service';
@@ -13,7 +16,8 @@ import { PuntoVacunacionService } from 'src/app/servicios/vacunacion/punto-vacun
 export class VacunacionCovidComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private PadronVacunacionServic: PadronVacunacionService, private distritoss: DistritosService,
-    private PuntoVacunacionServic:PuntoVacunacionService,private cita:CitaVacunacionService) {
+    private PuntoVacunacionServic:PuntoVacunacionService,private cita:CitaVacunacionService,private modalService: NgbModal
+    ,private estados:EstadosService, private rout:Router) {
 
 
   }
@@ -46,10 +50,16 @@ export class VacunacionCovidComponent implements OnInit {
 
     });
   }
-
+existeEnPadron:boolean=false
   BuscarDnI() {
     console.log(this.formGroup.value)
     this.PadronVacunacionServic.devolverDatos(this.formGroup.value.numero_documento).subscribe((respuesta) => {
+      console.log(respuesta)
+
+      if(respuesta.mensaje!='no existe en padron'){
+
+this.existeEnPadron=true
+    
 
       this.formGroup.setValue({
         numero_documento: this.formGroup.value.numero_documento,
@@ -60,16 +70,31 @@ export class VacunacionCovidComponent implements OnInit {
 
     }
 
+
+    }
+
     )
 
 
   }
 
-  actualizar() {
-    this.cita.citarPaciente({...this.formGroup2.value,...this.formGroup.value}).subscribe((respuesta)=>{
+  actualizar(content) {
 
-      console.log(respuesta)
-    })
+  
+    this.modalService.open(content).result.then((result) => {
+      console.log(result)
+
+      this.cita.citarPaciente({...this.formGroup2.value,...this.formGroup.value}).subscribe((respuesta)=>{
+     Object.assign(   this.estados.citapro,respuesta)
+
+this.rout.navigate(['/cita-programada-resultado'])
+        console.log(respuesta)
+      })
+     
+    }, (reason) => {
+      console.log('ppppppppppppp')
+    });
+
  
     
   }
