@@ -403,6 +403,7 @@
                         class="form-control"
                         formControlName="NOMBRE_PUNTO_VACUNACION"
                       >
+                      <option value="">SELECCIONE SU PUNTO DE VACUNACION</option>
                         <option *ngFor="let punto of puntos_vacunacion" [value]="punto.nombre_punto">{{punto.nombre_punto}}</option>
                       
                       </select>
