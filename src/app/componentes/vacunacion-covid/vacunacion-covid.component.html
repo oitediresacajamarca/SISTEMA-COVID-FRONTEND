@@ -247,19 +247,20 @@
                 formControlName="nombres"
               />
             </div>
-            <div class="position-relative p-3 bg-gray" style="height: 180px">
+            <div class="position-relative p-3 bg-gray" style="height: 180px"  *ngIf="existeEnPadron">
               <div class="ribbon-wrapper ribbon-xl">
-                <div class="ribbon bg-warning text-lg">Ribbon</div>
+                <div class="ribbon bg-warning text-lg">
+                  FELICIDADES</div>
               </div>
-              USTED SE ENCUENTRA DENTRO DEL PADRON
+              <H1>USTED YA SE ENCUENTRA DENTRO DEL PADRON</H1>
+              <small>AHORA  DEBE DE ACTUALIZAR SU INFORMACION PARA QUE PODAMOS COMUNICARNOS CON USTED</small>
+              
             </div>
           </div>
           <!-- /.card-body -->
 
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary" (click)="BuscarDnI()">
-              GUARDAR
-            </button>
+            
           </div>
         </form>
       </div>
@@ -475,7 +476,7 @@
             <button
               type="submit"
               class="btn btn-primary"
-              (click)="actualizar()"
+              (click)="actualizar(content)"
             >
               GUARDAR
             </button>
@@ -493,23 +494,20 @@
   <!-- /.row -->
 </div>
 
-<div class="modal fade" id="modal-info" style="display: none;" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content bg-info">
-      <div class="modal-header">
-        <h4 class="modal-title">Info Modal</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span></button>
-      </div>
-      <div class="modal-body">
-        <p>One fine body…</p>
-      </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-light">Save changes</button>
-      </div>
+
+<ng-template #content let-modal>
+  <div class="modal-content bg-info">
+    <div class="modal-header">
+      <h4 class="modal-title">Confimacion</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span></button>
     </div>
-    <!-- /.modal-content -->
+    <div class="modal-body">
+      <p>Confirma usted que la informacion suministrada es correcta</p>
+    </div>
+    <div class="modal-footer justify-content-between">
+      <button type="button" class="btn btn-outline-light" (click)="modal.dismiss('Save click')" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-outline-light" (click)="modal.close('Save click')">Confirmar Informacion</button>
+    </div>
   </div>
-  <!-- /.modal-dialog -->
-</div>
+</ng-template>

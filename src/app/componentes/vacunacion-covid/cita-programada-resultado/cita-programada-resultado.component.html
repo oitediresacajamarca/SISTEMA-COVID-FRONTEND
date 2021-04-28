@@ -1,0 +1,49 @@
+<div class="container">
+
+    <div class="invoice p-3 mb-3">
+        <!-- title row -->
+        <div class="row">
+          <div class="col-12">
+            <h4>
+              <i class="fas fa-globe"></i>DIRESA CAJAMARCA
+              <small class="float-right">Fecha: 28 de Abril 2021</small>
+            </h4>
+          </div>
+          <!-- /.col -->
+        </div>
+     
+        <div class="position-relative p-3 bg-gray" style="height: 180px">
+            <div class="ribbon-wrapper ribbon-xl">
+              <div class="ribbon bg-danger text-xl">
+                Cita de Vacunacion
+              </div>
+            </div>
+            <div class="cita">
+
+                SE LE HA GENERADO CITA DE VACUNACION PARA COVID 19<BR>
+
+                    EL DIA {{cita.FECHA_PROGRAMADA_CITA| date:'d/MM/yyyy'}} a HORAS {{cita.FECHA_PROGRAMADA_CITA| date:'shortTime'}} <BR>
+
+                    USTED DEBERA DE ACERCARSE  AL CENTRO DE VACUNACION {{cita.NOMBRE_PUNTO_VACUNACION}} <BR> PORTANDO SU DOCUMENTO DE IDENTIDAD
+            </div>
+            
+            
+         
+
+
+          </div>
+    
+    
+        <!-- this row will not appear when printing -->
+        <div class="row no-print">
+          <div class="col-12">
+            <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Inprimir</a>
+           
+            <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+              <i class="fas fa-download"></i> Generar PDF
+            </button>
+          </div>
+        </div>
+      </div>
+</div>
+

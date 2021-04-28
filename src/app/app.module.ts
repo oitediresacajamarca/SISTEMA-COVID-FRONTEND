@@ -83,6 +83,9 @@ import { SeguimientoFamiliarComponent } from './componentes/seguimiento-familiar
 import { SeguimientoFamiliarDesign2Component } from './componentes/seguimiento-familiar-design2/seguimiento-familiar-design2.component';
 import { VacunacionCovidComponent } from './componentes/vacunacion-covid/vacunacion-covid.component';
 import { ValidacionDniComponent } from './componentes/vacunacion-covid/validacion-dni/validacion-dni.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalConfirmacionComponent } from './componentes/vacunacion-covid/modal-confirmacion/modal-confirmacion.component';
+import { CitaProgramadaResultadoComponent } from './componentes/vacunacion-covid/cita-programada-resultado/cita-programada-resultado.component';
 
 
 
@@ -136,6 +139,8 @@ import { ValidacionDniComponent } from './componentes/vacunacion-covid/validacio
     SeguimientoFamiliarDesign2Component,
     VacunacionCovidComponent,
     ValidacionDniComponent,
+    ModalConfirmacionComponent,
+    CitaProgramadaResultadoComponent,
     
     
 
@@ -164,7 +169,8 @@ import { ValidacionDniComponent } from './componentes/vacunacion-covid/validacio
     MatDialogModule,
     ModalModule.forRoot(),
     GMapModule,
-    MatProgressSpinnerModule 
+    MatProgressSpinnerModule,
+    NgbModule 
 
   ],
   providers: [
