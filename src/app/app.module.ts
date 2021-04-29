@@ -86,6 +86,7 @@ import { ValidacionDniComponent } from './componentes/vacunacion-covid/validacio
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConfirmacionComponent } from './componentes/vacunacion-covid/modal-confirmacion/modal-confirmacion.component';
 import { CitaProgramadaResultadoComponent } from './componentes/vacunacion-covid/cita-programada-resultado/cita-programada-resultado.component';
+import { ActualizacionDatoComponent } from './componentes/vacunacion-covid/actualizacion-dato/actualizacion-dato.component';
 
 
 
@@ -141,6 +142,7 @@ import { CitaProgramadaResultadoComponent } from './componentes/vacunacion-covid
     ValidacionDniComponent,
     ModalConfirmacionComponent,
     CitaProgramadaResultadoComponent,
+    ActualizacionDatoComponent,
     
     
 

@@ -263,6 +263,36 @@
               <small>AHORA  DEBE DE ACTUALIZAR SU INFORMACION PARA QUE PODAMOS GENERAR SU CITA</small>
               
             </div>
+            <div class="position-relative p-3 bg-info" style="height: 180px"  *ngIf="noExisteEnPadron">
+              <div class="ribbon-wrapper ribbon-xl">
+                <div class="ribbon bg-warning text-lg">
+                  ATENCION</div>
+              </div>
+              <H1>USTED NO SE ENCUENTRA DENTRO DEL PADRON DE VACUNACION ACTUAL</H1>
+              <small>DEJENOS SUS DATOS, PARA TENERLE EN CUENTA DENTRO DEL PROCESO DE INGRESO AL PADRON</small>
+              
+            </div>
+
+            <div class="position-relative p-3 bg-info" style="height: 180px"  *ngIf="citaDisponible">
+              <div class="ribbon-wrapper ribbon-xl">
+                <div class="ribbon bg-warning text-lg">
+                  ATENCION</div>
+              </div>
+              <H1>USTED YA SE LE CITO</H1>
+              <small>DEJENOS SUS DATOS, PARA TENERLE EN CUENTA DENTRO DEL PROCESO DE INGRESO AL PADRON</small>
+              
+            </div>
+
+            <div class="position-relative p-3 bg-info" style="height: 180px"  *ngIf="personaProtegida">
+              <div class="ribbon-wrapper ribbon-xl">
+                <div class="ribbon bg-warning text-lg">
+                  ATENCION</div>
+              </div>
+              <H1>USTED YA SE LE VACUNO CON LAS DOSIS REQUERIDAS PARA ESTAR PROTEGIDO</H1>
+           
+              
+            </div>
+
           </div>
           <!-- /.card-body -->
 

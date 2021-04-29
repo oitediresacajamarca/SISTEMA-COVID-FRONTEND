@@ -16,17 +16,20 @@ import { PuntoVacunacionService } from 'src/app/servicios/vacunacion/punto-vacun
 export class VacunacionCovidComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private PadronVacunacionServic: PadronVacunacionService, private distritoss: DistritosService,
-    private PuntoVacunacionServic:PuntoVacunacionService,private cita:CitaVacunacionService,private modalService: NgbModal
-    ,private estados:EstadosService, private rout:Router) {
+    private PuntoVacunacionServic: PuntoVacunacionService, private cita: CitaVacunacionService, private modalService: NgbModal
+    , private estados: EstadosService, private rout: Router) {
 
 
   }
   formGroup: FormGroup;
   formGroup2: FormGroup;
   distritos_filtrados: any[] = []
+  noExisteEnPadron:boolean=false;
+  citaDisponible:boolean=false;
+  personaProtegida:boolean=false;
 
   puntos_vacunacion: any[] = []
-
+  edad_paciente: number;
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -47,29 +50,33 @@ export class VacunacionCovidComponent implements OnInit {
       NUMERO_TELEFONO: '',
       CORREO_ELECTRONICO: '',
       TIPO_SEGURO: '',
-      TIENE_DISCAPACIDAD:false
+      TIENE_DISCAPACIDAD: false
 
     });
   }
-existeEnPadron:boolean=false
+  existeEnPadron: boolean = false
   BuscarDnI() {
-    console.log(this.formGroup.value)
+
     this.PadronVacunacionServic.devolverDatos(this.formGroup.value.numero_documento).subscribe((respuesta) => {
+
       console.log(respuesta)
+      if (respuesta.mensaje != 'no existe en padron') {
 
-      if(respuesta.mensaje!='no existe en padron'){
+        this.existeEnPadron = true
+        this.edad_paciente = respuesta.Edad
 
-this.existeEnPadron=true
-    
 
-      this.formGroup.setValue({
-        numero_documento: this.formGroup.value.numero_documento,
-        ape_paterno: respuesta.Apellido_Paterno,
-        ape_materno: respuesta.Apellido_Materno,
-        nombres: respuesta.Nombres
-      })
+        this.formGroup.setValue({
+          numero_documento: this.formGroup.value.numero_documento,
+          ape_paterno: respuesta.Apellido_Paterno,
+          ape_materno: respuesta.Apellido_Materno,
+          nombres: respuesta.Nombres
+        })
 
-    }
+      }
+      else {
+        this.noExisteEnPadron=true;
+      }
 
 
     }
@@ -79,65 +86,76 @@ this.existeEnPadron=true
 
   }
 
+  buscarCita(dni:string){
+
+  }
+
   actualizar(content) {
 
-  
+
     this.modalService.open(content).result.then((result) => {
-      console.log(result)
+      let genera_cita = false
 
-      this.cita.citarPaciente({...this.formGroup2.value,...this.formGroup.value}).subscribe((respuesta)=>{
-     Object.assign(   this.estados.citapro,respuesta)
+if(this.edad_paciente>=80){
 
-this.rout.navigate(['/cita-programada-resultado'])
+      this.cita.citarPaciente({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
+        Object.assign(this.estados.citapro, respuesta)
+
+        this.rout.navigate(['/cita-programada-resultado'])
         console.log(respuesta)
       })
-     
+    }else{
+      this.rout.navigate(['/datos-actualizados'])
+    }
+
+
+
     }, (reason) => {
-      console.log('ppppppppppppp')
+    
     });
 
- 
-    
+
+
   }
 
   FILTRAR_DISTRITOS() {
 
 
-   
+
     this.distritoss.devolverDistritosN(this.formGroup2.value.PROVINCIA).subscribe((res) => {
 
-      this.distritos_filtrados=  res.map((dato)=>{
+      this.distritos_filtrados = res.map((dato) => {
 
 
-     return { nombre_distrito:dato.DISTRITO, codigo_distrito: dato.COD_UBIGEO }
+        return { nombre_distrito: dato.DISTRITO, codigo_distrito: dato.COD_UBIGEO }
 
       })
 
 
 
 
-  
+
     })
-   
+
 
 
 
   }
 
-  async FITRAR_PUNTOS_VACUNACION(){
+  async FITRAR_PUNTOS_VACUNACION() {
 
     console.log(this.formGroup2.value)
 
-    
-  this.PuntoVacunacionServic.devolverPuntosPorDistrito(this.formGroup2.value.DISTRITO).subscribe((puntos)=>{
 
-    this.puntos_vacunacion=puntos.map((punto)=>{
+    this.PuntoVacunacionServic.devolverPuntosPorDistrito(this.formGroup2.value.DISTRITO).subscribe((puntos) => {
 
-      return {nombre_punto:punto._NOMBRE_PUNTO_VACUNACION_}
+      this.puntos_vacunacion = puntos.map((punto) => {
+
+        return { nombre_punto: punto._NOMBRE_PUNTO_VACUNACION_ }
+
+      })
 
     })
-
-  })
 
 
   }
