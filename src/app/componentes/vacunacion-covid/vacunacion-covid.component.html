@@ -440,6 +440,7 @@
                 data-inputmask='"mask": "(999) 999-9999"'
                 data-mask=""
                 im-insert="true"
+                formControlName="NUMERO_TELEFONO"
               />
             </div>
             <!-- /.input group -->
@@ -452,7 +453,8 @@
                   ><i class="fas fa-envelope"></i
                 ></span>
               </div>
-              <input type="email" class="form-control" placeholder="Email" />
+              <input type="email" class="form-control" placeholder="Email" 
+              formControlName="CORREO_ELECTRONICO"/>
             </div>
 
             <!-- /input-group -->
@@ -471,7 +473,7 @@
           <div class="card-body">
             <div class="form-group">
               <label>SELECCIONAR TIPO DE SEGURO</label>
-              <select class="form-control">
+              <select class="form-control"  formControlName="TIPO_SEGURO">
                 <option>SIN SEGURO</option>
                 <option>SIS</option>
                 <option>SANIDAD PNP</option>
@@ -484,7 +486,7 @@
             <div class="form-group">
               <label>INDIQUE SI TIENE ALGUNA DISCAPACIDAD</label> 
               <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="TIENE_DISCAPACIDAD">
                 <label class="custom-control-label" for="customSwitch1">TENGO DISCAPACIAD</label>
               </div>
 

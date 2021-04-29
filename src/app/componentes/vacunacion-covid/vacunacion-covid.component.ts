@@ -46,7 +46,8 @@ export class VacunacionCovidComponent implements OnInit {
       NOMBRE_PUNTO_VACUNACION: '',
       NUMERO_TELEFONO: '',
       CORREO_ELECTRONICO: '',
-      TIPO_SEGURO: ''
+      TIPO_SEGURO: '',
+      TIENE_DISCAPACIDAD:false
 
     });
   }
