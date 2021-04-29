@@ -21,6 +21,7 @@ import { VacunacionCovidComponent } from './componentes/vacunacion-covid/vacunac
 import { ValidacionDniComponent } from './componentes/vacunacion-covid/validacion-dni/validacion-dni.component';
 import { ModalConfirmacionComponent } from './componentes/vacunacion-covid/modal-confirmacion/modal-confirmacion.component';
 import { CitaProgramadaResultadoComponent } from './componentes/vacunacion-covid/cita-programada-resultado/cita-programada-resultado.component';
+import { ActualizacionDatoComponent } from './componentes/vacunacion-covid/actualizacion-dato/actualizacion-dato.component';
 
 
 const routes: Routes = [
@@ -51,6 +52,7 @@ const routes: Routes = [
   {path:"vacunacion-covid", component: VacunacionCovidComponent},
   {path:"validacion-covid", component: ValidacionDniComponent},
   {path:"cita-programada-resultado", component: CitaProgramadaResultadoComponent},
+  {path:"datos-actualizados", component: ActualizacionDatoComponent},
   {path:"modal", component: ModalConfirmacionComponent}
 
   
