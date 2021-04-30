@@ -107,7 +107,8 @@ export class VacunacionCovidComponent implements OnInit {
 
 
     this.modalService.open(content).result.then((result) => {
-      let genera_cita = false
+    
+      this.BuscarDnI()
 
       this.actulizadata.actualizarData({...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente}).subscribe((respuesta)=>{
         console.log(respuesta)
