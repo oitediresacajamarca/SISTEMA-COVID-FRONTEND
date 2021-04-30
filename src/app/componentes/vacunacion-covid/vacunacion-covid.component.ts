@@ -110,7 +110,7 @@ export class VacunacionCovidComponent implements OnInit {
       let genera_cita = false
 
       this.actulizadata.actualizarData({...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente}).subscribe((respuesta)=>{
-        console.log(respuesta)
+       this.edad_paciente=respuesta.edad
       })
 
 if(this.edad_paciente>=80){

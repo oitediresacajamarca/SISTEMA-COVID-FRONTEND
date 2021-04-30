@@ -12,6 +12,6 @@ export class ActualizacionDataService {
   ) { }
 
   actualizarData(datos:any){
-  return  this.Http.post(environment.urlBackendNode+'vacunacion-cita/actualizar-data',datos)
+  return  this.Http.post<any>(environment.urlBackendNode+'vacunacion-cita/actualizar-data',datos)
   }
 }
