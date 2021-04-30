@@ -29,6 +29,14 @@ export class VacunacionCovidComponent implements OnInit {
   noExisteEnPadron:boolean=false;
   citaDisponible:boolean=false;
   personaProtegida:boolean=false;
+  resetearEstado(){
+    this.noExisteEnPadron=false;
+    this.citaDisponible=false;
+    this.personaProtegida=false;
+    this.existeEnPadron=false;
+
+
+  }
 
   puntos_vacunacion: any[] = []
   edad_paciente: number;
@@ -58,10 +66,11 @@ export class VacunacionCovidComponent implements OnInit {
   }
   existeEnPadron: boolean = false
   BuscarDnI() {
+    this.resetearEstado()
 
     this.PadronVacunacionServic.devolverDatos(this.formGroup.value.numero_documento).subscribe((respuesta) => {
 
-      console.log(respuesta)
+     console.log(respuesta)
       if (respuesta.mensaje != 'no existe en padron') {
 
         this.existeEnPadron = true
@@ -77,6 +86,7 @@ export class VacunacionCovidComponent implements OnInit {
 
       }
       else {
+        this.existeEnPadron=false;
         this.noExisteEnPadron=true;
       }
 
