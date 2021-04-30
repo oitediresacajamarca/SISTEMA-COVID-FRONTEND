@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DistritosService } from 'src/app/servicios/distritos.service';
 import { EstadosService } from 'src/app/servicios/estados.service';
+import { ActualizacionDataService } from 'src/app/servicios/vacunacion/aactualizacion-data.service';
 import { CitaVacunacionService } from 'src/app/servicios/vacunacion/cita-vacunacion.service';
 import { PadronVacunacionService } from 'src/app/servicios/vacunacion/padron-vacunacion.service';
 import { PuntoVacunacionService } from 'src/app/servicios/vacunacion/punto-vacunacion.service';
@@ -17,7 +18,8 @@ export class VacunacionCovidComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private PadronVacunacionServic: PadronVacunacionService, private distritoss: DistritosService,
     private PuntoVacunacionServic: PuntoVacunacionService, private cita: CitaVacunacionService, private modalService: NgbModal
-    , private estados: EstadosService, private rout: Router) {
+    , private estados: EstadosService, private rout: Router
+    ,private actulizadata:ActualizacionDataService) {
 
 
   }
@@ -91,10 +93,15 @@ export class VacunacionCovidComponent implements OnInit {
   }
 
   actualizar(content) {
+ 
 
 
     this.modalService.open(content).result.then((result) => {
       let genera_cita = false
+
+      this.actulizadata.actualizarData({...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente}).subscribe((respuesta)=>{
+        console.log(respuesta)
+      })
 
 if(this.edad_paciente>=80){
 
@@ -105,6 +112,10 @@ if(this.edad_paciente>=80){
         console.log(respuesta)
       })
     }else{
+
+
+
+
       this.rout.navigate(['/datos-actualizados'])
     }
 
