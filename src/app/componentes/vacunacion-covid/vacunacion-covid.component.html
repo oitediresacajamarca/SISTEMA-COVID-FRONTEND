@@ -205,7 +205,10 @@
                     id="exampleInputEmail1"
                     placeholder="Ingrese el Numero de Documento "
                     formControlName="numero_documento"
+                    
                   />
+                  <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup.get('numero_documento').errors!=null && this.formGroup.get('numero_documento').touched?'block':'none'}" class="error invalid-feedback">Numero de Documento es requerido</span>
+           
                 </div>
               </div>
 
@@ -232,7 +235,9 @@
                 id="exampleInputEmail1"
                 placeholder="Ingrese el Apellido Paterno"
                 formControlName="ape_paterno"
+               
               />
+              <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup.get('ape_paterno').errors!=null && this.formGroup.get('ape_paterno').touched?'block':'none'}" class="error invalid-feedback">Apellido Paterno es requerido</span>
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">APELLIDO MATERNO</label>
@@ -243,6 +248,7 @@
                 placeholder="Ingrese el Apellido Materno"
                 formControlName="ape_materno"
               />
+              <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup.get('ape_materno').errors!=null && this.formGroup.get('ape_materno').touched?'block':'none'}" class="error invalid-feedback">Apellido Materno es requerido</span>
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">NOMBRES</label>
@@ -252,7 +258,10 @@
                 id="exampleInputEmail1"
                 placeholder="ingrese sus Nombres"
                 formControlName="nombres"
+               
               />
+              <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup.get('nombres').errors!=null && this.formGroup.get('nombres').touched?'block':'none'}" class="error invalid-feedback">Apellido Materno es requerido</span>
+
             </div>
             <div class="position-relative p-3 bg-gray" style="height: 180px"  *ngIf="existeEnPadron">
               <div class="ribbon-wrapper ribbon-xl">
@@ -314,7 +323,9 @@
               <div class="col-3">
                 <div class="form-group">
                   <label>SELECCIONE PROVINCIA</label>
-                  <select class="form-control" formControlName="PROVINCIA" (change)="FILTRAR_DISTRITOS()">
+                  <select class="form-control" formControlName="PROVINCIA" (change)="FILTRAR_DISTRITOS()"
+                
+                  >
                     <option>CAJAMARCA</option>
                     <option>CAJABAMBA</option>
                     <option>CELENDIN</option>
@@ -329,12 +340,16 @@
                     <option>SAN PABLO</option>
                     <option>SANTA CRUZ</option>
                   </select>
+                  <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup2.get('PROVINCIA').errors!=null && this.formGroup2.get('PROVINCIA').touched?'block':'none'}" class="error invalid-feedback">PROVINCIA es requerido</span>
+
                 </div>
               </div>
               <div class="col-4">
                 <div class="form-group">
                   <label>SELECCIONE DISTRITO</label>
-                  <select class="form-control"  formControlName="DISTRITO"  (change)="FITRAR_PUNTOS_VACUNACION()" (click)="FITRAR_PUNTOS_VACUNACION()">
+                  <select class="form-control"  formControlName="DISTRITO" 
+                 
+                  (change)="FITRAR_PUNTOS_VACUNACION()" (click)="FITRAR_PUNTOS_VACUNACION()">
                    
                     <option value="" 
                     >"SELECCIONE DISTRITO"</option>
@@ -343,6 +358,8 @@
                    >{{distrito.nombre_distrito}}</option>
                    
                   </select>
+                  <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup2.get('DISTRITO').errors!=null && this.formGroup2.get('DISTRITO').touched?'block':'none'}" class="error invalid-feedback">Distrito es requerido</span>
+
                 </div>
               </div>
               <div class="col-5">
@@ -377,6 +394,8 @@
                     <option>CALLE</option>
                     <option>OTROS</option>
                   </select>
+                  <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup2.get('TIPO_VIA').errors!=null && this.formGroup2.get('TIPO_VIA').touched?'block':'none'}" class="error invalid-feedback">Tipo de Via es requerido</span>
+
                 </div>
               </div>
               <div class="col-sm-6">
@@ -388,6 +407,8 @@
                     placeholder="Enter ..."
                     formControlName="NOMBRE_VIA"
                   />
+                  <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup2.get('NOMBRE_VIA').errors!=null && this.formGroup2.get('NOMBRE_VIA').touched?'block':'none'}" class="error invalid-feedback">Nombre de Via es requerido</span>
+
                 </div>
               </div>
 
@@ -437,6 +458,9 @@
                         <option *ngFor="let punto of puntos_vacunacion" [value]="punto.nombre_punto">{{punto.nombre_punto}}</option>
                       
                       </select>
+                      <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup2.get('NOMBRE_PUNTO_VACUNACION').errors!=null && this.formGroup2.get('NOMBRE_PUNTO_VACUNACION').touched?'block':'none'}" class="error invalid-feedback">Punto de Vacunacion es requerido</span>
+
+               
                     </div>
                   </div>
                   <div class="col-8"></div>
@@ -472,6 +496,9 @@
                 im-insert="true"
                 formControlName="NUMERO_TELEFONO"
               />
+              <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup2.get('NUMERO_TELEFONO').errors!=null && this.formGroup2.get('NUMERO_TELEFONO').touched?'block':'none'}" class="error invalid-feedback">Numero de Telefono es requerido</span>
+
+               
             </div>
             <!-- /.input group -->
 
@@ -530,7 +557,7 @@
             <button
               type="submit"
               class="btn btn-primary"
-              (click)="actualizar(content)"
+              (click)="actualizar(content)" [disabled]="!this.formGroup.valid ||!this.formGroup2.valid "
             >
               GUARDAR
             </button>

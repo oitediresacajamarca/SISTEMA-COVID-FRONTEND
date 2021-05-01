@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DistritosService } from 'src/app/servicios/distritos.service';
@@ -43,24 +43,24 @@ export class VacunacionCovidComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
-      numero_documento: '',
-      ape_paterno: '',
-      ape_materno: '',
-      nombres: ''
+      numero_documento: ['',Validators.required],
+      ape_paterno: ['',Validators.required],
+      ape_materno: ['',Validators.required],
+      nombres: ['',Validators.required]
 
     });
     this.formGroup2 = this.formBuilder.group({
-      PROVINCIA: '',
-      DISTRITO: '',
-      TIPO_VIA: '',
-      NOMBRE_VIA: '',
-      NUMERO: '',
+      PROVINCIA: ['',Validators.required],
+      DISTRITO: ['',Validators.required],
+      TIPO_VIA: ['',Validators.required],
+      NOMBRE_VIA: ['',Validators.required],
+      NUMERO: ['',Validators.required],
       REFERENCIA: '',
       NOMBRE_PUNTO_VACUNACION: '',
-      NUMERO_TELEFONO: '',
-      CORREO_ELECTRONICO: '',
-      TIPO_SEGURO: '',
-      TIENE_DISCAPACIDAD: false
+      NUMERO_TELEFONO: ['',Validators.required],
+      CORREO_ELECTRONICO: ['',Validators.required],
+      TIPO_SEGURO: ['',Validators.required],
+      TIENE_DISCAPACIDAD: [false,Validators.required]
 
     });
   }
@@ -111,6 +111,7 @@ export class VacunacionCovidComponent implements OnInit {
       this.BuscarDnI()
 
       this.actulizadata.actualizarData({...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente}).subscribe((respuesta)=>{
+        console.log(respuesta)
        this.edad_paciente=respuesta.edad
       })
 
