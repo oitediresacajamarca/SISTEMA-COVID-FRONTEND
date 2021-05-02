@@ -56,7 +56,7 @@ export class VacunacionCovidComponent implements OnInit {
       NOMBRE_VIA: ['',Validators.required],
       NUMERO: ['',Validators.required],
       REFERENCIA: '',
-      NOMBRE_PUNTO_VACUNACION: '',
+      NOMBRE_PUNTO_VACUNACION: ['',Validators.required],
       NUMERO_TELEFONO: ['',Validators.required],
       CORREO_ELECTRONICO: ['',Validators.required],
       TIPO_SEGURO: ['',Validators.required],
