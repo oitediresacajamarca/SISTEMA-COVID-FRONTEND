@@ -46,7 +46,8 @@ export class VacunacionCovidComponent implements OnInit {
       numero_documento: ['',Validators.required],
       ape_paterno: ['',Validators.required],
       ape_materno: ['',Validators.required],
-      nombres: ['',Validators.required]
+      nombres: ['',Validators.required],
+      fecha_nacimiento:['',Validators.required]
 
     });
     this.formGroup2 = this.formBuilder.group({
