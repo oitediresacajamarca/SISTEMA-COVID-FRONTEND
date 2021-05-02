@@ -10,6 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -172,7 +173,8 @@ import { ActualizacionDatoComponent } from './componentes/vacunacion-covid/actua
     ModalModule.forRoot(),
     GMapModule,
     MatProgressSpinnerModule,
-    NgbModule 
+    NgbModule,
+    
 
   ],
   providers: [
