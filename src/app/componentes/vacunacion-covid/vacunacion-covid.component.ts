@@ -21,10 +21,12 @@ export class VacunacionCovidComponent implements OnInit {
     , private estados: EstadosService, private rout: Router
     ,private actulizadata:ActualizacionDataService) {
       this.minDate = new Date(1900, 1, 1);
+      this.maxDate = new Date(2021, 1, 1);
 
 
   }
   public minDate: Date = void 0; 
+  public maxDate: Date = void 0; 
   formGroup: FormGroup;
   formGroup2: FormGroup;
   distritos_filtrados: any[] = []
