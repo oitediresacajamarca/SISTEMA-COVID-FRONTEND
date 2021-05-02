@@ -20,9 +20,11 @@ export class VacunacionCovidComponent implements OnInit {
     private PuntoVacunacionServic: PuntoVacunacionService, private cita: CitaVacunacionService, private modalService: NgbModal
     , private estados: EstadosService, private rout: Router
     ,private actulizadata:ActualizacionDataService) {
+      this.minDate = new Date(1900, 1, 1);
 
 
   }
+  public minDate: Date = void 0; 
   formGroup: FormGroup;
   formGroup2: FormGroup;
   distritos_filtrados: any[] = []
