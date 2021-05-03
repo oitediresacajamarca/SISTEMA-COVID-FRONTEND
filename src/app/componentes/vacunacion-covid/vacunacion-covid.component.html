@@ -280,7 +280,7 @@
                 formControlName="nombres"
                
               />
-              <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup.get('nombres').errors!=null && this.formGroup.get('nombres').touched?'block':'none'}" class="error invalid-feedback">Apellido Materno es requerido</span>
+              <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup.get('nombres').errors!=null && this.formGroup.get('nombres').touched?'block':'none'}" class="error invalid-feedback">Nombres es requerido</span>
 
             </div>
             <div class="position-relative p-3 bg-gray" style="height: 180px"  *ngIf="existeEnPadron">
@@ -340,7 +340,7 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-3">
+              <div class="col-md-3">
                 <div class="form-group">
                   <label>SELECCIONE PROVINCIA</label>
                   <select class="form-control" formControlName="PROVINCIA" (change)="FILTRAR_DISTRITOS()"
@@ -364,7 +364,7 @@
 
                 </div>
               </div>
-              <div class="col-4">
+              <div class="col-md-4">
                 <div class="form-group">
                   <label>SELECCIONE DISTRITO</label>
                   <select class="form-control"  formControlName="DISTRITO" 
@@ -467,7 +467,7 @@
               </div>
               <div class="card-body">
                 <div class="row">
-                  <div class="col-4">
+                  <div class="col-md-4">
                     <div class="form-group">
                       <label>SELECCIONAR PUNTO</label>
                       <select

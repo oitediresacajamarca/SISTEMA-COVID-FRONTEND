@@ -19,25 +19,25 @@ export class VacunacionCovidComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private PadronVacunacionServic: PadronVacunacionService, private distritoss: DistritosService,
     private PuntoVacunacionServic: PuntoVacunacionService, private cita: CitaVacunacionService, private modalService: NgbModal
     , private estados: EstadosService, private rout: Router
-    ,private actulizadata:ActualizacionDataService) {
-      this.minDate = new Date(1900, 1, 1);
-      this.maxDate = new Date(2021, 1, 1);
+    , private actulizadata: ActualizacionDataService) {
+    this.minDate = new Date(1900, 1, 1);
+    this.maxDate = new Date(2021, 1, 1);
 
 
   }
-  public minDate: Date = void 0; 
-  public maxDate: Date = void 0; 
+  public minDate: Date = void 0;
+  public maxDate: Date = void 0;
   formGroup: FormGroup;
   formGroup2: FormGroup;
   distritos_filtrados: any[] = []
-  noExisteEnPadron:boolean=false;
-  citaDisponible:boolean=false;
-  personaProtegida:boolean=false;
-  resetearEstado(){
-    this.noExisteEnPadron=false;
-    this.citaDisponible=false;
-    this.personaProtegida=false;
-    this.existeEnPadron=false;
+  noExisteEnPadron: boolean = false;
+  citaDisponible: boolean = false;
+  personaProtegida: boolean = false;
+  resetearEstado() {
+    this.noExisteEnPadron = false;
+    this.citaDisponible = false;
+    this.personaProtegida = false;
+    this.existeEnPadron = false;
 
 
   }
@@ -47,25 +47,25 @@ export class VacunacionCovidComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
-      numero_documento: ['',Validators.required],
-      ape_paterno: ['',Validators.required],
-      ape_materno: ['',Validators.required],
-      nombres: ['',Validators.required],
-      fecha_nacimiento:['',Validators.required]
+      numero_documento: ['', Validators.required],
+      ape_paterno: ['', Validators.required],
+      ape_materno: ['', Validators.required],
+      nombres: ['', Validators.required],
+      fecha_nacimiento: ['', Validators.required]
 
     });
     this.formGroup2 = this.formBuilder.group({
-      PROVINCIA: ['',Validators.required],
-      DISTRITO: ['',Validators.required],
-      TIPO_VIA: ['',Validators.required],
-      NOMBRE_VIA: ['',Validators.required],
-      NUMERO: ['',Validators.required],
+      PROVINCIA: ['', Validators.required],
+      DISTRITO: ['', Validators.required],
+      TIPO_VIA: ['', Validators.required],
+      NOMBRE_VIA: ['', Validators.required],
+      NUMERO: ['', Validators.required],
       REFERENCIA: '',
-      NOMBRE_PUNTO_VACUNACION: ['',Validators.required],
-      NUMERO_TELEFONO: ['',Validators.required],
-      CORREO_ELECTRONICO: ['',Validators.required],
-      TIPO_SEGURO: ['',Validators.required],
-      TIENE_DISCAPACIDAD: [false,Validators.required]
+      NOMBRE_PUNTO_VACUNACION: ['', Validators.required],
+      NUMERO_TELEFONO: ['', Validators.required],
+      CORREO_ELECTRONICO: ['', Validators.required],
+      TIPO_SEGURO: ['', Validators.required],
+      TIENE_DISCAPACIDAD: [false, Validators.required]
 
     });
   }
@@ -75,7 +75,7 @@ export class VacunacionCovidComponent implements OnInit {
 
     this.PadronVacunacionServic.devolverDatos(this.formGroup.value.numero_documento).subscribe((respuesta) => {
 
-     console.log(respuesta)
+      console.log(respuesta)
       if (respuesta.mensaje != 'no existe en padron') {
 
         this.existeEnPadron = true
@@ -91,8 +91,8 @@ export class VacunacionCovidComponent implements OnInit {
 
       }
       else {
-        this.existeEnPadron=false;
-        this.noExisteEnPadron=true;
+        this.existeEnPadron = false;
+        this.noExisteEnPadron = true;
       }
 
 
@@ -103,42 +103,42 @@ export class VacunacionCovidComponent implements OnInit {
 
   }
 
-  buscarCita(dni:string){
+  buscarCita(dni: string) {
 
   }
 
   actualizar(content) {
- 
+
 
 
     this.modalService.open(content).result.then((result) => {
       let genera_cita = false
 
-      this.actulizadata.actualizarData({...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente}).subscribe((respuesta)=>{
+      this.actulizadata.actualizarData({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
         console.log(respuesta)
-       this.edad_paciente=respuesta.edad
+        this.edad_paciente = respuesta.edad
+
+
+        if (this.edad_paciente >= 80) {
+
+          this.cita.citarPaciente({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
+            Object.assign(this.estados.citapro, respuesta)
+
+            this.rout.navigate(['/cita-programada-resultado'])
+            console.log(respuesta)
+          })
+        } else {
+
+
+
+
+          this.rout.navigate(['/datos-actualizados'])
+        }
+
       })
-
-if(this.edad_paciente>=80){
-
-      this.cita.citarPaciente({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
-        Object.assign(this.estados.citapro, respuesta)
-
-        this.rout.navigate(['/cita-programada-resultado'])
-        console.log(respuesta)
-      })
-    }else{
-
-
-
-
-      this.rout.navigate(['/datos-actualizados'])
-    }
-
-
 
     }, (reason) => {
-    
+
     });
 
 
