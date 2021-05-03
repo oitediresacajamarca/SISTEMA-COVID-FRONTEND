@@ -80,13 +80,15 @@ export class VacunacionCovidComponent implements OnInit {
 
         this.existeEnPadron = true
         this.edad_paciente = respuesta.Edad
+        let fecha=this.formGroup.get('fecha_nacimiento').value
 
 
         this.formGroup.setValue({
           numero_documento: this.formGroup.value.numero_documento,
           ape_paterno: respuesta.Apellido_Paterno,
           ape_materno: respuesta.Apellido_Materno,
-          nombres: respuesta.Nombres
+          nombres: respuesta.Nombres,
+          fecha_nacimiento:fecha
         })
 
       }
