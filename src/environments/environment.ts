@@ -12,8 +12,13 @@ export const environment = {
   urlBackendAuth:"http://sir.diresacajamarca.gob.pe/dir_autenticacion/api/",
 //urlBackendNode:"http://localhost:8001/covid/",
  urlBackendNode:"http://190.116.36.121:8001/covid/",
+<<<<<<< HEAD
  //urlBackendNodeVacunas:"http://localhost:8001/vacunados/",
  urlBackendNodeVacunas:"http://190.116.36.121:8001/vacunados/",
+=======
+ urlBackendNodeVacunas:"http://localhost:8001/vacunados/",
+ //urlBackendNodeVacunas:"http://190.116.36.121:8001/vacunados/",
+>>>>>>> e5403f7463804fa8c73f934e0e433c11c5f657f3
  siscovid_client_id : "diresa_seguimiento",
  siscovid_cient_secret : "WrCcm69SZOVZpUpnYuq4"
 };
