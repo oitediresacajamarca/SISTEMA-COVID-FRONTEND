@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DistritosService } from 'src/app/servicios/distritos.service';
 import { EstadosService } from 'src/app/servicios/estados.service';
 import { ActualizacionDataService } from 'src/app/servicios/vacunacion/aactualizacion-data.service';
@@ -15,17 +15,19 @@ import { PuntoVacunacionService } from 'src/app/servicios/vacunacion/punto-vacun
   styleUrls: ['./vacunacion-covid.component.scss']
 })
 export class VacunacionCovidComponent implements OnInit {
+  model: NgbDateStruct;
 
   constructor(private formBuilder: FormBuilder, private PadronVacunacionServic: PadronVacunacionService, private distritoss: DistritosService,
     private PuntoVacunacionServic: PuntoVacunacionService, private cita: CitaVacunacionService, private modalService: NgbModal
     , private estados: EstadosService, private rout: Router
-    , private actulizadata: ActualizacionDataService) {
+    , private actulizadata: ActualizacionDataService, private calendar: NgbCalendar) {
     this.minDate = new Date(1900, 1, 1);
     this.maxDate = new Date(2021, 1, 1);
 
 
   }
-  public minDate: Date = void 0;
+  @ViewChild('ngbDatepicker') ngbDatepicker: any;
+  public minDate: Date = void 0;;
   public maxDate: Date = void 0;
   formGroup: FormGroup;
   formGroup2: FormGroup;
@@ -51,8 +53,7 @@ export class VacunacionCovidComponent implements OnInit {
       ape_paterno: ['', Validators.required],
       ape_materno: ['', Validators.required],
       nombres: ['', Validators.required],
-      fecha_nacimiento: ['', Validators.required]
-
+      FECHA_NACIMIENTO: ['', Validators.required]
     });
     this.formGroup2 = this.formBuilder.group({
       PROVINCIA: ['', Validators.required],
@@ -71,32 +72,61 @@ export class VacunacionCovidComponent implements OnInit {
   }
   existeEnPadron: boolean = false
   BuscarDnI() {
-    this.resetearEstado()
+
+
 
     this.PadronVacunacionServic.devolverDatos(this.formGroup.value.numero_documento).subscribe((respuesta) => {
 
-      console.log(respuesta)
-      if (respuesta.mensaje != 'no existe en padron') {
-
-        this.existeEnPadron = true
-        this.edad_paciente = respuesta.Edad
-        let fecha=this.formGroup.get('fecha_nacimiento').value
 
 
-        this.formGroup.setValue({
-          numero_documento: this.formGroup.value.numero_documento,
-          ape_paterno: respuesta.Apellido_Paterno,
-          ape_materno: respuesta.Apellido_Materno,
-          nombres: respuesta.Nombres,
-          fecha_nacimiento:fecha
-        })
+      this.existeEnPadron = false;
 
+      this.edad_paciente = respuesta.Edad
+
+      let fecha = this.formGroup.value.FECHA_NACIMIENTO
+  
+      if(
+        respuesta.mensaje.existeenhis
+      ){
+        
+        fecha=new Date(respuesta.FECHA_NACIMIENTO)
+
+      }else{
+
+    
+        fecha=new Date(fecha.year,fecha.month-1,fecha.day)
       }
-      else {
+      
+    
+      
+
+
+
+      this.formGroup.patchValue({
+        numero_documento: this.formGroup.value.numero_documento,
+        ape_paterno: respuesta.Apellido_Paterno,
+        ape_materno: respuesta.Apellido_Materno,
+        nombres: respuesta.Nombres,
+        FECHA_NACIMIENTO: fecha
+      })
+
+
+     
+      this.model = { day: fecha.getDate(), month: fecha.getMonth() + 1, year: fecha.getFullYear() }
+      console.log(this.formGroup.value)
+
+      if (this.edad_paciente >= 80) {
+        this.existeEnPadron = true;
+        this.noExisteEnPadron = false;
+      }
+      if (this.edad_paciente >= 60) {
+        this.existeEnPadron = true;
+        this.noExisteEnPadron = false;
+      }
+      if (this.edad_paciente < 60) {
         this.existeEnPadron = false;
         this.noExisteEnPadron = true;
       }
-
 
     }
 
@@ -117,7 +147,7 @@ export class VacunacionCovidComponent implements OnInit {
       let genera_cita = false
 
       this.actulizadata.actualizarData({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
-        console.log(respuesta)
+
         this.edad_paciente = respuesta.edad
 
 
@@ -127,7 +157,7 @@ export class VacunacionCovidComponent implements OnInit {
             Object.assign(this.estados.citapro, respuesta)
 
             this.rout.navigate(['/cita-programada-resultado'])
-            console.log(respuesta)
+       
           })
         } else {
 
@@ -173,7 +203,7 @@ export class VacunacionCovidComponent implements OnInit {
 
   async FITRAR_PUNTOS_VACUNACION() {
 
-    console.log(this.formGroup2.value)
+    
 
 
     this.PuntoVacunacionServic.devolverPuntosPorDistrito(this.formGroup2.value.DISTRITO).subscribe((puntos) => {
