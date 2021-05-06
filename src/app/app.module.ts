@@ -174,6 +174,7 @@ import { ActualizacionDatoComponent } from './componentes/vacunacion-covid/actua
     GMapModule,
     MatProgressSpinnerModule,
     NgbModule,
+   
     
 
   ],
