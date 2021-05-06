@@ -142,16 +142,17 @@ export class VacunacionCovidComponent implements OnInit {
   actualizar(content) {
 
 
-
+console.log(this.formGroup2.value)
     this.modalService.open(content).result.then((result) => {
       let genera_cita = false
 
       this.actulizadata.actualizarData({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
 
         this.edad_paciente = respuesta.edad
+        console.log(this.formGroup2.value.NOMBRE_PUNTO_VACUNACION)
+        console.log(this.edad_paciente )
 
-
-        if (this.edad_paciente >= 80) {
+        if (this.edad_paciente >= JSON.parse(this.formGroup2.value.NOMBRE_PUNTO_VACUNACION).EDAD_CITA) {
 
           this.cita.citarPaciente({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
             Object.assign(this.estados.citapro, respuesta)
@@ -207,10 +208,11 @@ export class VacunacionCovidComponent implements OnInit {
 
 
     this.PuntoVacunacionServic.devolverPuntosPorDistrito(this.formGroup2.value.DISTRITO).subscribe((puntos) => {
+      console.log(puntos)
 
       this.puntos_vacunacion = puntos.map((punto) => {
 
-        return { nombre_punto: punto._NOMBRE_PUNTO_VACUNACION_ }
+        return { nombre_punto: punto._NOMBRE_PUNTO_VACUNACION_,EDAD_CITA:punto.EDAD_CITA }
 
       })
 

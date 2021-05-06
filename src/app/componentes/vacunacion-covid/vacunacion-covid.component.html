@@ -478,7 +478,7 @@
                         formControlName="NOMBRE_PUNTO_VACUNACION"
                       >
                       <option value="">SELECCIONE SU PUNTO DE VACUNACION</option>
-                        <option *ngFor="let punto of puntos_vacunacion" [value]="punto.nombre_punto">{{punto.nombre_punto}}</option>
+                        <option *ngFor="let punto of puntos_vacunacion" [value]="{punto:punto.nombre_punto}">{{punto.nombre_punto}}</option>
                       
                       </select>
                       <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup2.get('NOMBRE_PUNTO_VACUNACION').errors!=null && this.formGroup2.get('NOMBRE_PUNTO_VACUNACION').touched?'block':'none'}" class="error invalid-feedback">Punto de Vacunacion es requerido</span>

@@ -16,7 +16,10 @@ export class CitaProgramadaResultadoComponent implements OnInit {
    Object.assign( this.cita,this.estados.citapro)
    
 
-   console.log(this.cita)
+  
+  }
+  imprimir(){
+    window.print()
   }
 
 
