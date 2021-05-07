@@ -73,7 +73,7 @@ export class VacunacionCovidComponent implements OnInit {
       REFERENCIA: '',
       NOMBRE_PUNTO_VACUNACION: ['', Validators.required],
       NUMERO_TELEFONO: ['', Validators.required],
-      CORREO_ELECTRONICO: ['', Validators.required],
+      CORREO_ELECTRONICO: [''],
       TIPO_SEGURO: ['', Validators.required],
       TIENE_DISCAPACIDAD: [false, Validators.required],
       DISCAPACIDAD_DESCRIPCION:['',]
@@ -175,7 +175,7 @@ export class VacunacionCovidComponent implements OnInit {
 
         this.edad_paciente = respuesta.edad
     
-        if (this.edad_paciente >= 80) {
+        if (this.edad_paciente >= 200) {
 
           this.cita.citarPaciente({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
             Object.assign(this.estados.citapro, respuesta)
