@@ -1,18 +1,27 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Injectable, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbCalendar, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DistritosService } from 'src/app/servicios/distritos.service';
 import { EstadosService } from 'src/app/servicios/estados.service';
 import { ActualizacionDataService } from 'src/app/servicios/vacunacion/aactualizacion-data.service';
 import { CitaVacunacionService } from 'src/app/servicios/vacunacion/cita-vacunacion.service';
 import { PadronVacunacionService } from 'src/app/servicios/vacunacion/padron-vacunacion.service';
 import { PuntoVacunacionService } from 'src/app/servicios/vacunacion/punto-vacunacion.service';
+import { NgbDateCustomParserFormatter } from 'src/app/componentes/vacunacion-covid/dateFormat';
+import { Console } from 'console';
+
+
 
 @Component({
   selector: 'app-vacunacion-covid',
   templateUrl: './vacunacion-covid.component.html',
-  styleUrls: ['./vacunacion-covid.component.scss']
+  styleUrls: ['./vacunacion-covid.component.scss'],
+  providers: [
+    /*   {provide: NgbDateAdapter, useClass: CustomAdapter},
+       {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter}*/
+  ]
+
 })
 export class VacunacionCovidComponent implements OnInit {
   model: NgbDateStruct;
@@ -71,6 +80,10 @@ export class VacunacionCovidComponent implements OnInit {
     });
   }
   existeEnPadron: boolean = false
+  cambioFecha() {
+
+   
+  }
   BuscarDnI() {
 
 
@@ -82,38 +95,46 @@ export class VacunacionCovidComponent implements OnInit {
       this.existeEnPadron = false;
 
       this.edad_paciente = respuesta.Edad
+      console.log(respuesta)
 
-      let fecha = this.formGroup.value.FECHA_NACIMIENTO
-  
-      if(
-        respuesta.mensaje.existeenhis
-      ){
-        
-        fecha=new Date(respuesta.FECHA_NACIMIENTO)
+      if(respuesta.mensaje.existeenhis){
 
-      }else{
+        let fec=new Date(respuesta.FECHA_NACIMIENTO)
+        this.model={day:fec.getDate(),month:fec.getMonth()+1,year:fec.getFullYear()}
 
-    
-        fecha=new Date(fecha.year,fecha.month-1,fecha.day)
+        this.formGroup.patchValue({
+          numero_documento: this.formGroup.value.numero_documento,
+          ape_paterno: respuesta.Apellido_Paterno,
+          ape_materno: respuesta.Apellido_Materno,
+          nombres: respuesta.Nombres,
+          FECHA_NACIMIENTO: this.model
+        })
+
+
       }
+
+      if(respuesta.mensaje.existeenpadron){
+
       
-    
       
 
+        this.formGroup.patchValue({
+          numero_documento: this.formGroup.value.numero_documento,
+          ape_paterno: respuesta.Apellido_Paterno,
+          ape_materno: respuesta.Apellido_Materno,
+          nombres: respuesta.Nombres,
+          FECHA_NACIMIENTO: this.model
+        })
 
 
-      this.formGroup.patchValue({
-        numero_documento: this.formGroup.value.numero_documento,
-        ape_paterno: respuesta.Apellido_Paterno,
-        ape_materno: respuesta.Apellido_Materno,
-        nombres: respuesta.Nombres,
-        FECHA_NACIMIENTO: fecha
-      })
+      }
 
 
      
-      this.model = { day: fecha.getDate(), month: fecha.getMonth() + 1, year: fecha.getFullYear() }
-      console.log(this.formGroup.value)
+
+
+      
+
 
       if (this.edad_paciente >= 80) {
         this.existeEnPadron = true;
@@ -127,12 +148,13 @@ export class VacunacionCovidComponent implements OnInit {
         this.existeEnPadron = false;
         this.noExisteEnPadron = true;
       }
+      console.log(this.formGroup.value)
+
 
     }
 
     )
-
-
+    
   }
 
   buscarCita(dni: string) {
@@ -142,23 +164,23 @@ export class VacunacionCovidComponent implements OnInit {
   actualizar(content) {
 
 
-
     this.modalService.open(content).result.then((result) => {
     
       this.BuscarDnI()
 
+     console.log(this.formGroup) 
+
       this.actulizadata.actualizarData({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
 
         this.edad_paciente = respuesta.edad
-
-
+    
         if (this.edad_paciente >= 80) {
 
           this.cita.citarPaciente({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
             Object.assign(this.estados.citapro, respuesta)
 
             this.rout.navigate(['/cita-programada-resultado'])
-       
+
           })
         } else {
 
@@ -202,16 +224,19 @@ export class VacunacionCovidComponent implements OnInit {
 
   }
 
+
+
   async FITRAR_PUNTOS_VACUNACION() {
 
-    
+
 
 
     this.PuntoVacunacionServic.devolverPuntosPorDistrito(this.formGroup2.value.DISTRITO).subscribe((puntos) => {
 
+
       this.puntos_vacunacion = puntos.map((punto) => {
 
-        return { nombre_punto: punto._NOMBRE_PUNTO_VACUNACION_ }
+        return { nombre_punto: punto._NOMBRE_PUNTO_VACUNACION_, EDAD_CITA: punto.EDAD_CITA }
 
       })
 

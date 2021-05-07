@@ -11,5 +11,8 @@ export class ActualizacionDatoComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  imprimir(){
+    window.print();
+  }
 
 }

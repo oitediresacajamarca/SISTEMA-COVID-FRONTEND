@@ -217,16 +217,16 @@
                 <div class="form-group">
                   <label>FECHA DE NACIMIENTO</label>
                   <div class="input-group">
-                    <input class="form-control" placeholder="yyyy-mm-dd"
+                    <input class="form-control" placeholder="dd/MM/yyyy"
                           name="dp"  ngbDatepicker #d="ngbDatepicker"
                           (click)="d.toggle()"
                           formControlName="FECHA_NACIMIENTO" [minDate]="{year: 1900, month: 1, day: 1}"
                           [maxDate]="{year: 2021, month: 12, day: 31}"
-                          [(ngModel)]="model">
+                          [(ngModel)]="model" (dateSelect)="cambioFecha()"> 
                         
-                    <!-- <div class="input-group-append">
-                      <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                    </div> -->
+                  <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="cambioFecha()" type="button"></button>
+                    </div> 
                   </div>
                 </div>
               </div>
@@ -299,7 +299,7 @@
                 <div class="ribbon bg-warning text-lg">
                   ATENCION</div>
               </div>
-              <H1>USTED NO SE ENCUENTRA DENTRO DEL PADRON DE VACUNACION ACTUAL</H1>
+              <H1>USTED NO SE ENCUENTRA DENTRO DEL <br> DE VACUNACION ACTUAL</H1>
               <small>DEJENOS SUS DATOS, PARA TENERLE EN CUENTA DENTRO DEL PROCESO DE INGRESO AL PADRON</small>
               
             </div>
