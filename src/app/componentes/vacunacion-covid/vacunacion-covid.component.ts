@@ -9,7 +9,7 @@ import { CitaVacunacionService } from 'src/app/servicios/vacunacion/cita-vacunac
 import { PadronVacunacionService } from 'src/app/servicios/vacunacion/padron-vacunacion.service';
 import { PuntoVacunacionService } from 'src/app/servicios/vacunacion/punto-vacunacion.service';
 import { NgbDateCustomParserFormatter } from 'src/app/componentes/vacunacion-covid/dateFormat';
-import { Console } from 'console';
+
 
 
 
