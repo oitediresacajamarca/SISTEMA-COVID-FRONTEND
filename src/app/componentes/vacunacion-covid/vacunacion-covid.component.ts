@@ -75,7 +75,8 @@ export class VacunacionCovidComponent implements OnInit {
       NUMERO_TELEFONO: ['', Validators.required],
       CORREO_ELECTRONICO: ['', Validators.required],
       TIPO_SEGURO: ['', Validators.required],
-      TIENE_DISCAPACIDAD: [false, Validators.required]
+      TIENE_DISCAPACIDAD: [false, Validators.required],
+      DISCAPACIDAD_DESCRIPCION:['',]
 
     });
   }
