@@ -22,6 +22,7 @@ import { ValidacionDniComponent } from './componentes/vacunacion-covid/validacio
 import { ModalConfirmacionComponent } from './componentes/vacunacion-covid/modal-confirmacion/modal-confirmacion.component';
 import { CitaProgramadaResultadoComponent } from './componentes/vacunacion-covid/cita-programada-resultado/cita-programada-resultado.component';
 import { ActualizacionDatoComponent } from './componentes/vacunacion-covid/actualizacion-dato/actualizacion-dato.component';
+import { ReniecComponent } from './pruebas/reniec/reniec.component';
 
 
 const routes: Routes = [
@@ -53,7 +54,8 @@ const routes: Routes = [
   {path:"validacion-covid", component: ValidacionDniComponent},
   {path:"cita-programada-resultado", component: CitaProgramadaResultadoComponent},
   {path:"datos-actualizados", component: ActualizacionDatoComponent},
-  {path:"modal", component: ModalConfirmacionComponent}
+  {path:"modal", component: ModalConfirmacionComponent},
+  {path:"reniec",component:ReniecComponent}
 
   
   
