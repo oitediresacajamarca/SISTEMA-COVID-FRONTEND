@@ -222,7 +222,8 @@
                           (click)="d.toggle()"
                           formControlName="FECHA_NACIMIENTO" [minDate]="{year: 1900, month: 1, day: 1}"
                           [maxDate]="{year: 2021, month: 12, day: 31}"
-                          [(ngModel)]="model" (dateSelect)="cambioFecha()"> 
+                          [(ngModel)]="model" (dateSelect)="cambioFecha()"
+                          disabled="true"> 
                         
                 
                   </div>
@@ -255,7 +256,7 @@
                 id="exampleInputEmail1"
                 placeholder="Ingrese el Apellido Paterno"
                 formControlName="ape_paterno"
-               
+                disabled="true"
               />
               <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup.get('ape_paterno').errors!=null && this.formGroup.get('ape_paterno').touched?'block':'none'}" class="error invalid-feedback">Apellido Paterno es requerido</span>
             </div>
@@ -267,6 +268,7 @@
                 id="exampleInputEmail1"
                 placeholder="Ingrese el Apellido Materno"
                 formControlName="ape_materno"
+                disabled="true"
               />
               <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup.get('ape_materno').errors!=null && this.formGroup.get('ape_materno').touched?'block':'none'}" class="error invalid-feedback">Apellido Materno es requerido</span>
             </div>
@@ -278,6 +280,7 @@
                 id="exampleInputEmail1"
                 placeholder="ingrese sus Nombres"
                 formControlName="nombres"
+                disabled="true"
                
               />
               <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup.get('nombres').errors!=null && this.formGroup.get('nombres').touched?'block':'none'}" class="error invalid-feedback">Nombres es requerido</span>

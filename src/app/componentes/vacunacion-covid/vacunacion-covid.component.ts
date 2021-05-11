@@ -10,6 +10,7 @@ import { PadronVacunacionService } from 'src/app/servicios/vacunacion/padron-vac
 import { PuntoVacunacionService } from 'src/app/servicios/vacunacion/punto-vacunacion.service';
 
 
+
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
 
