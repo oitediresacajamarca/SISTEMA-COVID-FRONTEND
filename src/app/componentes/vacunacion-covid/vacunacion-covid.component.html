@@ -759,7 +759,7 @@
               class="btn btn-primary"
             
               [disabled]="false"
-              ngbTooltip="Click aqui para terminar de registrar"
+              [ngbTooltip]="formGroup2.valid?'Clic aqui para terminar de registrar':''"
               (click)="actualizar(content)"
               
             >
