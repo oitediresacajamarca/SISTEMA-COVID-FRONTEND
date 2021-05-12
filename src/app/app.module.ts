@@ -89,6 +89,7 @@ import { ModalConfirmacionComponent } from './componentes/vacunacion-covid/modal
 import { CitaProgramadaResultadoComponent } from './componentes/vacunacion-covid/cita-programada-resultado/cita-programada-resultado.component';
 import { ActualizacionDatoComponent } from './componentes/vacunacion-covid/actualizacion-dato/actualizacion-dato.component';
 import { ReniecComponent } from './pruebas/reniec/reniec.component';
+import { ToastComponent } from './componentes/vacunacion-covid/toast/toast.component';
 
 
 
@@ -146,6 +147,7 @@ import { ReniecComponent } from './pruebas/reniec/reniec.component';
     CitaProgramadaResultadoComponent,
     ActualizacionDatoComponent,
     ReniecComponent,
+    ToastComponent,
     
     
 

@@ -161,16 +161,13 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <img src="assets/logotipogrc.png" style="width:80%;" />
-      
+      <img src="assets/logotipogrc.png" style="width: 80%" />
     </div>
 
     <div class="col-md-4 TITULO">VACUNACION TERRITORIAL</div>
     <div class="col-md-4">
-
-      <img src="assets/logo_diresa.png" style="width:30%;" />
+      <img src="assets/logo_diresa.png" style="width: 30%" />
     </div>
-   
 
     <div class="col-md-6 SUBTITULO">ADULTOS MAYORES</div>
   </div>
@@ -205,11 +202,19 @@
                     id="exampleInputEmail1"
                     placeholder="Ingrese el Numero de Documento "
                     formControlName="numero_documento"
-                    
-                    
                   />
-                  <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup.get('numero_documento').errors!=null && this.formGroup.get('numero_documento').touched?'block':'none'}" class="error invalid-feedback">Numero de Documento es requerido</span>
-           
+                  <span
+                    id="exampleInputEmail1-error"
+                    [ngStyle]="{
+                      display:
+                        this.formGroup.get('numero_documento').errors != null &&
+                        this.formGroup.get('numero_documento').touched
+                          ? 'block'
+                          : 'none'
+                    }"
+                    class="error invalid-feedback"
+                    >Numero de Documento es requerido</span
+                  >
                 </div>
               </div>
 
@@ -217,39 +222,41 @@
                 <div class="form-group">
                   <label>FECHA DE NACIMIENTO</label>
                   <div class="input-group">
-                    <input class="form-control" placeholder="dd/MM/yyyy"
-                          name="dp"  ngbDatepicker #d="ngbDatepicker"
-                          (click)="d.toggle()"
-                          formControlName="FECHA_NACIMIENTO" [minDate]="{year: 1900, month: 1, day: 1}"
-                          [maxDate]="{year: 2021, month: 12, day: 31}"
-                          [(ngModel)]="model" (dateSelect)="cambioFecha()"
-                          disabled="true"> 
-                        
-                
+                    <input
+                      class="form-control"
+                      placeholder="dd/MM/yyyy"
+                      name="dp"
+                      ngbDatepicker
+                      #d="ngbDatepicker"
+                      (click)="d.toggle()"
+                      formControlName="FECHA_NACIMIENTO"
+                      [minDate]="{ year: 1900, month: 1, day: 1 }"
+                      [maxDate]="{ year: 2021, month: 12, day: 31 }"
+                      [(ngModel)]="model"
+                      (dateSelect)="cambioFecha()"
+                      disabled="true"
+                    />
                   </div>
                 </div>
               </div>
-              
-
-
 
               <div class="col-md-2">
                 <div class="form-group">
-               <br>
-              
-                <button
-                  type="submit"
-                  class="btn btn-primary form-control"
-                  (click)="BuscarDnI()"
-                >
-                  BUSCAR
-                </button>
+                  <br />
+
+                  <button
+                    type="submit"
+                    class="btn btn-primary form-control"
+                    (click)="BuscarDnI()"
+                  >
+                    BUSCAR
+                  </button>
                 </div>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="exampleInputEmail1">APELLIDO PATERNO</label>
+              <label for="exampleInputEmail1">APELLIDO PATERNO </label>
               <input
                 type="email"
                 class="form-control"
@@ -258,7 +265,18 @@
                 formControlName="ape_paterno"
                 disabled="true"
               />
-              <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup.get('ape_paterno').errors!=null && this.formGroup.get('ape_paterno').touched?'block':'none'}" class="error invalid-feedback">Apellido Paterno es requerido</span>
+              <span
+                id="exampleInputEmail1-error"
+                [ngStyle]="{
+                  display:
+                    this.formGroup.get('ape_paterno').errors != null &&
+                    this.formGroup.get('ape_paterno').touched
+                      ? 'block'
+                      : 'none'
+                }"
+                class="error invalid-feedback"
+                >Apellido Paterno es requerido</span
+              >
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">APELLIDO MATERNO</label>
@@ -270,7 +288,18 @@
                 formControlName="ape_materno"
                 disabled="true"
               />
-              <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup.get('ape_materno').errors!=null && this.formGroup.get('ape_materno').touched?'block':'none'}" class="error invalid-feedback">Apellido Materno es requerido</span>
+              <span
+                id="exampleInputEmail1-error"
+                [ngStyle]="{
+                  display:
+                    this.formGroup.get('ape_materno').errors != null &&
+                    this.formGroup.get('ape_materno').touched
+                      ? 'block'
+                      : 'none'
+                }"
+                class="error invalid-feedback"
+                >Apellido Materno es requerido</span
+              >
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">NOMBRES</label>
@@ -281,74 +310,103 @@
                 placeholder="ingrese sus Nombres"
                 formControlName="nombres"
                 disabled="true"
-               
               />
-              <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup.get('nombres').errors!=null && this.formGroup.get('nombres').touched?'block':'none'}" class="error invalid-feedback">Nombres es requerido</span>
-
+              <span
+                id="exampleInputEmail1-error"
+                [ngStyle]="{
+                  display:
+                    this.formGroup.get('nombres').errors != null &&
+                    this.formGroup.get('nombres').touched
+                      ? 'block'
+                      : 'none'
+                }"
+                class="error invalid-feedback"
+                >Nombres es requerido</span
+              >
             </div>
-            <div class="position-relative p-3 bg-gray" style="height: 180px"  *ngIf="existeEnPadron">
+            <div
+              class="position-relative p-3 bg-gray"
+              style="height: 180px"
+              *ngIf="existeEnPadron"
+            >
               <div class="ribbon-wrapper ribbon-xl">
-                <div class="ribbon bg-warning text-lg">
-                  FELICIDADES</div>
+                <div class="ribbon bg-warning text-lg">FELICIDADES</div>
               </div>
               <H1>USTED YA SE ENCUENTRA DENTRO DEL PADRON</H1>
-              <small>AHORA  DEBE DE ACTUALIZAR SU INFORMACION PARA QUE PODAMOS GENERAR SU CITA</small>
-              
+              <small
+                >AHORA DEBE DE ACTUALIZAR SU INFORMACION PARA QUE PODAMOS
+                GENERAR SU CITA</small
+              >
             </div>
-            <div class="position-relative p-3 bg-info" style="height: 180px"  *ngIf="noExisteEnPadron">
+            <div
+              class="position-relative p-3 bg-info"
+              style="height: 180px"
+              *ngIf="noExisteEnPadron"
+            >
               <div class="ribbon-wrapper ribbon-xl">
-                <div class="ribbon bg-warning text-lg">
-                  ATENCION</div>
+                <div class="ribbon bg-warning text-lg">ATENCION</div>
               </div>
-              <H1>USTED NO SE ENCUENTRA DENTRO DEL <br> DE VACUNACION ACTUAL</H1>
-              <small>DEJENOS SUS DATOS, PARA TENERLE EN CUENTA DENTRO DEL PROCESO DE INGRESO AL PADRON</small>
-              
+              <H1
+                >USTED NO SE ENCUENTRA DENTRO DEL <br />
+                DE VACUNACION ACTUAL</H1
+              >
+              <small
+                >DEJENOS SUS DATOS, PARA TENERLE EN CUENTA DENTRO DEL PROCESO DE
+                INGRESO AL PADRON</small
+              >
             </div>
-            
 
-            <div class="position-relative p-3 bg-info" style="height: 180px"  *ngIf="citaDisponible">
+            <div
+              class="position-relative p-3 bg-info"
+              style="height: 180px"
+              *ngIf="citaDisponible"
+            >
               <div class="ribbon-wrapper ribbon-xl">
-                <div class="ribbon bg-warning text-lg">
-                  ATENCION</div>
+                <div class="ribbon bg-warning text-lg">ATENCION</div>
               </div>
               <H1>USTED YA SE LE CITO</H1>
-              <small>DEJENOS SUS DATOS, PARA TENERLE EN CUENTA DENTRO DEL PROCESO DE INGRESO AL PADRON</small>
-              
+              <small
+                >DEJENOS SUS DATOS, PARA TENERLE EN CUENTA DENTRO DEL PROCESO DE
+                INGRESO AL PADRON</small
+              >
             </div>
 
-            <div class="position-relative p-3 bg-info" style="height: 180px"  *ngIf="personaProtegida">
+            <div
+              class="position-relative p-3 bg-info"
+              style="height: 180px"
+              *ngIf="personaProtegida"
+            >
               <div class="ribbon-wrapper ribbon-xl">
-                <div class="ribbon bg-warning text-lg">
-                  ATENCION</div>
+                <div class="ribbon bg-warning text-lg">ATENCION</div>
               </div>
-              <H1>USTED YA SE LE VACUNO CON LAS DOSIS REQUERIDAS PARA ESTAR PROTEGIDO</H1>
-           
-              
+              <H1
+                >USTED YA SE LE VACUNO CON LAS DOSIS REQUERIDAS PARA ESTAR
+                PROTEGIDO</H1
+              >
             </div>
-
           </div>
           <!-- /.card-body -->
 
-          <div class="card-footer">
-            
-          </div>
+          <div class="card-footer"></div>
         </form>
       </div>
       <!-- /.card -->
 
       <!-- /.card -->
-      <form role="form" [formGroup]="formGroup2">
+      <form role="form" [formGroup]="formGroup2" >
         <div class="card card-success">
           <div class="card-header">
-            <h3 class="card-title">DISTRITO DE RESIDENCIA HABITUAL</h3>
+            <h3 class="card-title">DISTRITO DE RESIDENCIA HABITUAL *</h3>
           </div>
           <div class="card-body">
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <label>SELECCIONE PROVINCIA</label>
-                  <select class="form-control" formControlName="PROVINCIA" (change)="FILTRAR_DISTRITOS()"
-                
+                  <label>SELECCIONE PROVINCIA *</label>
+                  <select
+                    class="form-control"
+                    formControlName="PROVINCIA"
+                    (change)="FILTRAR_DISTRITOS()"
                   >
                     <option>CAJAMARCA</option>
                     <option>CAJABAMBA</option>
@@ -364,26 +422,50 @@
                     <option>SAN PABLO</option>
                     <option>SANTA CRUZ</option>
                   </select>
-                  <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup2.get('PROVINCIA').errors!=null && this.formGroup2.get('PROVINCIA').touched?'block':'none'}" class="error invalid-feedback">PROVINCIA es requerido</span>
-
+                  <span
+                    id="exampleInputEmail1-error"
+                    [ngStyle]="{
+                      display:
+                        this.formGroup2.get('PROVINCIA').errors != null &&
+                        this.formGroup2.get('PROVINCIA').touched
+                          ? 'block'
+                          : 'none'
+                    }"
+                    class="error invalid-feedback"
+                    >PROVINCIA es requerido</span
+                  >
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label>SELECCIONE DISTRITO</label>
-                  <select class="form-control"  formControlName="DISTRITO" 
-                 
-                  (change)="FITRAR_PUNTOS_VACUNACION()" (click)="FITRAR_PUNTOS_VACUNACION()">
-                   
-                    <option value="" 
-                    >"SELECCIONE DISTRITO"</option>
+                  <label>SELECCIONE DISTRITO *</label>
+                  <select
+                    class="form-control"
+                    formControlName="DISTRITO"
+                    (change)="FITRAR_PUNTOS_VACUNACION()"
+                    (click)="FITRAR_PUNTOS_VACUNACION()"
+                  >
+                    <option value="">"SELECCIONE DISTRITO"</option>
 
-                    <option [value]="distrito.codigo_distrito" *ngFor="let distrito of distritos_filtrados"
-                   >{{distrito.nombre_distrito}}</option>
-                   
+                    <option
+                      [value]="distrito.codigo_distrito"
+                      *ngFor="let distrito of distritos_filtrados"
+                    >
+                      {{ distrito.nombre_distrito }}
+                    </option>
                   </select>
-                  <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup2.get('DISTRITO').errors!=null && this.formGroup2.get('DISTRITO').touched?'block':'none'}" class="error invalid-feedback">Distrito es requerido</span>
-
+                  <span
+                    id="exampleInputEmail1-error"
+                    [ngStyle]="{
+                      display:
+                        this.formGroup2.get('DISTRITO').errors != null &&
+                        this.formGroup2.get('DISTRITO').touched
+                          ? 'block'
+                          : 'none'
+                    }"
+                    class="error invalid-feedback"
+                    >Distrito es requerido</span
+                  >
                 </div>
               </div>
               <div class="col-5">
@@ -410,7 +492,7 @@
               <div class="col-sm-4">
                 <!-- text input -->
                 <div class="form-group">
-                  <label>TIPO DE VIA </label>
+                  <label>TIPO DE VIA *</label>
                   <select class="form-control" formControlName="TIPO_VIA">
                     <option>AVENIDA</option>
                     <option>JR</option>
@@ -418,27 +500,47 @@
                     <option>CALLE</option>
                     <option>OTROS</option>
                   </select>
-                  <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup2.get('TIPO_VIA').errors!=null && this.formGroup2.get('TIPO_VIA').touched?'block':'none'}" class="error invalid-feedback">Tipo de Via es requerido</span>
-
+                  <span
+                    id="exampleInputEmail1-error"
+                    [ngStyle]="{
+                      display:
+                        this.formGroup2.get('TIPO_VIA').errors != null &&
+                        this.formGroup2.get('TIPO_VIA').touched
+                          ? 'block'
+                          : 'none'
+                    }"
+                    class="error invalid-feedback"
+                    >Tipo de Via es requerido</span
+                  >
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label>NOMBRE DE VIA</label>
+                  <label>NOMBRE DE VIA *</label>
                   <input
                     type="text"
                     class="form-control"
                     placeholder="Enter ..."
                     formControlName="NOMBRE_VIA"
                   />
-                  <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup2.get('NOMBRE_VIA').errors!=null && this.formGroup2.get('NOMBRE_VIA').touched?'block':'none'}" class="error invalid-feedback">Nombre de Via es requerido</span>
-
+                  <span
+                    id="exampleInputEmail1-error"
+                    [ngStyle]="{
+                      display:
+                        this.formGroup2.get('NOMBRE_VIA').errors != null &&
+                        this.formGroup2.get('NOMBRE_VIA').touched
+                          ? 'block'
+                          : 'none'
+                    }"
+                    class="error invalid-feedback"
+                    >Nombre de Via es requerido</span
+                  >
                 </div>
               </div>
 
               <div class="col-sm-2">
                 <div class="form-group">
-                  <label>NUMERO</label>
+                  <label>NUMERO *</label>
                   <input
                     type="text"
                     class="form-control"
@@ -478,13 +580,30 @@
                         class="form-control"
                         formControlName="NOMBRE_PUNTO_VACUNACION"
                       >
-                      <option value="">SELECCIONE SU PUNTO DE VACUNACION</option>
-                        <option *ngFor="let punto of puntos_vacunacion" [value]="punto.nombre_punto">{{punto.nombre_punto}}</option>
-                      
+                        <option value="">
+                          SELECCIONE SU PUNTO DE VACUNACION *
+                        </option>
+                        <option
+                          *ngFor="let punto of puntos_vacunacion"
+                          [value]="punto.nombre_punto"
+                        >
+                          {{ punto.nombre_punto }}
+                        </option>
                       </select>
-                      <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup2.get('NOMBRE_PUNTO_VACUNACION').errors!=null && this.formGroup2.get('NOMBRE_PUNTO_VACUNACION').touched?'block':'none'}" class="error invalid-feedback">Punto de Vacunacion es requerido</span>
-
-               
+                      <span
+                        id="exampleInputEmail1-error"
+                        [ngStyle]="{
+                          display:
+                            this.formGroup2.get('NOMBRE_PUNTO_VACUNACION')
+                              .errors != null &&
+                            this.formGroup2.get('NOMBRE_PUNTO_VACUNACION')
+                              .touched
+                              ? 'block'
+                              : 'none'
+                        }"
+                        class="error invalid-feedback"
+                        >Punto de Vacunacion es requerido</span
+                      >
                     </div>
                   </div>
                   <div class="col-8"></div>
@@ -504,7 +623,7 @@
             <h3 class="card-title">CONTACTO PARA PROGRAMAR CITA</h3>
           </div>
           <div class="card-body">
-            <label>NUMERO DE TELEFONO</label>
+            <label>NUMERO DE TELEFONO *</label>
 
             <div class="input-group mb-3">
               <div class="input-group-prepend">
@@ -520,9 +639,18 @@
                 im-insert="true"
                 formControlName="NUMERO_TELEFONO"
               />
-              <span id="exampleInputEmail1-error" [ngStyle]="{'display':this.formGroup2.get('NUMERO_TELEFONO').errors!=null && this.formGroup2.get('NUMERO_TELEFONO').touched?'block':'none'}" class="error invalid-feedback">Numero de Telefono es requerido</span>
-
-               
+              <span
+                id="exampleInputEmail1-error"
+                [ngStyle]="{
+                  display:
+                    this.formGroup2.get('NUMERO_TELEFONO').errors != null &&
+                    this.formGroup2.get('NUMERO_TELEFONO').touched
+                      ? 'block'
+                      : 'none'
+                }"
+                class="error invalid-feedback"
+                >Numero de Telefono es requerido</span
+              >
             </div>
             <!-- /.input group -->
 
@@ -534,8 +662,12 @@
                   ><i class="fas fa-envelope"></i
                 ></span>
               </div>
-              <input type="email" class="form-control" placeholder="Email" 
-              formControlName="CORREO_ELECTRONICO"/>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                formControlName="CORREO_ELECTRONICO"
+              />
             </div>
 
             <!-- /input-group -->
@@ -553,8 +685,8 @@
 
           <div class="card-body">
             <div class="form-group">
-              <label>SELECCIONAR TIPO DE SEGURO</label>
-              <select class="form-control"  formControlName="TIPO_SEGURO">
+              <label>SELECCIONAR TIPO DE SEGURO *</label>
+              <select class="form-control" formControlName="TIPO_SEGURO">
                 <option>SIN SEGURO</option>
                 <option>SIS</option>
                 <option>SANIDAD PNP</option>
@@ -565,28 +697,71 @@
             </div>
 
             <div class="form-group">
-              <label>INDIQUE SI TIENE ALGUNA DISCAPACIDAD</label> 
+              <label>INDIQUE SI TIENE ALGUNA DISCAPACIDAD</label>
               <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="TIENE_DISCAPACIDAD">
-                <label class="custom-control-label" for="customSwitch1">TENGO DISCAPACIDAD</label>
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="customSwitch1"
+                  formControlName="TIENE_DISCAPACIDAD"
+                />
+                <label class="custom-control-label" for="customSwitch1"
+                  >TENGO DISCAPACIDAD</label
+                >
               </div>
+            </div>
 
-              </div>
-
-              <div class="form-group" *ngIf="this.formGroup2.get('TIENE_DISCAPACIDAD').value">
-                <label>Indique que tipo de discapacidad posee</label>
-                <textarea class="form-control" rows="3" placeholder="Describa aqui ..."></textarea>
-              </div>
-
-           
+            <div
+              class="form-group"
+              *ngIf="this.formGroup2.get('TIENE_DISCAPACIDAD').value"
+            >
+              <label>Indique que tipo de discapacidad posee</label>
+              <textarea
+                class="form-control"
+                rows="3"
+                placeholder="Describa aqui ..."
+              ></textarea>
+            </div>
           </div>
           <!-- /.card-body -->
+
+          <div
+            id="toastsContainerTopRight"
+            *ngIf="false"
+            class="toasts-top-right fixed"
+          >
+            <div
+              class="toast bg-warning fade show"
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true"
+            >
+              <div class="toast-header">
+                <strong class="mr-auto">Atencion</strong><small>Subtitle</small
+                ><button
+                  data-dismiss="toast"
+                  type="button"
+                  class="ml-2 mb-1 close"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="toast-body">
+                Debe ingresar Todos los campos que son requeridos.
+              </div>
+            </div>
+          </div>
 
           <div class="card-footer">
             <button
               type="submit"
               class="btn btn-primary"
-              (click)="actualizar(content)" [disabled]="!this.formGroup.valid ||!this.formGroup2.valid "
+            
+              [disabled]="false"
+              ngbTooltip="Click aqui para terminar de registrar"
+              (click)="actualizar(content)"
+              
             >
               GUARDAR
             </button>
@@ -604,20 +779,41 @@
   <!-- /.row -->
 </div>
 
-
 <ng-template #content let-modal>
   <div class="modal-content bg-info">
     <div class="modal-header">
       <h4 class="modal-title">Confimacion</h4>
-      <button type="button" class="close" data-dismiss="modal" (click)="modal.dismiss('Save click')" aria-label="Cancelar">
-        <span aria-hidden="true">×</span></button>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        (click)="modal.dismiss('Save click')"
+        aria-label="Cancelar"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
     </div>
     <div class="modal-body">
       <p>Confirma usted que la informacion suministrada es correcta</p>
     </div>
     <div class="modal-footer justify-content-between">
-      <button type="button" class="btn btn-outline-light" (click)="modal.dismiss('Save click')" data-dismiss="modal">Cancelar</button>
-      <button type="button" class="btn btn-outline-light" (click)="modal.close('Save click')">Confirmar Informacion</button>
+      <button
+        type="button"
+        class="btn btn-outline-light"
+        (click)="modal.dismiss('Save click')"
+        data-dismiss="modal"
+      >
+        Cancelar
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-light"
+        (click)="modal.close('Save click')"
+      >
+        Confirmar Informacion
+      </button>
     </div>
   </div>
 </ng-template>
+
+<app-toast aria-live="polite" aria-atomic="true"></app-toast>

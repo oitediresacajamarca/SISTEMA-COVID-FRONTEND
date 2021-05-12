@@ -8,6 +8,7 @@ import { ActualizacionDataService } from 'src/app/servicios/vacunacion/aactualiz
 import { CitaVacunacionService } from 'src/app/servicios/vacunacion/cita-vacunacion.service';
 import { PadronVacunacionService } from 'src/app/servicios/vacunacion/padron-vacunacion.service';
 import { PuntoVacunacionService } from 'src/app/servicios/vacunacion/punto-vacunacion.service';
+import { ToastService } from './toast.service';
 
 
 
@@ -17,33 +18,33 @@ export class CustomAdapter extends NgbDateAdapter<string> {
   readonly DELIMITER = '-';
 
   fromModel(value: any | null): NgbDateStruct | null {
-   
-    
-    if(value){
 
-      if (value.day==undefined) {
+
+    if (value) {
+
+      if (value.day == undefined) {
         let date = value.split(this.DELIMITER);
         return {
-          day : parseInt(date[0], 10),
-          month : parseInt(date[1], 10),
-          year : parseInt(date[2], 10)
+          day: parseInt(date[0], 10),
+          month: parseInt(date[1], 10),
+          year: parseInt(date[2], 10)
         };
       }
-      if (value.day!=undefined) {
-       
+      if (value.day != undefined) {
+
         return {
-          day : value.day,
-          month : value.month,
-          year : value.year
+          day: value.day,
+          month: value.month,
+          year: value.year
         };
       }
     }
- 
+
     return null;
   }
 
   toModel(date: NgbDateStruct | null): string | null {
- 
+
     return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
   }
 }
@@ -57,13 +58,13 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
   readonly DELIMITER = '/';
 
   parse(value: string): NgbDateStruct | null {
-  
+
     if (value) {
       let date = value.split(this.DELIMITER);
       return {
-        day : parseInt(date[0], 10),
-        month : parseInt(date[1], 10),
-        year : parseInt(date[2], 10)
+        day: parseInt(date[0], 10),
+        month: parseInt(date[1], 10),
+        year: parseInt(date[2], 10)
       };
     }
     return null;
@@ -108,9 +109,9 @@ export class CustomDatepickerI18n extends NgbDatepickerI18n {
   templateUrl: './vacunacion-covid.component.html',
   styleUrls: ['./vacunacion-covid.component.scss'],
   providers: [
-    {provide: NgbDateAdapter, useClass: CustomAdapter},
-    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter},
-    I18n, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}
+    { provide: NgbDateAdapter, useClass: CustomAdapter },
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
+    I18n, { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }
   ]
 
 })
@@ -121,7 +122,8 @@ export class VacunacionCovidComponent implements OnInit {
     private PuntoVacunacionServic: PuntoVacunacionService, private cita: CitaVacunacionService, private modalService: NgbModal
     , private estados: EstadosService, private rout: Router
     , private actulizadata: ActualizacionDataService, private calendar: NgbCalendar,
-    private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>) {
+    private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>,
+    public toast: ToastService) {
     this.minDate = new Date(1900, 1, 1);
     this.maxDate = new Date(2021, 1, 1);
 
@@ -145,11 +147,14 @@ export class VacunacionCovidComponent implements OnInit {
     this.personaProtegida = false;
     this.existeEnPadron = false;
 
-
   }
 
   puntos_vacunacion: any[] = []
   edad_paciente: number;
+  FormValidador() {
+
+    return true;
+  }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -171,14 +176,14 @@ export class VacunacionCovidComponent implements OnInit {
       CORREO_ELECTRONICO: [''],
       TIPO_SEGURO: ['', Validators.required],
       TIENE_DISCAPACIDAD: [false, Validators.required],
-      DISCAPACIDAD_DESCRIPCION:['',]
+      DISCAPACIDAD_DESCRIPCION: ['',]
 
-    });
+    }, { Validators: this.FormValidador })
   }
   existeEnPadron: boolean = false
   cambioFecha() {
 
-   
+
   }
   BuscarDnI() {
 
@@ -193,26 +198,10 @@ export class VacunacionCovidComponent implements OnInit {
       this.edad_paciente = respuesta.Edad
       console.log(respuesta)
 
-      if(respuesta.mensaje.existeenhis){
+      if (respuesta.mensaje.existeenhis) {
 
-        let fec=new Date(respuesta.FECHA_NACIMIENTO)
-        this.model={day:fec.getDate(),month:fec.getMonth()+1,year:fec.getFullYear()}
-
-        this.formGroup.patchValue({
-          numero_documento: this.formGroup.value.numero_documento,
-          ape_paterno: respuesta.Apellido_Paterno,
-          ape_materno: respuesta.Apellido_Materno,
-          nombres: respuesta.Nombres,
-          FECHA_NACIMIENTO: this.model
-        })
-
-
-      }
-
-      if(respuesta.mensaje.existeenpadron){
-
-      
-      
+        let fec = new Date(respuesta.FECHA_NACIMIENTO)
+        this.model = { day: fec.getDate(), month: fec.getMonth() + 1, year: fec.getFullYear() }
 
         this.formGroup.patchValue({
           numero_documento: this.formGroup.value.numero_documento,
@@ -225,11 +214,27 @@ export class VacunacionCovidComponent implements OnInit {
 
       }
 
+      if (respuesta.mensaje.existeenpadron) {
 
-     
 
 
-      
+
+        this.formGroup.patchValue({
+          numero_documento: this.formGroup.value.numero_documento,
+          ape_paterno: respuesta.Apellido_Paterno,
+          ape_materno: respuesta.Apellido_Materno,
+          nombres: respuesta.Nombres,
+          FECHA_NACIMIENTO: this.model
+        })
+
+
+      }
+
+
+
+
+
+
 
 
       if (this.edad_paciente >= 80) {
@@ -250,47 +255,135 @@ export class VacunacionCovidComponent implements OnInit {
     }
 
     )
-    
+
   }
 
   buscarCita(dni: string) {
 
   }
 
+  validarForm() {
+
+
+    let errors: any[] = Object.keys(this.formGroup2.controls).filter(key => {
+
+      return this.formGroup2.get(key).errors != null
+    });
+    if (errors.length > 0) {
+
+
+      if (errors[0] == 'PROVINCIA') {
+
+        this.toast.show({ mensaje: 'DEBE DE SELECIONAR UNA PROVINCIA' })
+      }
+
+      if (errors[0] == 'DISTRITO') {
+
+        this.toast.show({ mensaje: 'DEBE DE SELECIONAR UN DISTRITO' })
+
+             }
+
+             if (errors[0] == 'TIPO_VIA') {
+
+              this.toast.show({ mensaje: 'DEBE DE SELECCIONAR UN TIPO DE VIA' })
+            }
+            if (errors[0] == 'NOMBRE_VIA') {
+
+              this.toast.show({ mensaje: 'DEBE DE SELECCIONAR SU NOMBRE DE VIA DE SU DIRECCION' })
+            }
+
+            if (errors[0] == 'NUMERO') {
+
+              this.toast.show({ mensaje: 'DEBE DE INDICAR EL NUMERO DE SU DIRECCION EN CASO DE NO TENER COLOCAR SN' })
+            }
+      
+            if (errors[0] == 'NOMBRE_PUNTO_VACUNACION') {
+
+              this.toast.show({ mensaje: 'DEBE DE SELECIONAR EL PUNTO DE VACUNACION DONDE DESEA VACUNARSE' })
+            }
+
+            if (errors[0] == 'NOMBRE_PUNTO_VACUNACION') {
+
+              this.toast.show({ mensaje: 'DEBE DE SELECIONAR EL PUNTO DE VACUNACION DONDE DESEA VACUNARSE' })
+            }
+
+            if (errors[0] == 'NUMERO_TELEFONO') {
+
+              this.toast.show({ mensaje: 'DEBE DE INDICARNOS UN NUMERO DE TELEFONO' })
+            }
+
+
+            if (errors[0] == 'TIPO_SEGURO') {
+
+              this.toast.show({ mensaje: 'DEBE DE INDICARNOS EL TIPO DE SEGURO QUE POSEE EN CASO DE NO CONTAR INDICAR SIN SEGURO' })
+            }
+      
+            
+
+
+
+
+    }
+
+
+    
+
+  }
+  submit() {
+
+
+
+
+
+
+
+    /*if(this.formGroup2.get(key).errors!=null){
+      this.toast.show({mensaje:key+' ES REQUERIDO'})
+      return
+    }
+*/
+
+  }
+
   actualizar(content) {
 
 
-    this.modalService.open(content).result.then((result) => {
-      let genera_cita = false
+    this.validarForm()
 
-     console.log(this.formGroup) 
+    if(this.formGroup2.valid){
 
-      this.actulizadata.actualizarData({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
 
-        this.edad_paciente = respuesta.edad
+        this.modalService.open(content).result.then((result) => {
+          let genera_cita = false
     
-        if (this.edad_paciente >= 200) {
-
-          this.cita.citarPaciente({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
-            Object.assign(this.estados.citapro, respuesta)
-
-            this.rout.navigate(['/cita-programada-resultado'])
-
+         console.log(this.formGroup) 
+    
+          this.actulizadata.actualizarData({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
+    
+            this.edad_paciente = respuesta.edad
+        
+            if (this.edad_paciente >= 200) {
+    
+              this.cita.citarPaciente({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
+                Object.assign(this.estados.citapro, respuesta)
+    
+                this.rout.navigate(['/cita-programada-resultado'])
+    
+              })
+            } else {
+    
+    
+    
+    
+              this.rout.navigate(['/datos-actualizados'])
+            }
+    
           })
-        } else {
-
-
-
-
-          this.rout.navigate(['/datos-actualizados'])
-        }
-
-      })
-
-    }, (reason) => {
-
-    });
-
+    
+        }, (reason) => {
+    
+        });
+      }
 
 
   }
