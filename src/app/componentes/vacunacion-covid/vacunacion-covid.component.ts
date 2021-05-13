@@ -356,15 +356,20 @@ export class VacunacionCovidComponent implements OnInit {
         this.modalService.open(content).result.then((result) => {
           let genera_cita = false
     
-         console.log(this.formGroup) 
+
     
           this.actulizadata.actualizarData({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
     
             this.edad_paciente = respuesta.edad
+
+            console.log(respuesta.punto.EDAD_CITA)
         
-            if (this.edad_paciente >= 70) {
+            if (this.edad_paciente >= respuesta.punto.EDAD_CITA&&respuesta.punto.CITAR_HABILITADO=='HABILITADO') {
+              console.log('se citara')
     
               this.cita.citarPaciente({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
+
+                console.log(respuesta)
                 Object.assign(this.estados.citapro, respuesta)
     
                 this.rout.navigate(['/cita-programada-resultado'])
