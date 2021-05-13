@@ -362,7 +362,7 @@ export class VacunacionCovidComponent implements OnInit {
     
             this.edad_paciente = respuesta.edad
         
-            if (this.edad_paciente >= 200) {
+            if (this.edad_paciente >= 70) {
     
               this.cita.citarPaciente({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
                 Object.assign(this.estados.citapro, respuesta)
