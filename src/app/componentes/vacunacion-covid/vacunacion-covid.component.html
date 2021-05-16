@@ -338,6 +338,7 @@
                 GENERAR SU CITA</small
               >
             </div>
+       
             <div
               class="position-relative p-3 bg-info"
               style="height: 180px"
@@ -356,19 +357,39 @@
               >
             </div>
 
-            <div
-              class="position-relative p-3 bg-info"
-              style="height: 180px"
-              *ngIf="citaDisponible"
-            >
-              <div class="ribbon-wrapper ribbon-xl">
-                <div class="ribbon bg-warning text-lg">ATENCION</div>
+            <div class="card card-default">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-bullhorn"></i>
+                  Callouts
+                </h3>
               </div>
-              <H1>USTED YA SE LE CITO</H1>
-              <small
-                >DEJENOS SUS DATOS, PARA TENERLE EN CUENTA DENTRO DEL PROCESO DE
-                INGRESO AL PADRON</small
-              >
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="callout callout-danger">
+                  <h5>I am a danger callout!</h5>
+
+                  <p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire
+                    soul,
+                    like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                </div>
+                <div class="callout callout-info">
+                  <h5>I am an info callout!</h5>
+
+                  <p>Follow the steps to continue to payment.</p>
+                </div>
+                <div class="callout callout-warning">
+                  <h5>I am a warning callout!</h5>
+
+                  <p>This is a yellow callout.</p>
+                </div>
+                <div class="callout callout-success">
+                  <h5>I am a success callout!</h5>
+
+                  <p>This is a green callout.</p>
+                </div>
+              </div>
+              <!-- /.card-body -->
             </div>
 
             <div

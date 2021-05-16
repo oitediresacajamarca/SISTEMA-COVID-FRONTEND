@@ -152,11 +152,11 @@ export class VacunacionCovidComponent implements OnInit {
   formGroup2: FormGroup;
   distritos_filtrados: any[] = []
   noExisteEnPadron: boolean = false;
-  citaDisponible: boolean = false;
+  citaDisponible: boolean = true;
   personaProtegida: boolean = false;
   resetearEstado() {
     this.noExisteEnPadron = false;
-    this.citaDisponible = false;
+    this.citaDisponible = true;
     this.personaProtegida = false;
     this.existeEnPadron = false;
 
