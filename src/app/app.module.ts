@@ -90,6 +90,10 @@ import { CitaProgramadaResultadoComponent } from './componentes/vacunacion-covid
 import { ActualizacionDatoComponent } from './componentes/vacunacion-covid/actualizacion-dato/actualizacion-dato.component';
 import { ReniecComponent } from './pruebas/reniec/reniec.component';
 import { ToastComponent } from './componentes/vacunacion-covid/toast/toast.component';
+import { RestrictInputDirective } from './directivas/restrict-input.directive';
+
+
+import {KeyFilterModule} from 'primeng/keyfilter';
 
 
 
@@ -148,6 +152,7 @@ import { ToastComponent } from './componentes/vacunacion-covid/toast/toast.compo
     ActualizacionDatoComponent,
     ReniecComponent,
     ToastComponent,
+    RestrictInputDirective,
     
     
 
@@ -178,6 +183,8 @@ import { ToastComponent } from './componentes/vacunacion-covid/toast/toast.compo
     GMapModule,
     MatProgressSpinnerModule,
     NgbModule,
+
+    KeyFilterModule
    
     
 

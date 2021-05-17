@@ -14,5 +14,10 @@ export class CitaVacunacionService {
 
   }
 
+  devolverCitas(num_doc:string){
+
+    return this.http.get(environment.urlBackendNode+'vacunacion-cita/citas/'+num_doc)
+  }
+
 
 }

@@ -9,13 +9,14 @@ import { CitaVacunacionService } from 'src/app/servicios/vacunacion/cita-vacunac
 import { PadronVacunacionService } from 'src/app/servicios/vacunacion/padron-vacunacion.service';
 import { PuntoVacunacionService } from 'src/app/servicios/vacunacion/punto-vacunacion.service';
 import { ToastService } from './toast.service';
-
+import * as Inputmask from 'inputmask';
 
 
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
 
   readonly DELIMITER = '-';
+
 
   fromModel(value: any | null): NgbDateStruct | null {
 
@@ -48,6 +49,9 @@ export class CustomAdapter extends NgbDateAdapter<string> {
     return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
   }
 }
+
+
+
 
 /**
  * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
@@ -129,6 +133,16 @@ export class VacunacionCovidComponent implements OnInit {
 
 
   }
+  citas: any[] = []
+
+  _keyUp(event: any) {
+    const pattern = /[0-9]/;
+    if (!pattern.test(event.target.value)) {
+      event.target.value = event.target.value.replace(/[^a-zA-Z]/g, "");
+      // invalid character, prevent input
+
+    }
+  }
   get today() {
     return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
   }
@@ -139,11 +153,11 @@ export class VacunacionCovidComponent implements OnInit {
   formGroup2: FormGroup;
   distritos_filtrados: any[] = []
   noExisteEnPadron: boolean = false;
-  citaDisponible: boolean = false;
+  citaDisponible: boolean = true;
   personaProtegida: boolean = false;
   resetearEstado() {
     this.noExisteEnPadron = false;
-    this.citaDisponible = false;
+    this.citaDisponible = true;
     this.personaProtegida = false;
     this.existeEnPadron = false;
 
@@ -172,11 +186,12 @@ export class VacunacionCovidComponent implements OnInit {
       NUMERO: ['', Validators.required],
       REFERENCIA: '',
       NOMBRE_PUNTO_VACUNACION: ['', Validators.required],
-      NUMERO_TELEFONO: ['', Validators.required],
+      NUMERO_TELEFONO: ['', [Validators.required]],
       CORREO_ELECTRONICO: [''],
       TIPO_SEGURO: ['', Validators.required],
       TIENE_DISCAPACIDAD: [false, Validators.required],
-      DISCAPACIDAD_DESCRIPCION: ['',]
+      DISCAPACIDAD_DESCRIPCION: ['',],
+      movilidad: []
 
     }, { Validators: this.FormValidador })
   }
@@ -196,7 +211,7 @@ export class VacunacionCovidComponent implements OnInit {
       this.existeEnPadron = false;
 
       this.edad_paciente = respuesta.Edad
-      console.log(respuesta)
+
 
       if (respuesta.mensaje.existeenhis) {
 
@@ -217,8 +232,6 @@ export class VacunacionCovidComponent implements OnInit {
       if (respuesta.mensaje.existeenpadron) {
 
 
-
-
         this.formGroup.patchValue({
           numero_documento: this.formGroup.value.numero_documento,
           ape_paterno: respuesta.Apellido_Paterno,
@@ -237,7 +250,7 @@ export class VacunacionCovidComponent implements OnInit {
 
 
 
-      if (this.edad_paciente >= 80) {
+      if (this.edad_paciente >= 70) {
         this.existeEnPadron = true;
         this.noExisteEnPadron = false;
       }
@@ -249,7 +262,10 @@ export class VacunacionCovidComponent implements OnInit {
         this.existeEnPadron = false;
         this.noExisteEnPadron = true;
       }
-      console.log(this.formGroup.value)
+
+
+      this.citas = respuesta.citas
+      console.log(this.citas.length)
 
 
     }
@@ -269,6 +285,8 @@ export class VacunacionCovidComponent implements OnInit {
 
       return this.formGroup2.get(key).errors != null
     });
+
+
     if (errors.length > 0) {
 
 
@@ -281,44 +299,44 @@ export class VacunacionCovidComponent implements OnInit {
 
         this.toast.show({ mensaje: 'DEBE DE SELECIONAR UN DISTRITO' })
 
-             }
+      }
 
-             if (errors[0] == 'TIPO_VIA') {
+      if (errors[0] == 'TIPO_VIA') {
 
-              this.toast.show({ mensaje: 'DEBE DE SELECCIONAR UN TIPO DE VIA' })
-            }
-            if (errors[0] == 'NOMBRE_VIA') {
+        this.toast.show({ mensaje: 'DEBE DE SELECCIONAR UN TIPO DE VIA' })
+      }
+      if (errors[0] == 'NOMBRE_VIA') {
 
-              this.toast.show({ mensaje: 'DEBE DE SELECCIONAR SU NOMBRE DE VIA DE SU DIRECCION' })
-            }
+        this.toast.show({ mensaje: 'DEBE DE SELECCIONAR SU NOMBRE DE VIA DE SU DIRECCION' })
+      }
 
-            if (errors[0] == 'NUMERO') {
+      if (errors[0] == 'NUMERO') {
 
-              this.toast.show({ mensaje: 'DEBE DE INDICAR EL NUMERO DE SU DIRECCION EN CASO DE NO TENER COLOCAR SN' })
-            }
-      
-            if (errors[0] == 'NOMBRE_PUNTO_VACUNACION') {
+        this.toast.show({ mensaje: 'DEBE DE INDICAR EL NUMERO DE SU DIRECCION EN CASO DE NO TENER COLOCAR SN' })
+      }
 
-              this.toast.show({ mensaje: 'DEBE DE SELECIONAR EL PUNTO DE VACUNACION DONDE DESEA VACUNARSE' })
-            }
+      if (errors[0] == 'NOMBRE_PUNTO_VACUNACION') {
 
-            if (errors[0] == 'NOMBRE_PUNTO_VACUNACION') {
+        this.toast.show({ mensaje: 'DEBE DE SELECIONAR EL PUNTO DE VACUNACION DONDE DESEA VACUNARSE' })
+      }
 
-              this.toast.show({ mensaje: 'DEBE DE SELECIONAR EL PUNTO DE VACUNACION DONDE DESEA VACUNARSE' })
-            }
+      if (errors[0] == 'NOMBRE_PUNTO_VACUNACION') {
 
-            if (errors[0] == 'NUMERO_TELEFONO') {
+        this.toast.show({ mensaje: 'DEBE DE SELECIONAR EL PUNTO DE VACUNACION DONDE DESEA VACUNARSE' })
+      }
 
-              this.toast.show({ mensaje: 'DEBE DE INDICARNOS UN NUMERO DE TELEFONO' })
-            }
+      if (errors[0] == 'NUMERO_TELEFONO') {
+
+        this.toast.show({ mensaje: 'DEBE DE INDICARNOS UN NUMERO DE TELEFONO' })
+      }
 
 
-            if (errors[0] == 'TIPO_SEGURO') {
+      if (errors[0] == 'TIPO_SEGURO') {
 
-              this.toast.show({ mensaje: 'DEBE DE INDICARNOS EL TIPO DE SEGURO QUE POSEE EN CASO DE NO CONTAR INDICAR SIN SEGURO' })
-            }
-      
-            
+        this.toast.show({ mensaje: 'DEBE DE INDICARNOS EL TIPO DE SEGURO QUE POSEE EN CASO DE NO CONTAR INDICAR SIN SEGURO' })
+      }
+
+
 
 
 
@@ -326,7 +344,31 @@ export class VacunacionCovidComponent implements OnInit {
     }
 
 
-    
+
+    errors = Object.keys(this.formGroup.controls).filter(key => {
+
+      return this.formGroup.get(key).errors != null
+    });
+
+
+    if (errors.length > 0) {
+
+
+      if (errors[0] == 'numero_documento' || errors[0] == 'ape_paterno') {
+
+        this.toast.show({ mensaje: 'DEBE DE INGRESAR SU NUMERO DE DOCUMENTO Y HACER CLIC EN BUSCAR' })
+      }
+
+
+
+
+
+
+
+
+    }
+
+
 
   }
   submit() {
@@ -345,50 +387,53 @@ export class VacunacionCovidComponent implements OnInit {
 
   }
 
+  movilidad = false;
+
+
   actualizar(content) {
 
 
     this.validarForm()
 
-    if(this.formGroup2.valid){
+    if (this.formGroup2.valid) {
 
 
-        this.modalService.open(content).result.then((result) => {
-          let genera_cita = false
-    
+      this.modalService.open(content).result.then((result) => {
+        let genera_cita = false
 
-    
-          this.actulizadata.actualizarData({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
-    
-            this.edad_paciente = respuesta.edad
 
-            console.log(respuesta.punto.EDAD_CITA)
-        
-            if (this.edad_paciente >= respuesta.punto.EDAD_CITA&&respuesta.punto.CITAR_HABILITADO=='HABILITADO') {
-              console.log('se citara')
-    
-              this.cita.citarPaciente({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
 
-                console.log(respuesta)
-                Object.assign(this.estados.citapro, respuesta)
-    
-                this.rout.navigate(['/cita-programada-resultado'])
-    
-              })
-            } else {
-    
-    
-    
-    
-              this.rout.navigate(['/datos-actualizados'])
-            }
-    
-          })
-    
-        }, (reason) => {
-    
-        });
-      }
+        this.actulizadata.actualizarData({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
+
+          this.edad_paciente = respuesta.edad
+
+          console.log(respuesta.punto.EDAD_CITA)
+
+          if (this.edad_paciente >= respuesta.punto.EDAD_CITA && respuesta.punto.CITAR_HABILITADO == 'HABILITADO') {
+            console.log('se citara')
+
+            this.cita.citarPaciente({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
+
+              console.log(respuesta)
+              Object.assign(this.estados.citapro, respuesta)
+
+              this.rout.navigate(['/cita-programada-resultado'])
+
+            })
+          } else {
+
+
+
+
+            this.rout.navigate(['/datos-actualizados'])
+          }
+
+        })
+
+      }, (reason) => {
+
+      });
+    }
 
 
   }
@@ -419,23 +464,58 @@ export class VacunacionCovidComponent implements OnInit {
 
 
 
+  cambio_movilidad(event) {
+this.FITRAR_PUNTOS_VACUNACION()
+    
+  }
+
+
+
+
   async FITRAR_PUNTOS_VACUNACION() {
 
 
 
 
-    this.PuntoVacunacionServic.devolverPuntosPorDistrito(this.formGroup2.value.DISTRITO).subscribe((puntos) => {
+    this.PuntoVacunacionServic.devolverPuntosPorDistrito(this.formGroup2.value.DISTRITO).subscribe(async (puntos) => {
 
-
-      this.puntos_vacunacion = puntos.map((punto) => {
+      let punto_filtrado: any[]
+      punto_filtrado = puntos.map((punto) => {
 
         return { nombre_punto: punto._NOMBRE_PUNTO_VACUNACION_, EDAD_CITA: punto.EDAD_CITA }
 
       })
+      console.log(this.movilidad)
+
+      this.puntos_vacunacion = punto_filtrado.filter((punto) => {
+
+        return (punto.nombre_punto == 'VACUNACAR: CC EL QUINDE' && this.movilidad) || (punto.nombre_punto != 'VACUNACAR: CC EL QUINDE')
+      })
+
+
 
     })
 
+    console.log(this.puntos_vacunacion)
+
 
   }
+
+  Numeros(event) {//Solo numeros
+    var out = '';
+    console.log(event)
+    var filtro = '1234567890';//Caracteres validos
+
+    this.formGroup2.controls
+    for (var i = 0; i < event.value.length; i++)
+      if (filtro.indexOf(event.value.charAt(i)) != -1)
+
+        out += event.value.charAt(i);
+
+
+    return out;
+  }
+
+
 
 }

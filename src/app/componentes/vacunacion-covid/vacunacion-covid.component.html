@@ -338,6 +338,7 @@
                 GENERAR SU CITA</small
               >
             </div>
+
             <div
               class="position-relative p-3 bg-info"
               style="height: 180px"
@@ -356,19 +357,83 @@
               >
             </div>
 
-            <div
-              class="position-relative p-3 bg-info"
-              style="height: 180px"
-              *ngIf="citaDisponible"
-            >
-              <div class="ribbon-wrapper ribbon-xl">
-                <div class="ribbon bg-warning text-lg">ATENCION</div>
+            <div class="card card-default" *ngIf="citas.length > 0">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-bullhorn"></i>
+                  USTED TIENE UNA CITA PENDIENTE
+                </h3>
               </div>
-              <H1>USTED YA SE LE CITO</H1>
-              <small
-                >DEJENOS SUS DATOS, PARA TENERLE EN CUENTA DENTRO DEL PROCESO DE
-                INGRESO AL PADRON</small
-              >
+              <!-- /.card-header -->
+              <div class="card-body" *ngFor="let cita of citas">
+                <div class="callout callout-danger">
+                  <h5>Cita Pendiente</h5>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="info-box">
+                        <span class="info-box-icon bg-info"
+                          ><i class="far fa-envelope"></i
+                        ></span>
+
+                        <div class="info-box-content">
+                          <span class="info-box-text">FECHA PROGRAMADA</span>
+                          <span class="info-box-number">{{
+                            cita.FECHA_CITA | date: "shortDate"
+                          }}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="info-box">
+                        <span class="info-box-icon bg-info"
+                          ><i class="far fa-envelope"></i
+                        ></span>
+
+                        <div class="info-box-content">
+                          <span class="info-box-text"
+                            >PUNTO DE VACUNCION PROGRAMADO</span
+                          >
+                          <span class="info-box-number">{{
+                            cita.NOMBRE_PUNTO_VACUNACION
+                          }}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="info-box">
+                        <span class="info-box-icon bg-info"
+                          ><i class="far fa-envelope"></i
+                        ></span>
+
+                        <div class="info-box-content">
+                          <span class="info-box-text">MOTIVO DE VISITA</span>
+                          <span class="info-box-number">{{
+                            cita.FECHA_CITA | date: "shortDate"
+                          }}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <p>Puede Actualizar sus Datos</p>
+                          <p>
+                            <a class="btn btn-app">
+                              <i class="fas fa-edit"></i> Actualizar Mis datos
+                            </a>
+                          </p>
+                    </div>
+                  </div>
+
+                  
+                 
+                </div>
+              </div>
+              <!-- /.card-body -->
             </div>
 
             <div
@@ -393,7 +458,7 @@
       <!-- /.card -->
 
       <!-- /.card -->
-      <form role="form" [formGroup]="formGroup2" >
+      <form role="form" [formGroup]="formGroup2">
         <div class="card card-success">
           <div class="card-header">
             <h3 class="card-title">DISTRITO DE RESIDENCIA HABITUAL *</h3>
@@ -402,12 +467,13 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <label>SELECCIONE PROVINCIA *</label>
+                  <label>SELECCIONE PROVINCIA</label>
                   <select
                     class="form-control"
                     formControlName="PROVINCIA"
                     (change)="FILTRAR_DISTRITOS()"
                   >
+                  <option>SELECIONE PROVINCIA</option>
                     <option>CAJAMARCA</option>
                     <option>CAJABAMBA</option>
                     <option>CELENDIN</option>
@@ -445,8 +511,7 @@
                     (change)="FITRAR_PUNTOS_VACUNACION()"
                     (click)="FITRAR_PUNTOS_VACUNACION()"
                   >
-                    <option value="">"SELECCIONE DISTRITO"</option>
-
+                  <option>SELECCIONE DISTRITO</option>
                     <option
                       [value]="distrito.codigo_distrito"
                       *ngFor="let distrito of distritos_filtrados"
@@ -574,18 +639,32 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-4">
+
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1"  (change)="cambio_movilidad($event)"    formControlName="movilidad" [(ngModel)]="movilidad">
+                      <label class="form-check-label" for="exampleCheck1">DISPONE DE MOVILIDAD</label>
+                    </div>
+                  
+                 
+                  </div>
+                  <div class="col-8">
+
                     <div class="form-group">
+
+                   
                       <label>SELECCIONAR PUNTO</label>
                       <select
                         class="form-control"
                         formControlName="NOMBRE_PUNTO_VACUNACION"
                       >
+
+
                         <option value="">
                           SELECCIONE SU PUNTO DE VACUNACION *
                         </option>
                         <option
                           *ngFor="let punto of puntos_vacunacion"
-                          [value]="punto.nombre_punto"
+                          [value]="punto.nombre_punto" 
                         >
                           {{ punto.nombre_punto }}
                         </option>
@@ -606,7 +685,6 @@
                       >
                     </div>
                   </div>
-                  <div class="col-8"></div>
                 </div>
               </div>
               <!-- /.card-body -->
@@ -634,8 +712,8 @@
               <input
                 type="text"
                 class="form-control"
-                data-inputmask='"mask": "(999) 999-9999"'
-                data-mask=""
+                pKeyFilter="num"
+                data-mask="9999"
                 im-insert="true"
                 formControlName="NUMERO_TELEFONO"
               />
@@ -720,7 +798,8 @@
                 class="form-control"
                 rows="3"
                 placeholder="Describa aqui ..."
-                formControlName="DISCAPACIDAD_DESCRIPCION" ></textarea>
+                formControlName="DISCAPACIDAD_DESCRIPCION"
+              ></textarea>
             </div>
           </div>
           <!-- /.card-body -->
@@ -757,11 +836,11 @@
             <button
               type="submit"
               class="btn btn-primary"
-            
               [disabled]="false"
-              [ngbTooltip]="formGroup2.valid?'Clic aqui para terminar de registrar':''"
+              [ngbTooltip]="
+                formGroup2.valid ? 'Clic aqui para terminar de registrar' : ''
+              "
               (click)="actualizar(content)"
-              
             >
               GUARDAR
             </button>
