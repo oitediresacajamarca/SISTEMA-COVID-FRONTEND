@@ -357,10 +357,11 @@
               >
             </div>
 
-            <div class="card card-default" *ngIf="true">
+            <div class="card card-default" *ngIf=" citas.length!=undefined">
               <div class="card-header">
-                <h3 class="card-title">
-               
+                <h3 class="card-title" *ngIf=" citas.length!=undefined">
+                  <i class="fas fa-bullhorn"></i>
+                 CITAS PENDIENTES
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -411,9 +412,7 @@
 
                         <div class="info-box-content">
                           <span class="info-box-text">MOTIVO DE VISITA</span>
-                          <span class="info-box-number">{{
-                            cita.FECHA_CITA | date: "shortDate"
-                          }}</span>
+                          <span class="info-box-number">PRIMERA DOSIS VACUNACION ANTICOVID</span>
                         </div>
                         <!-- /.info-box-content -->
                       </div>
@@ -457,7 +456,7 @@
       <!-- /.card -->
 
       <!-- /.card -->
-      <form role="form" [formGroup]="formGroup2">
+      <form role="form" [formGroup]="formGroup2" *ngIf="citas.length==0">
         <div class="card card-success">
           <div class="card-header">
             <h3 class="card-title">DISTRITO DE RESIDENCIA HABITUAL *</h3>
