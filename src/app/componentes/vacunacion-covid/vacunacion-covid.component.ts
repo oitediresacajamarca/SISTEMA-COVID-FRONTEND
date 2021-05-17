@@ -133,6 +133,7 @@ export class VacunacionCovidComponent implements OnInit {
 
 
   }
+  citas: any[] = []
 
   _keyUp(event: any) {
     const pattern = /[0-9]/;
@@ -189,7 +190,8 @@ export class VacunacionCovidComponent implements OnInit {
       CORREO_ELECTRONICO: [''],
       TIPO_SEGURO: ['', Validators.required],
       TIENE_DISCAPACIDAD: [false, Validators.required],
-      DISCAPACIDAD_DESCRIPCION: ['',]
+      DISCAPACIDAD_DESCRIPCION: ['',],
+      movilidad: []
 
     }, { Validators: this.FormValidador })
   }
@@ -209,7 +211,7 @@ export class VacunacionCovidComponent implements OnInit {
       this.existeEnPadron = false;
 
       this.edad_paciente = respuesta.Edad
-      console.log(respuesta)
+
 
       if (respuesta.mensaje.existeenhis) {
 
@@ -230,8 +232,6 @@ export class VacunacionCovidComponent implements OnInit {
       if (respuesta.mensaje.existeenpadron) {
 
 
-
-
         this.formGroup.patchValue({
           numero_documento: this.formGroup.value.numero_documento,
           ape_paterno: respuesta.Apellido_Paterno,
@@ -250,7 +250,7 @@ export class VacunacionCovidComponent implements OnInit {
 
 
 
-      if (this.edad_paciente >= 80) {
+      if (this.edad_paciente >= 70) {
         this.existeEnPadron = true;
         this.noExisteEnPadron = false;
       }
@@ -262,7 +262,10 @@ export class VacunacionCovidComponent implements OnInit {
         this.existeEnPadron = false;
         this.noExisteEnPadron = true;
       }
-      console.log(this.formGroup.value)
+
+
+      this.citas = respuesta.citas
+      console.log(this.citas.length)
 
 
     }
@@ -384,6 +387,9 @@ export class VacunacionCovidComponent implements OnInit {
 
   }
 
+  movilidad = false;
+
+
   actualizar(content) {
 
 
@@ -458,21 +464,39 @@ export class VacunacionCovidComponent implements OnInit {
 
 
 
+  cambio_movilidad(event) {
+this.FITRAR_PUNTOS_VACUNACION()
+    
+  }
+
+
+
+
   async FITRAR_PUNTOS_VACUNACION() {
 
 
 
 
-    this.PuntoVacunacionServic.devolverPuntosPorDistrito(this.formGroup2.value.DISTRITO).subscribe((puntos) => {
+    this.PuntoVacunacionServic.devolverPuntosPorDistrito(this.formGroup2.value.DISTRITO).subscribe(async (puntos) => {
 
-
-      this.puntos_vacunacion = puntos.map((punto) => {
+      let punto_filtrado: any[]
+      punto_filtrado = puntos.map((punto) => {
 
         return { nombre_punto: punto._NOMBRE_PUNTO_VACUNACION_, EDAD_CITA: punto.EDAD_CITA }
 
       })
+      console.log(this.movilidad)
+
+      this.puntos_vacunacion = punto_filtrado.filter((punto) => {
+
+        return (punto.nombre_punto == 'VACUNACAR: CC EL QUINDE' && this.movilidad) || (punto.nombre_punto != 'VACUNACAR: CC EL QUINDE')
+      })
+
+
 
     })
+
+    console.log(this.puntos_vacunacion)
 
 
   }
