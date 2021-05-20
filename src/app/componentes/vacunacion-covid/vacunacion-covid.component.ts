@@ -134,7 +134,8 @@ export class VacunacionCovidComponent implements OnInit {
 
   }
   citas: any[] = []
-
+  vacunas:any={dosis_programar:'n'}
+mensaje_dosis=''
   _keyUp(event: any) {
     const pattern = /[0-9]/;
     if (!pattern.test(event.target.value)) {
@@ -194,6 +195,9 @@ export class VacunacionCovidComponent implements OnInit {
       movilidad: []
 
     }, { Validators: this.FormValidador })
+
+
+    this.citas = []
   }
   existeEnPadron: boolean = false
   cambioFecha() {
@@ -265,6 +269,22 @@ export class VacunacionCovidComponent implements OnInit {
 
 
       this.citas = respuesta.citas
+
+      this.vacunas=respuesta.vacunas
+
+
+    if(this.vacunas.dosis_programar==1){
+
+      this.mensaje_dosis='PRIMERA DOSIS'
+
+    }
+
+    if(this.vacunas.dosis_programar==2){
+
+      this.mensaje_dosis='SEGUNDA DOSIS'
+
+    }
+
       console.log(this.citas.length)
 
 
@@ -388,6 +408,7 @@ export class VacunacionCovidComponent implements OnInit {
   }
 
   movilidad = false;
+  dosis_aplicadas:any={dosis_programar:'ninguna'}
 
 
   actualizar(content) {
@@ -409,8 +430,8 @@ export class VacunacionCovidComponent implements OnInit {
 
           console.log(respuesta.punto.EDAD_CITA)
 
-          if (this.edad_paciente >= respuesta.punto.EDAD_CITA && respuesta.punto.CITAR_HABILITADO == 'HABILITADO') {
-            console.log('se citara')
+          if (this.edad_paciente >= respuesta.punto.EDAD_CITA && respuesta.punto.CITAR_HABILITADO == 'HABILITADO'&& this.formGroup2.value.TIENE_DISCAPACIDAD==false) {
+           
 
             this.cita.citarPaciente({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
 
@@ -418,7 +439,6 @@ export class VacunacionCovidComponent implements OnInit {
               Object.assign(this.estados.citapro, respuesta)
 
               this.rout.navigate(['/cita-programada-resultado'])
-
             })
           } else {
 
