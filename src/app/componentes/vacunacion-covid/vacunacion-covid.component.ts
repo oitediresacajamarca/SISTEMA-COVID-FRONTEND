@@ -286,6 +286,7 @@ mensaje_dosis=''
     }
 
       console.log(this.citas.length)
+      console.log(this.edad_paciente)
 
 
     }
