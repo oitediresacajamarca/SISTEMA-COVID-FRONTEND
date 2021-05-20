@@ -327,7 +327,7 @@
             <div
               class="position-relative p-3 bg-gray"
               style="height: 180px"
-              *ngIf="existeEnPadron"
+              *ngIf="existeEnPadron&&vacunas.dosis_programar!='ninguna'"
             >
               <div class="ribbon-wrapper ribbon-xl">
                 <div class="ribbon bg-warning text-lg">FELICIDADES</div>
@@ -357,7 +357,24 @@
               >
             </div>
 
-            <div class="card card-default" *ngIf=" citas.length>0">
+            <div
+            class="position-relative p-3 bg-info"
+            style="height: 180px"
+            *ngIf="vacunas.dosis_programar=='ninguna'"
+          >
+            <div class="ribbon-wrapper ribbon-xl">
+              <div class="ribbon bg-warning text-lg">FELICIDADES</div>
+            </div>
+            <H1
+              >USTED YA HA SIDO <br />
+              VACUNADO<BR />
+              CON TODAS LAS DOSIS</H1            >
+            <small
+              >GRACIAS POR CONFIAR EN NOSOTROS</small
+            >
+          </div>
+
+            <div class="card card-default" *ngIf=" citas.length>0&&vacunas.dosis_programar!='ninguna' &&vacunas.dosis_programar!='n'">
               <div class="card-header">
                 <h3 class="card-title" >
                   <i class="fas fa-bullhorn"></i>
@@ -434,6 +451,50 @@
               <!-- /.card-body -->
             </div>
 
+
+           
+
+            <div class="card card-default" *ngIf="vacunas.dosis_programar!='ninguna'&&vacunas.dosis_programar!='n'&&citas.length==0">
+              <div class="card-header">
+                <h3 class="card-title" >
+                  <i class="fas fa-bullhorn"></i>
+                 DOSIS A PROGRAMAR
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body" >
+                <div class="callout callout-danger">
+               
+                  <div class="row">
+                
+                    <div class="col-md-6">
+                      <div class="info-box">
+                        <span class="info-box-icon bg-info"
+                          ><i class="far fa-envelope"></i
+                        ></span>
+
+                        <div class="info-box-content">
+                          <span class="info-box-text"
+                            >LA DOSIS QUE LE CORRESPONDE ES: </span
+                          >
+                          <span class="info-box-number">
+                            {{mensaje_dosis}}
+                          </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                      </div>
+                    </div>
+                  </div>
+
+                 
+                  
+                 
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+
             <div
               class="position-relative p-3 bg-info"
               style="height: 180px"
@@ -456,7 +517,7 @@
       <!-- /.card -->
 
       <!-- /.card -->
-      <form role="form" [formGroup]="formGroup2" *ngIf="citas.length==0">
+      <form role="form" [formGroup]="formGroup2" *ngIf="citas.length==0&&vacunas.dosis_programar!='ninguna'">
         <div class="card card-success">
           <div class="card-header">
             <h3 class="card-title">DISTRITO DE RESIDENCIA HABITUAL *</h3>
@@ -782,7 +843,7 @@
                   formControlName="TIENE_DISCAPACIDAD"
                 />
                 <label class="custom-control-label" for="customSwitch1"
-                  >TENGO DISCAPACIDAD</label
+                  >TENGO DISCAPACIDAD QUE NO ME PERMITE MOVILIZARME</label
                 >
               </div>
             </div>
