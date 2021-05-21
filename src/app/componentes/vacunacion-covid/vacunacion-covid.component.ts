@@ -134,7 +134,7 @@ export class VacunacionCovidComponent implements OnInit {
 
   }
   citas: any[] = []
-  vacunas:any={dosis_programar:'n'}
+  vacunas:any={dosis_programar:'n',dosis:[]}
 mensaje_dosis=''
   _keyUp(event: any) {
     const pattern = /[0-9]/;

@@ -449,6 +449,93 @@
               <!-- /.card-body -->
             </div>
 
+            <div class="card card-default" *ngIf="vacunas.dosis.length>0">
+              <div class="card-header">
+                <h3 class="card-title" >
+                  <i class="fas fa-bullhorn"></i>
+                 DOSIS A SUMINISTRADAS
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body" >
+                <div class="callout callout-danger">
+               
+                  <div class="row" *ngFor="let dosis of vacunas.dosis">
+                
+                    <div class="col-md-4">
+                      <div class="info-box" >
+                        <span class="info-box-icon bg-info"
+                          ><i class="far fa-envelope"></i
+                        ></span>
+
+                        <div class="info-box-content">
+                          <span class="info-box-text"
+                            >Numero de Dosis </span
+                          >
+                          <span class="info-box-number">
+                            {{dosis.valorlab}}
+                          </span>
+                         
+                        </div>
+                        <!-- /.info-box-content -->
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                      <div class="info-box" >
+                        <span class="info-box-icon bg-info"
+                          ><i class="far fa-envelope"></i
+                        ></span>
+
+                        <div class="info-box-content">
+                       
+                          <span class="info-box-text"
+                            >Establecimiento </span
+                          >
+                          <span class="info-box-number">
+                            {{dosis.estnombre}}
+                          </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                      </div>
+                    </div>
+
+
+
+
+
+                    
+                    <div class="col-md-4">
+                      <div class="info-box" >
+                        <span class="info-box-icon bg-info"
+                          ><i class="far fa-envelope"></i
+                        ></span>
+
+                        <div class="info-box-content">
+                       
+                          <span class="info-box-text"
+                            >FECHA DE VACUNACION </span
+                          >
+                          <span class="info-box-number">
+                            {{dosis.periodo}}
+                          </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                      </div>
+                    </div>
+
+
+
+                  </div>
+
+                 
+                  
+                 
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
 
            
 
