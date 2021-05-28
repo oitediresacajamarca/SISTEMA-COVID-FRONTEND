@@ -235,8 +235,12 @@
                       [(ngModel)]="model"
                       (dateSelect)="cambioFecha()"
                       disabled="true"
+                      [ngbTooltip]="
+                     'dia'
+                    "
                     />
                   </div>
+                  <span class="badge badge-danger navbar-badge" *ngIf="edad_descripcion.anios>=0">EDAD ACTUAL :{{edad_descripcion.anios}} años {{edad_descripcion.meses}} meses {{edad_descripcion.dias}} dias</span>
                 </div>
               </div>
 
@@ -253,6 +257,8 @@
                   </button>
                 </div>
               </div>
+
+              
             </div>
 
             <div class="form-group">
@@ -327,7 +333,7 @@
             <div
               class="position-relative p-3 bg-gray"
               style="height: 180px"
-              *ngIf="existeEnPadron&&vacunas.dosis_programar!='ninguna'"
+              *ngIf="existeEnPadron&&vacunas.dosis_programar!='ninguna'&&existe_padron_act==false"
             >
               <div class="ribbon-wrapper ribbon-xl">
                 <div class="ribbon bg-warning text-lg">FELICIDADES</div>
@@ -336,6 +342,20 @@
               <small
                 >AHORA DEBE DE ACTUALIZAR SU INFORMACION PARA QUE PODAMOS
                 GENERAR SU CITA</small
+              >
+            </div>
+
+            <div
+              class="position-relative p-3 bg-gray"
+              style="height: 180px"
+              *ngIf="existe_padron_act==true&&citas.length==0"
+            >
+              <div class="ribbon-wrapper ribbon-xl">
+                <div class="ribbon bg-warning text-lg">ATENCION</div>
+              </div>
+              <H1>USTED YA SE ENCUENTRA REGISTRADO EN NUESTRA BASE DE DATOS</H1>
+              <small
+                >SE LE INFORMARA EL MOMENTO QUE SE LE PROGRAME SU CITA AL NUMERO DE CELULAR SUMINISTRADO  </small
               >
             </div>
 
@@ -393,7 +413,7 @@
                         <div class="info-box-content">
                           <span class="info-box-text">FECHA PROGRAMADA</span>
                           <span class="info-box-number">{{
-                            cita.FECHA_CITA | date: "shortDate"
+                            cita.FECHA_CITA | date: "dd/MM/yyyy"
                           }}</span>
                         </div>
                         <!-- /.info-box-content -->
@@ -609,7 +629,7 @@
 
     
     
-      <form role="form" [formGroup]="formGroup2" *ngIf="(citas.length==0&&vacunas.dosis_programar!='ninguna')&&edad_paciente>=60">
+      <form role="form" [formGroup]="formGroup2" *ngIf="(citas.length==0&&vacunas.dosis_programar!='ninguna')&&edad_paciente>=60&&existe_padron_act==false&&existeEnPadron==true">
         <div class="card card-success">
           <div class="card-header">
             <h3 class="card-title">DISTRITO DE RESIDENCIA HABITUAL *</h3>
