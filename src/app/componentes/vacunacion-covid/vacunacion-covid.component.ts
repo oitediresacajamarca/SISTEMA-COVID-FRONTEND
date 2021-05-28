@@ -12,6 +12,7 @@ import { ToastService } from './toast.service';
 import * as Inputmask from 'inputmask';
 
 
+
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
 
@@ -134,8 +135,9 @@ export class VacunacionCovidComponent implements OnInit {
 
   }
   citas: any[] = []
-  vacunas:any={dosis_programar:'n',dosis:[]}
-mensaje_dosis=''
+  edad_descripcion
+  vacunas: any = { dosis_programar: 'n', dosis: [] }
+  mensaje_dosis = ''
   _keyUp(event: any) {
     const pattern = /[0-9]/;
     if (!pattern.test(event.target.value)) {
@@ -166,6 +168,7 @@ mensaje_dosis=''
 
   puntos_vacunacion: any[] = []
   edad_paciente: number;
+  existe_padron_act: boolean = false
   FormValidador() {
 
     return true;
@@ -215,6 +218,7 @@ mensaje_dosis=''
       this.existeEnPadron = false;
 
       this.edad_paciente = respuesta.Edad
+      this.edad_descripcion = respuesta.edad_descripcion
 
 
       if (respuesta.mensaje.existeenhis) {
@@ -246,9 +250,13 @@ mensaje_dosis=''
 
 
       }
+console.log(respuesta.mensaje.en_padron_actual)
 
-
-
+      if (respuesta.mensaje.en_padron_actual == true) {
+        this.existe_padron_act = true
+      } else {
+        this.existe_padron_act = false
+      }
 
 
 
@@ -270,23 +278,23 @@ mensaje_dosis=''
 
       this.citas = respuesta.citas
 
-      this.vacunas=respuesta.vacunas
+      this.vacunas = respuesta.vacunas
 
 
-    if(this.vacunas.dosis_programar==1){
+      if (this.vacunas.dosis_programar == 1) {
 
-      this.mensaje_dosis='PRIMERA DOSIS'
+        this.mensaje_dosis = 'PRIMERA DOSIS'
 
-    }
+      }
 
-    if(this.vacunas.dosis_programar==2){
+      if (this.vacunas.dosis_programar == 2) {
 
-      this.mensaje_dosis='SEGUNDA DOSIS'
+        this.mensaje_dosis = 'SEGUNDA DOSIS'
 
-    }
+      }
 
-      console.log(this.citas.length)
-      console.log(this.edad_paciente)
+
+
 
 
     }
@@ -409,7 +417,7 @@ mensaje_dosis=''
   }
 
   movilidad = false;
-  dosis_aplicadas:any={dosis_programar:'ninguna'}
+  dosis_aplicadas: any = { dosis_programar: 'ninguna' }
 
 
   actualizar(content) {
@@ -431,8 +439,8 @@ mensaje_dosis=''
 
           console.log(respuesta.punto.EDAD_CITA)
 
-          if (this.edad_paciente >= respuesta.punto.EDAD_CITA && respuesta.punto.CITAR_HABILITADO == 'HABILITADO'&& this.formGroup2.value.TIENE_DISCAPACIDAD==false) {
-           
+          if (this.edad_paciente >= respuesta.punto.EDAD_CITA && respuesta.punto.CITAR_HABILITADO == 'HABILITADO' && this.formGroup2.value.TIENE_DISCAPACIDAD == false) {
+
 
             this.cita.citarPaciente({ ...this.formGroup2.value, ...this.formGroup.value, edad: this.edad_paciente }).subscribe((respuesta) => {
 
@@ -486,8 +494,8 @@ mensaje_dosis=''
 
 
   cambio_movilidad(event) {
-this.FITRAR_PUNTOS_VACUNACION()
-    
+    this.FITRAR_PUNTOS_VACUNACION()
+
   }
 
 
