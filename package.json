@@ -34,6 +34,7 @@
     "inputmask": "^5.0.5",
     "jquery": "^3.5.1",
     "ngx-bootstrap": "^6.1.0",
+    "primeicons": "^4.1.0",
     "primeng": "^10.0.3",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

@@ -122,7 +122,7 @@ export class CustomDatepickerI18n extends NgbDatepickerI18n {
 })
 export class VacunacionCovidComponent implements OnInit {
   model: NgbDateStruct;
-
+  countries: any[];
   constructor(private formBuilder: FormBuilder, private PadronVacunacionServic: PadronVacunacionService, private distritoss: DistritosService,
     private PuntoVacunacionServic: PuntoVacunacionService, private cita: CitaVacunacionService, private modalService: NgbModal
     , private estados: EstadosService, private rout: Router
@@ -131,6 +131,19 @@ export class VacunacionCovidComponent implements OnInit {
     public toast: ToastService) {
     this.minDate = new Date(1900, 1, 1);
     this.maxDate = new Date(2021, 1, 1);
+    this.countries = [
+      {name: 'Australia', code: 'AU'},
+      {name: 'Brazil', code: 'BR'},
+      {name: 'China', code: 'CN'},
+      {name: 'Egypt', code: 'EG'},
+      {name: 'France', code: 'FR'},
+      {name: 'Germany', code: 'DE'},
+      {name: 'India', code: 'IN'},
+      {name: 'Japan', code: 'JP'},
+      {name: 'Spain', code: 'ES'},
+      {name: 'United States', code: 'US'}
+  ];
+
 
 
   }
@@ -199,6 +212,9 @@ export class VacunacionCovidComponent implements OnInit {
       movilidad: []
 
     }, { Validators: this.FormValidador })
+
+
+
 
 
     this.citas = []
@@ -556,6 +572,12 @@ export class VacunacionCovidComponent implements OnInit {
 
     return out;
   }
+
+
+
+  selectedCountry: string;
+
+
 
 
 

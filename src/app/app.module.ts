@@ -8,6 +8,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import {DropdownModule} from 'primeng/dropdown';
 
 
 
@@ -185,7 +186,8 @@ import {KeyFilterModule} from 'primeng/keyfilter';
     NgbModule,
 
     KeyFilterModule
-   
+   ,
+   DropdownModule
     
 
   ],
