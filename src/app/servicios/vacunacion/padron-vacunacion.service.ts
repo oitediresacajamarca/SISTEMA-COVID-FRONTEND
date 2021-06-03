@@ -11,7 +11,8 @@ export class PadronVacunacionService {
 
   devolverDatos(dni:string){
 
-    return this.http.get<any>(environment.urlBackendNodeVacunas+'padron-vacunados/'+dni)
+    return this.http.post<any>(environment.urlBackendNodeVacunas+'padron-vacunados/'+dni,{fake:'....'})
 
   }
+  
 }

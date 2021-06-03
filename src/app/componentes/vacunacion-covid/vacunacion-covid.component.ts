@@ -170,6 +170,7 @@ export class VacunacionCovidComponent implements OnInit {
   edad_paciente: number;
   existe_padron_act: boolean = false
   FormValidador() {
+    
 
     return true;
   }
@@ -250,7 +251,7 @@ export class VacunacionCovidComponent implements OnInit {
 
 
       }
-console.log(respuesta.mensaje.en_padron_actual)
+      console.log(respuesta.mensaje.en_padron_actual)
 
       if (respuesta.mensaje.en_padron_actual == true) {
         this.existe_padron_act = true
@@ -511,14 +512,25 @@ console.log(respuesta.mensaje.en_padron_actual)
       let punto_filtrado: any[]
       punto_filtrado = puntos.map((punto) => {
 
-        return { nombre_punto: punto._NOMBRE_PUNTO_VACUNACION_, EDAD_CITA: punto.EDAD_CITA }
+        return { nombre_punto: punto._NOMBRE_PUNTO_VACUNACION_, EDAD_CITA: punto.EDAD_CITA, TIPO: punto.TIPO }
 
       })
-      console.log(this.movilidad)
+
 
       this.puntos_vacunacion = punto_filtrado.filter((punto) => {
 
-        return (punto.nombre_punto == 'VACUNACAR: CC EL QUINDE' && this.movilidad) || (punto.nombre_punto != 'VACUNACAR: CC EL QUINDE')
+        if (this.movilidad ==true&& punto.TIPO == 'VACUNACAR') {
+          return true
+
+        }
+
+        if (this.movilidad == false && punto.TIPO != 'VACUNACAR') {
+
+          return true
+        }
+
+
+
       })
 
 
