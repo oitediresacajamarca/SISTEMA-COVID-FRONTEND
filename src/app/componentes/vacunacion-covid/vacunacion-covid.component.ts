@@ -10,6 +10,8 @@ import { PadronVacunacionService } from 'src/app/servicios/vacunacion/padron-vac
 import { PuntoVacunacionService } from 'src/app/servicios/vacunacion/punto-vacunacion.service';
 import { ToastService } from './toast.service';
 import * as Inputmask from 'inputmask';
+import { CuposPuntoService } from 'src/app/servicios/vacunacion/cupos-punto.service';
+import { ValidadorService } from 'src/app/servicios/vacunacion/validador.service';
 
 
 
@@ -122,27 +124,28 @@ export class CustomDatepickerI18n extends NgbDatepickerI18n {
 })
 export class VacunacionCovidComponent implements OnInit {
   model: NgbDateStruct;
+  model2: NgbDateStruct
   countries: any[];
   constructor(private formBuilder: FormBuilder, private PadronVacunacionServic: PadronVacunacionService, private distritoss: DistritosService,
     private PuntoVacunacionServic: PuntoVacunacionService, private cita: CitaVacunacionService, private modalService: NgbModal
     , private estados: EstadosService, private rout: Router
     , private actulizadata: ActualizacionDataService, private calendar: NgbCalendar,
     private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>,
-    public toast: ToastService) {
+    public toast: ToastService, private cupos_puntos_serv: CuposPuntoService, private validator: ValidadorService) {
     this.minDate = new Date(1900, 1, 1);
     this.maxDate = new Date(2021, 1, 1);
     this.countries = [
-      {name: 'Australia', code: 'AU'},
-      {name: 'Brazil', code: 'BR'},
-      {name: 'China', code: 'CN'},
-      {name: 'Egypt', code: 'EG'},
-      {name: 'France', code: 'FR'},
-      {name: 'Germany', code: 'DE'},
-      {name: 'India', code: 'IN'},
-      {name: 'Japan', code: 'JP'},
-      {name: 'Spain', code: 'ES'},
-      {name: 'United States', code: 'US'}
-  ];
+      { name: 'Australia', code: 'AU' },
+      { name: 'Brazil', code: 'BR' },
+      { name: 'China', code: 'CN' },
+      { name: 'Egypt', code: 'EG' },
+      { name: 'France', code: 'FR' },
+      { name: 'Germany', code: 'DE' },
+      { name: 'India', code: 'IN' },
+      { name: 'Japan', code: 'JP' },
+      { name: 'Spain', code: 'ES' },
+      { name: 'United States', code: 'US' }
+    ];
 
 
 
@@ -182,10 +185,10 @@ export class VacunacionCovidComponent implements OnInit {
   puntos_vacunacion: any[] = []
   edad_paciente: number;
   existe_padron_act: boolean = false
-  FormValidador() {
-    
+  FormValidador(form: FormGroup) {
 
-    return true;
+    console.log(form)
+    return false;
   }
 
   ngOnInit(): void {
@@ -209,9 +212,10 @@ export class VacunacionCovidComponent implements OnInit {
       TIPO_SEGURO: ['', Validators.required],
       TIENE_DISCAPACIDAD: [false, Validators.required],
       DISCAPACIDAD_DESCRIPCION: ['',],
-      movilidad: []
-
-    }, { Validators: this.FormValidador })
+      movilidad: [],
+      CITA: [''],
+      FECHA_CITA: ['']
+    }, { validators: [this.validator.comparisonValidator()] })
 
 
 
@@ -267,7 +271,7 @@ export class VacunacionCovidComponent implements OnInit {
 
 
       }
-      console.log(respuesta.mensaje.en_padron_actual)
+
 
       if (respuesta.mensaje.en_padron_actual == true) {
         this.existe_padron_act = true
@@ -326,7 +330,7 @@ export class VacunacionCovidComponent implements OnInit {
 
   validarForm() {
 
-
+    console.log(this.formGroup2)
     let errors: any[] = Object.keys(this.formGroup2.controls).filter(key => {
 
       return this.formGroup2.get(key).errors != null
@@ -366,10 +370,7 @@ export class VacunacionCovidComponent implements OnInit {
         this.toast.show({ mensaje: 'DEBE DE SELECIONAR EL PUNTO DE VACUNACION DONDE DESEA VACUNARSE' })
       }
 
-      if (errors[0] == 'NOMBRE_PUNTO_VACUNACION') {
 
-        this.toast.show({ mensaje: 'DEBE DE SELECIONAR EL PUNTO DE VACUNACION DONDE DESEA VACUNARSE' })
-      }
 
       if (errors[0] == 'NUMERO_TELEFONO') {
 
@@ -425,11 +426,7 @@ export class VacunacionCovidComponent implements OnInit {
 
 
 
-    /*if(this.formGroup2.get(key).errors!=null){
-      this.toast.show({mensaje:key+' ES REQUERIDO'})
-      return
-    }
-*/
+
 
   }
 
@@ -439,8 +436,14 @@ export class VacunacionCovidComponent implements OnInit {
 
   actualizar(content) {
 
-
+    this.formGroup2.updateValueAndValidity()
     this.validarForm()
+
+    if (this.formGroup2.value.CITA != undefined && this.formGroup2.value.CITA != '') {
+
+      this.formGroup2.value.CITA = this.cupos[this.formGroup2.value.CITA]
+    }
+
 
     if (this.formGroup2.valid) {
 
@@ -454,7 +457,11 @@ export class VacunacionCovidComponent implements OnInit {
 
           this.edad_paciente = respuesta.edad
 
-          console.log(respuesta.punto.EDAD_CITA)
+          if (this.formGroup2.value.TIENE_DISCAPACIDAD == true) {
+            this.rout.navigate(['/datos-actualizados'])
+          }
+
+
 
           if (this.edad_paciente >= respuesta.punto.EDAD_CITA && respuesta.punto.CITAR_HABILITADO == 'HABILITADO' && this.formGroup2.value.TIENE_DISCAPACIDAD == false) {
 
@@ -479,6 +486,7 @@ export class VacunacionCovidComponent implements OnInit {
       }, (reason) => {
 
       });
+
     }
 
 
@@ -521,6 +529,8 @@ export class VacunacionCovidComponent implements OnInit {
   async FITRAR_PUNTOS_VACUNACION() {
 
 
+    this.cambiarValidaciones()
+
 
 
     this.PuntoVacunacionServic.devolverPuntosPorDistrito(this.formGroup2.value.DISTRITO).subscribe(async (puntos) => {
@@ -535,7 +545,7 @@ export class VacunacionCovidComponent implements OnInit {
 
       this.puntos_vacunacion = punto_filtrado.filter((punto) => {
 
-        if (this.movilidad ==true&& punto.TIPO == 'VACUNACAR') {
+        if (this.movilidad == true && punto.TIPO == 'VACUNACAR') {
           return true
 
         }
@@ -551,9 +561,10 @@ export class VacunacionCovidComponent implements OnInit {
 
 
 
+
+
     })
 
-    console.log(this.puntos_vacunacion)
 
 
   }
@@ -576,9 +587,48 @@ export class VacunacionCovidComponent implements OnInit {
 
 
   selectedCountry: string;
+  cupos: any[]
+
+
+  async seleciono_punto(event) {
+    console.log(event)
+
+    let cupos = await this.cupos_puntos_serv.devolver_cupos_disponibles(event.target.value).toPromise()
+    this.cupos = cupos;
+
+    this.devolverFechasDisponibles(event.target.value)
+
+
+  }
+  async devolverFechasDisponibles(nombre_punto: string) {
 
 
 
+    let fechas_disp = await this.cupos_puntos_serv.devolver_fechas_disponibles(nombre_punto).toPromise()
+
+    this.fechas_disponibles = fechas_disp
+
+  }
+
+  fechas_disponibles:any[]
+  cambiarValidaciones() {
+
+    this.formGroup2.updateValueAndValidity()
+    /*
+    
+    
+        if(this.formGroup2.controls['TIENE_DISCAPACIDAD'].value==true){
+          this.formGroup2.controls['NOMBRE_PUNTO_VACUNACION'].clearValidators()
+          
+        console.log(this.formGroup2.controls['NOMBRE_PUNTO_VACUNACION'])
+          if(this.movilidad==true){
+            this.formGroup2.controls['NOMBRE_PUNTO_VACUNACION'].setValidators(Validators.required)
+          }
+        }else {
+          this.formGroup2.controls['NOMBRE_PUNTO_VACUNACION'].setValidators(Validators.required)
+        }
+    */
+  }
 
 
 }
