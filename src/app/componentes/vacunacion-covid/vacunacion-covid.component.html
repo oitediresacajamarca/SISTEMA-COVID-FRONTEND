@@ -358,6 +358,15 @@
               <small
                 >SE LE INFORMARA EL MOMENTO QUE SE LE PROGRAME SU CITA AL NUMERO DE CELULAR SUMINISTRADO  </small
               >
+              <div class="bg-primary">
+                <p>Puede Actualizar sus Datos</p>
+                <p>
+                  <a class="btn btn-app">
+                    <i class="fas fa-edit"></i> Actualizar Mis datos
+                  </a>
+                </p>
+              </div>
+             
             </div>
 
             <div
@@ -370,7 +379,7 @@
               </div>
               <H4
                 >La inscripción para vacunarse en la plataforma http://gorecaj.pe/vacunacion <br />
-                 está habilitada en este momento para todas las personas mayores de 60 años. <br />
+                 está habilitada en este momento para todas las personas mayores de 58 años. <br />
                </H4
               >
              
@@ -630,7 +639,8 @@
 
     
     
-      <form role="form" [formGroup]="formGroup2" *ngIf="(citas.length==0&&vacunas.dosis_programar!='ninguna')&&edad_paciente>=60&&existe_padron_act==false&&existeEnPadron==true">
+      <form role="form" [formGroup]="formGroup2" *ngIf="(citas.length==0&&vacunas.dosis_programar!='ninguna')
+      &&edad_paciente>=58&&existe_padron_act==false&&existeEnPadron==true">
         <div class="card card-success">
           <div class="card-header">
             <h3 class="card-title">DISTRITO DE RESIDENCIA HABITUAL *</h3>
