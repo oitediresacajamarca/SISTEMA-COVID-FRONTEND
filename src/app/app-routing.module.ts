@@ -24,7 +24,6 @@ import { CitaProgramadaResultadoComponent } from './componentes/vacunacion-covid
 import { ActualizacionDatoComponent } from './componentes/vacunacion-covid/actualizacion-dato/actualizacion-dato.component';
 import { ReniecComponent } from './pruebas/reniec/reniec.component';
 
-
 const routes: Routes = [
 
 

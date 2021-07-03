@@ -231,11 +231,10 @@ export class VacunacionCovidComponent implements OnInit {
   BuscarDnI() {
 
 
-
     this.PadronVacunacionServic.devolverDatos(this.formGroup.value.numero_documento).subscribe((respuesta) => {
 
 
-
+      console.log(respuesta)
       this.existeEnPadron = false;
 
       this.edad_paciente = respuesta.Edad
@@ -287,11 +286,11 @@ export class VacunacionCovidComponent implements OnInit {
         this.existeEnPadron = true;
         this.noExisteEnPadron = false;
       }
-      if (this.edad_paciente >= 60) {
+      if (this.edad_paciente >= 55) {
         this.existeEnPadron = true;
         this.noExisteEnPadron = false;
       }
-      if (this.edad_paciente < 60) {
+      if (this.edad_paciente < 55) {
         this.existeEnPadron = false;
         this.noExisteEnPadron = true;
       }
@@ -324,9 +323,7 @@ export class VacunacionCovidComponent implements OnInit {
 
   }
 
-  buscarCita(dni: string) {
 
-  }
 
   validarForm() {
 
@@ -457,10 +454,6 @@ export class VacunacionCovidComponent implements OnInit {
 
           this.edad_paciente = respuesta.edad
 
-          if (this.formGroup2.value.TIENE_DISCAPACIDAD == true) {
-            this.rout.navigate(['/datos-actualizados'])
-          }
-
 
 
           if (this.edad_paciente >= respuesta.punto.EDAD_CITA && respuesta.punto.CITAR_HABILITADO == 'HABILITADO' && this.formGroup2.value.TIENE_DISCAPACIDAD == false) {
@@ -474,9 +467,6 @@ export class VacunacionCovidComponent implements OnInit {
               this.rout.navigate(['/cita-programada-resultado'])
             })
           } else {
-
-
-
 
             this.rout.navigate(['/datos-actualizados'])
           }
@@ -571,7 +561,7 @@ export class VacunacionCovidComponent implements OnInit {
 
   Numeros(event) {//Solo numeros
     var out = '';
-    console.log(event)
+
     var filtro = '1234567890';//Caracteres validos
 
     this.formGroup2.controls
@@ -610,7 +600,7 @@ export class VacunacionCovidComponent implements OnInit {
 
   }
 
-  fechas_disponibles:any[]
+  fechas_disponibles: any[]
   cambiarValidaciones() {
 
     this.formGroup2.updateValueAndValidity()

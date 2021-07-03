@@ -173,7 +173,7 @@
       <img src="assets/logo_diresa.png" style="width: 30%" />
     </div>
 
-    <div class="col-md-6 SUBTITULO">ADULTOS MAYORES</div>
+    <div class="col-md-6 SUBTITULO">MAYORES 55 AÑOS</div>
   </div>
   <div class="row">
     <!-- left column -->
@@ -350,6 +350,9 @@
               >
             </div>
 
+
+
+
             <div
               class="position-relative p-3 bg-gray"
               style="height: 180px"
@@ -357,11 +360,21 @@
             >
               <div class="ribbon-wrapper ribbon-xl">
                 <div class="ribbon bg-warning text-lg">ATENCION</div>
+                <H1>USTED YA SE ENCUENTRA REGISTRADO EN NUESTRA BASE DE DATOS</H1>
+                <small
+                  >SE LE INFORMARA EL MOMENTO QUE SE LE PROGRAME SU CITA AL NUMERO DE CELULAR SUMINISTRADO  </small
+                >
               </div>
-              <H1>USTED YA SE ENCUENTRA REGISTRADO EN NUESTRA BASE DE DATOS</H1>
-              <small
-                >SE LE INFORMARA EL MOMENTO QUE SE LE PROGRAME SU CITA AL NUMERO DE CELULAR SUMINISTRADO  </small
-              >
+            
+              <div class="bg-primary">
+                <p>Puede Actualizar sus Datos</p>
+                <p>
+                  <a class="btn btn-app">
+                    <i class="fas fa-edit"></i> Actualizar Mis datos
+                  </a>
+                </p>
+              </div>
+             
             </div>
 
             <div
@@ -374,7 +387,7 @@
               </div>
               <H4
                 >La inscripción para vacunarse en la plataforma http://gorecaj.pe/vacunacion <br />
-                 está habilitada en este momento para todas las personas mayores de 60 años. <br />
+                 está habilitada en este momento para todas las personas mayores de 55 años. <br />
                </H4
               >
              
@@ -635,7 +648,8 @@
 
     
     
-      <form role="form" [formGroup]="formGroup2" *ngIf="(citas.length==0&&vacunas.dosis_programar!='ninguna')&&edad_paciente>=60&&existe_padron_act==false&&existeEnPadron==true">
+      <form role="form" [formGroup]="formGroup2" *ngIf="(citas.length==0&&vacunas.dosis_programar!='ninguna')
+      &&edad_paciente>=55&&existe_padron_act==false&&existeEnPadron==true">
         <div class="card card-success">
           <div class="card-header">
             <h3 class="card-title">DISTRITO DE RESIDENCIA HABITUAL *</h3>
@@ -820,6 +834,11 @@
                     <div class="form-check">
                       <input type="checkbox" class="form-check-input" id="exampleCheck1"  (change)="cambio_movilidad($event)"    formControlName="movilidad" [(ngModel)]="movilidad">
                       <label class="form-check-label" for="exampleCheck1">DISPONE DE MOVILIDAD</label>
+                    </div>
+
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1"  (change)="cambio_movilidad($event)"    formControlName="movilidad" [(ngModel)]="movilidad">
+                      <label class="form-check-label" for="exampleCheck1">CUENTA CON BICICLETA</label>
                     </div>
                    
                   </div>
