@@ -465,8 +465,8 @@
                         ></span>
 
                         <div class="info-box-content">
-                          <span class="info-box-text">MOTIVO DE VISITA</span>
-                          <span class="info-box-number">PRIMERA DOSIS VACUNACION ANTICOVID</span>
+                          <span class="info-box-text">MOTIVO DE CITA</span>
+                          <span class="info-box-number">{{this.mensaje_dosis}} VACUNACION ANTICOVID</span>
                         </div>
                         <!-- /.info-box-content -->
                       </div>
@@ -837,7 +837,7 @@
                     </div>
 
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1"  (change)="cambio_movilidad($event)"    formControlName="movilidad" [(ngModel)]="movilidad">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1"  (change)="cambio_movilidad($event)"    formControlName="movilidad_bici" [(ngModel)]="movilidad_bici">
                       <label class="form-check-label" for="exampleCheck1">CUENTA CON BICICLETA</label>
                     </div>
                    
@@ -891,15 +891,17 @@
                       <label>FECHA DISPONIBLES</label>
                       <div class="input-group">
                         <input
+                        disabled
                           class="form-control"
                           placeholder="dd/MM/yyyy"
                           name="dp"
                           ngbDatepicker
-                          #d="ngbDatepicker"
+                          formControlName="FECHA_CITA"
+                    
                           (click)="d.toggle()"
-                          formControlName=""
+                   
                           [minDate]="{ year: 2021, month: 6, day: 7 }"
-                          [maxDate]="{ year: 2021, month: 6, day: 9 }"
+                          [maxDate]="{ year: 2022, month: 6, day: 9 }"
                           [(ngModel)]="model2"
                           (dateSelect)="cambioFecha()"
           
@@ -908,7 +910,7 @@
                         "
                         />
                       </div>
-                      <span class="badge badge-danger navbar-badge" *ngIf="edad_descripcion.anios>=0">EDAD ACTUAL :{{edad_descripcion.anios}} años {{edad_descripcion.meses}} meses {{edad_descripcion.dias}} dias</span>
+                      <span class="badge badge-info navbar-badge" *ngIf="edad_descripcion.anios>=0">ULTIMO DIGITO DNI: {{ultimo_digito}}</span>
                     </div>
                   </div>
                   <div class="col-md-12"><table class="table table-sm">

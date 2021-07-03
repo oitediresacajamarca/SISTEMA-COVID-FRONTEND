@@ -154,6 +154,7 @@ export class VacunacionCovidComponent implements OnInit {
   edad_descripcion
   vacunas: any = { dosis_programar: 'n', dosis: [] }
   mensaje_dosis = ''
+  ultimo_digito
   _keyUp(event: any) {
     const pattern = /[0-9]/;
     if (!pattern.test(event.target.value)) {
@@ -165,7 +166,7 @@ export class VacunacionCovidComponent implements OnInit {
   get today() {
     return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
   }
-  @ViewChild('ngbDatepicker') ngbDatepicker: any;
+
   public minDate: Date = void 0;;
   public maxDate: Date = void 0;
   formGroup: FormGroup;
@@ -212,9 +213,11 @@ export class VacunacionCovidComponent implements OnInit {
       TIPO_SEGURO: ['', Validators.required],
       TIENE_DISCAPACIDAD: [false, Validators.required],
       DISCAPACIDAD_DESCRIPCION: ['',],
-      movilidad: [],
+      movilidad: [''],
+      movilidad_bici:[''],
       CITA: [''],
-      FECHA_CITA: ['']
+      FECHA_CITA: [''],
+      MOTIVO:['']
     }, { validators: [this.validator.comparisonValidator()] })
 
 
@@ -239,7 +242,9 @@ export class VacunacionCovidComponent implements OnInit {
 
       this.edad_paciente = respuesta.Edad
       this.edad_descripcion = respuesta.edad_descripcion
-
+      let fecha_asig=new Date(respuesta.mensaje.fecha_asignada)
+      this.model2={ day: fecha_asig.getDate(), month: fecha_asig.getMonth() + 1, year:fecha_asig.getFullYear() }
+      this.formGroup2.controls['MOTIVO'].setValue(respuesta.vacunas.dosis_programar)
 
       if (respuesta.mensaje.existeenhis) {
 
@@ -428,6 +433,7 @@ export class VacunacionCovidComponent implements OnInit {
   }
 
   movilidad = false;
+  movilidad_bici=false;
   dosis_aplicadas: any = { dosis_programar: 'ninguna' }
 
 
@@ -445,6 +451,7 @@ export class VacunacionCovidComponent implements OnInit {
     if (this.formGroup2.valid) {
 
 
+      console.log(this.formGroup2.valid)
       this.modalService.open(content).result.then((result) => {
         let genera_cita = false
 
@@ -545,6 +552,16 @@ export class VacunacionCovidComponent implements OnInit {
           return true
         }
 
+        if (this.movilidad_bici == true && punto.TIPO == 'VACUNA_ACTIVA') {
+          return true
+
+        }
+
+        if (this.movilidad_bici == false && punto.TIPO != 'VACUNA_ACTIVA') {
+
+          return true
+        }
+
 
 
       })
@@ -581,7 +598,7 @@ export class VacunacionCovidComponent implements OnInit {
 
 
   async seleciono_punto(event) {
-    console.log(event)
+   
 
     let cupos = await this.cupos_puntos_serv.devolver_cupos_disponibles(event.target.value).toPromise()
     this.cupos = cupos;
