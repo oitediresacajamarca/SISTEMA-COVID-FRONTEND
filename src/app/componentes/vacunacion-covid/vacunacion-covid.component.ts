@@ -214,10 +214,10 @@ export class VacunacionCovidComponent implements OnInit {
       TIENE_DISCAPACIDAD: [false, Validators.required],
       DISCAPACIDAD_DESCRIPCION: ['',],
       movilidad: [''],
-      movilidad_bici:[''],
-      CITA: [''],
+      movilidad_bici: [''],
+      CITA: ['', Validators.required],
       FECHA_CITA: [''],
-      MOTIVO:['']
+      MOTIVO: ['']
     }, { validators: [this.validator.comparisonValidator()] })
 
 
@@ -239,12 +239,12 @@ export class VacunacionCovidComponent implements OnInit {
 
       console.log(respuesta)
       this.existeEnPadron = false;
-      this.ultimo_digito=respuesta.mensaje.ultimoCaracter
+      this.ultimo_digito = respuesta.mensaje.ultimoCaracter
 
       this.edad_paciente = respuesta.Edad
       this.edad_descripcion = respuesta.edad_descripcion
-      let fecha_asig=new Date(respuesta.mensaje.fecha_asignada)
-      this.model2={ day: fecha_asig.getDate(), month: fecha_asig.getMonth() + 1, year:fecha_asig.getFullYear() }
+      let fecha_asig = new Date(respuesta.mensaje.fecha_asignada)
+      this.model2 = { day: fecha_asig.getDate(), month: fecha_asig.getMonth() + 1, year: fecha_asig.getFullYear() }
       this.formGroup2.controls['MOTIVO'].setValue(respuesta.vacunas.dosis_programar)
 
       if (respuesta.mensaje.existeenhis) {
@@ -386,6 +386,11 @@ export class VacunacionCovidComponent implements OnInit {
         this.toast.show({ mensaje: 'DEBE DE INDICARNOS EL TIPO DE SEGURO QUE POSEE EN CASO DE NO CONTAR INDICAR SIN SEGURO' })
       }
 
+      if (errors[0] == 'CITA') {
+
+        this.toast.show({ mensaje: 'DEBE DE ELEGIR UN HORARIO QUE ESTE DISPONIBLE PARA EL PUNTO DE VACUNACION SELECCIONADO' })
+      }
+
 
 
 
@@ -434,7 +439,7 @@ export class VacunacionCovidComponent implements OnInit {
   }
 
   movilidad = false;
-  movilidad_bici=false;
+  movilidad_bici = false;
   dosis_aplicadas: any = { dosis_programar: 'ninguna' }
 
 
@@ -452,7 +457,7 @@ export class VacunacionCovidComponent implements OnInit {
     if (this.formGroup2.valid) {
 
 
-      console.log(this.formGroup2.valid)
+      console.log(this.formGroup2)
       this.modalService.open(content).result.then((result) => {
         let genera_cita = false
 
@@ -595,19 +600,28 @@ export class VacunacionCovidComponent implements OnInit {
 
 
   selectedCountry: string;
-  cupos: any[]
+  cupos: any[]=[]
 
 
   async seleciono_punto(event) {
+
+
+      this.devolver_cupos_por_punto_fecha(event.target.value,this.formGroup2.controls['FECHA_CITA'].value)
    
 
-    let cupos = await this.cupos_puntos_serv.devolver_cupos_disponibles(event.target.value).toPromise()
-    this.cupos = cupos;
-
-    this.devolverFechasDisponibles(event.target.value)
+  
 
 
   }
+
+
+
+  async devolver_cupos_por_punto_fecha(nombre_punto: string, fecha: string) {
+    let cupos = await this.cupos_puntos_serv.devolver_cupos_por_fecha_punto(nombre_punto, fecha).toPromise()
+    this.cupos = cupos;
+
+  }
+
   async devolverFechasDisponibles(nombre_punto: string) {
 
 
