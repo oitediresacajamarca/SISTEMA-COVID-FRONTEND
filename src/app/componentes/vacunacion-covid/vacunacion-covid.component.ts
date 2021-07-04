@@ -239,6 +239,7 @@ export class VacunacionCovidComponent implements OnInit {
 
       console.log(respuesta)
       this.existeEnPadron = false;
+      this.ultimo_digito=respuesta.mensaje.ultimoCaracter
 
       this.edad_paciente = respuesta.Edad
       this.edad_descripcion = respuesta.edad_descripcion
