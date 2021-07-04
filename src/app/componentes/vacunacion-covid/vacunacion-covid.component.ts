@@ -183,6 +183,8 @@ export class VacunacionCovidComponent implements OnInit {
 
   }
 
+  CITAR_HABILITADO='DESABILITADO'
+
   puntos_vacunacion: any[] = []
   edad_paciente: number;
   existe_padron_act: boolean = false
@@ -386,7 +388,7 @@ export class VacunacionCovidComponent implements OnInit {
         this.toast.show({ mensaje: 'DEBE DE INDICARNOS EL TIPO DE SEGURO QUE POSEE EN CASO DE NO CONTAR INDICAR SIN SEGURO' })
       }
 
-      if (errors[0] == 'CITA') {
+      if (errors[0] == 'CITA'&& this.CITAR_HABILITADO=='HABILITADO') {
 
         this.toast.show({ mensaje: 'DEBE DE ELEGIR UN HORARIO QUE ESTE DISPONIBLE PARA EL PUNTO DE VACUNACION SELECCIONADO' })
       }
@@ -446,13 +448,25 @@ export class VacunacionCovidComponent implements OnInit {
   actualizar(content) {
 
     this.formGroup2.updateValueAndValidity()
-    this.validarForm()
+  
 
     if (this.formGroup2.value.CITA != undefined && this.formGroup2.value.CITA != '') {
 
       this.formGroup2.value.CITA = this.cupos[this.formGroup2.value.CITA]
     }
+    else{
+      if(this.CITAR_HABILITADO!=='HABILITADO'){
+        this.formGroup2.controls['CITA'].setErrors([])
+        this.formGroup2.controls['CITA'].setValue({vaci:''})
+      
 
+      }
+    
+    }
+
+    console.log(this.formGroup2.value.CITA )
+
+    this.validarForm()
 
     if (this.formGroup2.valid) {
 
@@ -539,9 +553,11 @@ export class VacunacionCovidComponent implements OnInit {
     this.PuntoVacunacionServic.devolverPuntosPorDistrito(this.formGroup2.value.DISTRITO).subscribe(async (puntos) => {
 
       let punto_filtrado: any[]
+    
       punto_filtrado = puntos.map((punto) => {
 
-        return { nombre_punto: punto._NOMBRE_PUNTO_VACUNACION_, EDAD_CITA: punto.EDAD_CITA, TIPO: punto.TIPO }
+        return { nombre_punto: punto._NOMBRE_PUNTO_VACUNACION_, EDAD_CITA: punto.EDAD_CITA, TIPO: punto.TIPO ,
+          CITAR_HABILITADO:punto.CITAR_HABILITADO}
 
       })
 
@@ -604,7 +620,13 @@ export class VacunacionCovidComponent implements OnInit {
 
 
   async seleciono_punto(event) {
+   let punto=
+    this.puntos_vacunacion.find((punto)=>{
+return punto.nombre_punto==event.target.value
 
+    })
+
+    this.CITAR_HABILITADO=punto.CITAR_HABILITADO
 
       this.devolver_cupos_por_punto_fecha(event.target.value,this.formGroup2.controls['FECHA_CITA'].value)
    

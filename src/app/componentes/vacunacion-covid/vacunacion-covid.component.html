@@ -1,6 +1,3 @@
-
-  
-
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
   <!-- Left navbar links -->
   <ul class="navbar-nav">
@@ -162,7 +159,6 @@
 </nav>
 
 <div class="container">
-
   <div class="row">
     <div class="col-md-4">
       <img src="assets/logotipogrc.png" style="width: 80%" />
@@ -177,7 +173,7 @@
   </div>
   <div class="row">
     <!-- left column -->
-  
+
     <div class="col-md-12">
       <!-- general form elements -->
       <div class="card card-primary">
@@ -240,12 +236,16 @@
                       [(ngModel)]="model"
                       (dateSelect)="cambioFecha()"
                       disabled="true"
-                      [ngbTooltip]="
-                     'dia'
-                    "
+                      [ngbTooltip]="'dia'"
                     />
                   </div>
-                  <span class="badge badge-danger navbar-badge" *ngIf="edad_descripcion.anios>=0">EDAD ACTUAL :{{edad_descripcion.anios}} años {{edad_descripcion.meses}} meses {{edad_descripcion.dias}} dias</span>
+                  <span
+                    class="badge badge-danger navbar-badge"
+                    *ngIf="edad_descripcion.anios >= 0"
+                    >EDAD ACTUAL :{{ edad_descripcion.anios }} años
+                    {{ edad_descripcion.meses }} meses
+                    {{ edad_descripcion.dias }} dias</span
+                  >
                 </div>
               </div>
 
@@ -262,8 +262,6 @@
                   </button>
                 </div>
               </div>
-
-              
             </div>
 
             <div class="form-group">
@@ -338,7 +336,11 @@
             <div
               class="position-relative p-3 bg-gray"
               style="height: 180px"
-              *ngIf="existeEnPadron&&vacunas.dosis_programar!='ninguna'&&existe_padron_act==false"
+              *ngIf="
+                existeEnPadron &&
+                vacunas.dosis_programar != 'ninguna' &&
+                existe_padron_act == false
+              "
             >
               <div class="ribbon-wrapper ribbon-xl">
                 <div class="ribbon bg-warning text-lg">FELICIDADES</div>
@@ -350,41 +352,28 @@
               >
             </div>
 
-
-
-
-
-<div  *ngIf="existe_padron_act==true&&citas.length==0">
-
-            <div
-              class="position-relative p-3 bg-gray"
-              style="height: 180px"
-             
-            >
-              <div class="ribbon-wrapper ribbon-xl">
-                <div class="ribbon bg-warning text-lg">ATENCION</div>
-              </div>
-                <H1>USTED YA SE ENCUENTRA REGISTRADO EN NUESTRA BASE DE DATOS</H1>
-                <small
-                  >SE LE INFORMARA EL MOMENTO QUE SE LE PROGRAME SU CITA AL NUMERO DE CELULAR SUMINISTRADO  </small
+            <div *ngIf="existe_padron_act == true && citas.length == 0">
+              <div class="position-relative p-3 bg-gray" style="height: 180px">
+                <div class="ribbon-wrapper ribbon-xl">
+                  <div class="ribbon bg-warning text-lg">ATENCION</div>
+                </div>
+                <H1
+                  >USTED YA SE ENCUENTRA REGISTRADO EN NUESTRA BASE DE DATOS</H1
                 >
-          
-            
-              <div >
-               
-              </div>
+                <small
+                  >SE LE INFORMARA EL MOMENTO QUE SE LE PROGRAME SU CITA AL
+                  NUMERO DE CELULAR SUMINISTRADO
+                </small>
 
-            
-            
-             
+                <div></div>
+              </div>
+              <p>Puede Actualizar sus Datos</p>
+              <p>
+                <a class="btn btn-app" (click)="existe_padron_act = false">
+                  <i class="fas fa-edit"></i> Actualizar Mis datos
+                </a>
+              </p>
             </div>
-            <p>Puede Actualizar sus Datos</p>
-            <p>
-              <a class="btn btn-app" (click)="existe_padron_act=false">
-                <i class="fas fa-edit"></i> Actualizar Mis datos
-              </a>
-            </p>
-          </div>
             <div
               class="position-relative p-3 bg-info"
               style="height: 180px"
@@ -394,36 +383,40 @@
                 <div class="ribbon bg-warning text-sm">ATENCION</div>
               </div>
               <H4
-                >La inscripción para vacunarse en la plataforma http://gorecaj.pe/vacunacion <br />
-                 está habilitada en este momento para todas las personas mayores de 55 años. <br />
-               </H4
-              >
-             
+                >La inscripción para vacunarse en la plataforma
+                http://gorecaj.pe/vacunacion <br />
+                está habilitada en este momento para todas las personas mayores
+                de 55 años. <br />
+              </H4>
             </div>
 
             <div
-            class="position-relative p-3 bg-info"
-            style="height: 180px"
-            *ngIf="vacunas.dosis_programar=='ninguna'"
-          >
-            <div class="ribbon-wrapper ribbon-xl">
-              <div class="ribbon bg-warning text-lg">FELICIDADES</div>
-            </div>
-            <H1
-              >USTED YA HA SIDO <br />
-              VACUNADO<BR />
-              CON TODAS LAS DOSIS</H1            >
-            <small
-              >GRACIAS POR CONFIAR EN NOSOTROS</small
+              class="position-relative p-3 bg-info"
+              style="height: 180px"
+              *ngIf="vacunas.dosis_programar == 'ninguna'"
             >
-          </div>
+              <div class="ribbon-wrapper ribbon-xl">
+                <div class="ribbon bg-warning text-lg">FELICIDADES</div>
+              </div>
+              <H1
+                >USTED YA HA SIDO <br />
+                VACUNADO<BR /> CON TODAS LAS DOSIS</H1
+              >
+              <small>GRACIAS POR CONFIAR EN NOSOTROS</small>
+            </div>
 
-  
-            <div class="card card-default" *ngIf=" citas.length>0&&vacunas.dosis_programar!='ninguna' &&vacunas.dosis_programar!='n'">
+            <div
+              class="card card-default"
+              *ngIf="
+                citas.length > 0 &&
+                vacunas.dosis_programar != 'ninguna' &&
+                vacunas.dosis_programar != 'n'
+              "
+            >
               <div class="card-header">
-                <h3 class="card-title" >
+                <h3 class="card-title">
                   <i class="fas fa-bullhorn"></i>
-                 CITAS PENDIENTES
+                  CITAS PENDIENTES
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -474,124 +467,103 @@
 
                         <div class="info-box-content">
                           <span class="info-box-text">MOTIVO DE CITA</span>
-                          <span class="info-box-number">{{this.mensaje_dosis}} VACUNACION ANTICOVID</span>
+                          <span class="info-box-number"
+                            >{{ this.mensaje_dosis }} VACUNACION ANTICOVID</span
+                          >
                         </div>
                         <!-- /.info-box-content -->
                       </div>
                     </div>
-                  
                   </div>
-
-                  
-                 
                 </div>
               </div>
               <!-- /.card-body -->
             </div>
 
-            <div class="card card-default" *ngIf="vacunas.dosis.length>0">
+            <div class="card card-default" *ngIf="vacunas.dosis.length > 0">
               <div class="card-header">
-                <h3 class="card-title" >
+                <h3 class="card-title">
                   <i class="fas fa-bullhorn"></i>
-                 DOSIS A SUMINISTRADAS
+                  DOSIS A SUMINISTRADAS
                 </h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body" >
+              <div class="card-body">
                 <div class="callout callout-danger">
-               
                   <div class="row" *ngFor="let dosis of vacunas.dosis">
-                
                     <div class="col-md-4">
-                      <div class="info-box" >
+                      <div class="info-box">
                         <span class="info-box-icon bg-info"
                           ><i class="far fa-envelope"></i
                         ></span>
 
                         <div class="info-box-content">
-                          <span class="info-box-text"
-                            >Numero de Dosis </span
-                          >
+                          <span class="info-box-text">Numero de Dosis </span>
                           <span class="info-box-number">
-                            {{dosis.valorlab}}
-                          </span>
-                         
-                        </div>
-                        <!-- /.info-box-content -->
-                      </div>
-                    </div>
-
-
-                    <div class="col-md-4">
-                      <div class="info-box" >
-                        <span class="info-box-icon bg-info"
-                          ><i class="far fa-envelope"></i
-                        ></span>
-
-                        <div class="info-box-content">
-                       
-                          <span class="info-box-text"
-                            >Establecimiento </span
-                          >
-                          <span class="info-box-number">
-                            {{dosis.estnombre}}
+                            {{ dosis.valorlab }}
                           </span>
                         </div>
                         <!-- /.info-box-content -->
                       </div>
                     </div>
 
-
-
-
-
-                    
                     <div class="col-md-4">
-                      <div class="info-box" >
+                      <div class="info-box">
                         <span class="info-box-icon bg-info"
                           ><i class="far fa-envelope"></i
                         ></span>
 
                         <div class="info-box-content">
-                       
-                          <span class="info-box-text"
-                            >FECHA DE VACUNACION </span
-                          >
+                          <span class="info-box-text">Establecimiento </span>
                           <span class="info-box-number">
-                            {{dosis.periodo}}
+                            {{ dosis.estnombre }}
                           </span>
                         </div>
                         <!-- /.info-box-content -->
                       </div>
                     </div>
 
+                    <div class="col-md-4">
+                      <div class="info-box">
+                        <span class="info-box-icon bg-info"
+                          ><i class="far fa-envelope"></i
+                        ></span>
 
-
+                        <div class="info-box-content">
+                          <span class="info-box-text"
+                            >FECHA DE VACUNACION
+                          </span>
+                          <span class="info-box-number">
+                            {{ dosis.periodo }}
+                          </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                      </div>
+                    </div>
                   </div>
-
-                 
-                  
-                 
                 </div>
               </div>
               <!-- /.card-body -->
             </div>
 
-           
-
-            <div class="card card-default" *ngIf="vacunas.dosis_programar!='ninguna'&&vacunas.dosis_programar!='n'&&citas.length==0">
+            <div
+              class="card card-default"
+              *ngIf="
+                vacunas.dosis_programar != 'ninguna' &&
+                vacunas.dosis_programar != 'n' &&
+                citas.length == 0
+              "
+            >
               <div class="card-header">
-                <h3 class="card-title" >
+                <h3 class="card-title">
                   <i class="fas fa-bullhorn"></i>
-                 DOSIS A PROGRAMAR
+                  DOSIS A PROGRAMAR
                 </h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body" >
+              <div class="card-body">
                 <div class="callout callout-danger">
-               
                   <div class="row">
-                
                     <div class="col-md-6">
                       <div class="info-box">
                         <span class="info-box-icon bg-info"
@@ -600,25 +572,20 @@
 
                         <div class="info-box-content">
                           <span class="info-box-text"
-                            >LA DOSIS QUE LE CORRESPONDE ES: </span
-                          >
+                            >LA DOSIS QUE LE CORRESPONDE ES:
+                          </span>
                           <span class="info-box-number">
-                            {{mensaje_dosis}}
+                            {{ mensaje_dosis }}
                           </span>
                         </div>
                         <!-- /.info-box-content -->
                       </div>
                     </div>
                   </div>
-
-                 
-                  
-                 
                 </div>
               </div>
               <!-- /.card-body -->
             </div>
-
 
             <div
               class="position-relative p-3 bg-info"
@@ -643,14 +610,17 @@
 
       <!-- /.card -->
 
-
-      
-
-
-    
-    
-      <form role="form" [formGroup]="formGroup2" *ngIf="(citas.length==0&&vacunas.dosis_programar!='ninguna')
-      &&edad_paciente>=55&&existe_padron_act==false&&existeEnPadron==true">
+      <form
+        role="form"
+        [formGroup]="formGroup2"
+        *ngIf="
+          citas.length == 0 &&
+          vacunas.dosis_programar != 'ninguna' &&
+          edad_paciente >= 55 &&
+          existe_padron_act == false &&
+          existeEnPadron == true
+        "
+      >
         <div class="card card-success">
           <div class="card-header">
             <h3 class="card-title">DISTRITO DE RESIDENCIA HABITUAL *</h3>
@@ -665,7 +635,7 @@
                     formControlName="PROVINCIA"
                     (change)="FILTRAR_DISTRITOS()"
                   >
-                  <option>SELECIONE PROVINCIA</option>
+                    <option>SELECIONE PROVINCIA</option>
                     <option>CAJAMARCA</option>
                     <option>CAJABAMBA</option>
                     <option>CELENDIN</option>
@@ -703,7 +673,7 @@
                     (change)="FITRAR_PUNTOS_VACUNACION()"
                     (click)="FITRAR_PUNTOS_VACUNACION()"
                   >
-                  <option>SELECCIONE DISTRITO</option>
+                    <option>SELECCIONE DISTRITO</option>
                     <option
                       [value]="distrito.codigo_distrito"
                       *ngFor="let distrito of distritos_filtrados"
@@ -831,39 +801,48 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-4">
-
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1"  (change)="cambio_movilidad($event)"    formControlName="movilidad" [(ngModel)]="movilidad">
-                      <label class="form-check-label" for="exampleCheck1">DISPONE DE MOVILIDAD</label>
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="exampleCheck1"
+                        (change)="cambio_movilidad($event)"
+                        formControlName="movilidad"
+                        [(ngModel)]="movilidad"
+                      />
+                      <label class="form-check-label" for="exampleCheck1"
+                        >DISPONE DE MOVILIDAD</label
+                      >
                     </div>
 
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1"  (change)="cambio_movilidad($event)"    formControlName="movilidad_bici" [(ngModel)]="movilidad_bici">
-                      <label class="form-check-label" for="exampleCheck1">CUENTA CON BICICLETA</label>
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="exampleCheck1"
+                        (change)="cambio_movilidad($event)"
+                        formControlName="movilidad_bici"
+                        [(ngModel)]="movilidad_bici"
+                      />
+                      <label class="form-check-label" for="exampleCheck1"
+                        >CUENTA CON BICICLETA</label
+                      >
                     </div>
-                   
                   </div>
                   <div class="col-md-4">
-                   
-
                     <div class="form-group">
-
-                    
-
-                   
                       <label>SELECCIONAR PUNTO</label>
                       <select
                         class="form-control"
-                        formControlName="NOMBRE_PUNTO_VACUNACION" (change)="seleciono_punto($event)"
+                        formControlName="NOMBRE_PUNTO_VACUNACION"
+                        (change)="seleciono_punto($event)"
                       >
-
-
                         <option value="">
                           SELECCIONE SU PUNTO DE VACUNACION *
                         </option>
                         <option
                           *ngFor="let punto of puntos_vacunacion"
-                          [value]="punto.nombre_punto" 
+                          [value]="punto.nombre_punto"
                         >
                           {{ punto.nombre_punto }}
                         </option>
@@ -883,75 +862,79 @@
                         >Punto de Vacunacion es requerido</span
                       >
                     </div>
-                 
-                 
-                 
                   </div>
                   <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group" *ngIf="CITAR_HABILITADO=='HABILITADO'">
                       <label>FECHA DISPONIBLES</label>
                       <div class="input-group">
                         <input
-                        disabled
+                          disabled
                           class="form-control"
                           placeholder="dd/MM/yyyy"
                           name="dp"
                           ngbDatepicker
                           formControlName="FECHA_CITA"
-                    
                           (click)="d.toggle()"
-                   
                           [minDate]="{ year: 2021, month: 6, day: 7 }"
                           [maxDate]="{ year: 2022, month: 6, day: 9 }"
                           [(ngModel)]="model2"
                           (dateSelect)="cambioFecha()"
-          
-                          [ngbTooltip]="
-                         'dia'
-                        "
+                          [ngbTooltip]="'dia'"
                         />
                       </div>
-                      <span class="badge badge-info navbar-badge" *ngIf="edad_descripcion.anios>=0"> <h5> ULTIMO DIGITO DNI:  {{ultimo_digito}}</h5></span>
+                      <span
+                        class="badge badge-info navbar-badge"
+                        *ngIf="edad_descripcion.anios >= 0"
+                      >
+                        <h5>ULTIMO DIGITO DNI: {{ ultimo_digito }}</h5></span
+                      >
                     </div>
                   </div>
-                  <div class="col-md-12"><table class="table table-sm">
-                    <thead>
-                      <tr>
-                  
-                        <th style="width: 10px">#</th>
-                        <th>DIA</th>
-                        <th>HORARIOS</th>
-                        <th style="width: 40px">CUPOS TOTALES</th>
-                        <th style="width: 40px">CUPOS OCUPADOS</th>
-                        <th style="width: 40px">CUPOS DISPONIBLES</th>
-                        <th style="width: 10px">SELECIONAR</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let cupo of cupos;let i = index">
+                  <div class="col-md-10">
+                    <div class="table-responsive-sm" *ngIf="CITAR_HABILITADO=='HABILITADO'">
+                      <table class="table table-sm table-condensed">
+                        <thead>
+                          <tr>
+                            <th style="width: 5%" scope="col">#</th>
+                            <th style="width: 5%" scope="col">DIA</th>
+                            <th style="width: 5%" scope="col">HORARIOS</th>
+                            <th style="width: 5%" scope="col">CUPOS TOTALES</th>
+                            <th style="width: 5%" scope="col">
+                              CUPOS OCUPADOS
+                            </th>
+                            <th style="width: 5%" scope="col">
+                              CUPOS DISPONIBLES
+                            </th>
+                            <th style="width: 10%" scope="col">SELECCIONAR</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let cupo of cupos; let i = index">
+                            <th scope="row">{{ i + 1 }}</th>
+                            <td class="peque">{{ cupo.FECHA_CITA | date: "dd/MM/yyyy" }}</td>
 
-                        <td>{{i+1}}</td>
-                        <td>{{cupo.FECHA_CITA|date:'dd/MM/yyyy'}}</td>
-                       
-                          <td>{{cupo.HORARIO_CITA}}</td>
-                          <td>{{cupo.CUPOS_HORA}}</td>
-                          <td>{{cupo.CUPOS_OCUPADOS}}</td>
-                   
-         
-                        <td><span class="badge bg-info">{{cupo.CUPOS_HORA-cupo.CUPOS_OCUPADOS}}</span></td>
-                        <td>
-                          <input type="radio"
+                            <td class="peque">{{ cupo.HORARIO_CITA }}</td>
+                            <td>{{ cupo.CUPOS_HORA }}</td>
+                            <td>{{ cupo.CUPOS_OCUPADOS }}</td>
 
-       name="CITA"
-       value="{{i}}"  
-       formControlName="CITA"   
-      >
-                        </td>
-                      </tr>
-        
-                    </tbody>
-                  </table></div>
-            
+                            <td>
+                              <span class="badge bg-info">{{
+                                cupo.CUPOS_HORA - cupo.CUPOS_OCUPADOS
+                              }}</span>
+                            </td>
+                            <td>
+                              <input
+                                type="radio"
+                                name="CITA"
+                                value="{{ i }}"
+                                formControlName="CITA"
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- /.card-body -->
@@ -1048,7 +1031,8 @@
                   type="checkbox"
                   class="custom-control-input"
                   id="customSwitch1"
-                  formControlName="TIENE_DISCAPACIDAD" (change)="cambiarValidaciones()"
+                  formControlName="TIENE_DISCAPACIDAD"
+                  (change)="cambiarValidaciones()"
                 />
                 <label class="custom-control-label" for="customSwitch1"
                   >TENGO DISCAPACIDAD QUE NO ME PERMITE MOVILIZARME</label
@@ -1161,6 +1145,5 @@
     </div>
   </div>
 </ng-template>
-
 
 <app-toast aria-live="polite" aria-atomic="true"></app-toast>

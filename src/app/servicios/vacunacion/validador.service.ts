@@ -34,6 +34,38 @@ export class ValidadorService {
           group.controls['NOMBRE_PUNTO_VACUNACION'].setErrors(null)
         }
       }
+
+
+
+
+      if(group.controls['TIENE_DISCAPACIDAD'].value==true){
+        group.controls['NOMBRE_PUNTO_VACUNACION'].setErrors(null)
+        
+
+        if(group.controls['movilidad'].value==true){
+          console.log( group.controls['NOMBRE_PUNTO_VACUNACION'])
+          if( group.controls['NOMBRE_PUNTO_VACUNACION'].value==''){
+            group.controls['NOMBRE_PUNTO_VACUNACION'].setErrors({required:true})
+          }else{
+            group.controls['NOMBRE_PUNTO_VACUNACION'].setErrors(null)
+          }
+
+       
+        }
+      }else {
+        if( group.controls['NOMBRE_PUNTO_VACUNACION'].value==''){
+          group.controls['NOMBRE_PUNTO_VACUNACION'].setErrors({required:true})
+        }else{
+          group.controls['NOMBRE_PUNTO_VACUNACION'].setErrors(null)
+        }
+      }
+
+
+
+
+
+
+
        return;
  };
 }
