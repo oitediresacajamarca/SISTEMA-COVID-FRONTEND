@@ -627,8 +627,11 @@ return punto.nombre_punto==event.target.value
     })
 
     this.CITAR_HABILITADO=punto.CITAR_HABILITADO
-
+    if(   this.CITAR_HABILITADO=='HABILITADO'){
       this.devolver_cupos_por_punto_fecha(event.target.value,this.formGroup2.controls['FECHA_CITA'].value)
+    }
+
+
    
 
   
