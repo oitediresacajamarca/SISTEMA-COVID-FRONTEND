@@ -294,11 +294,11 @@ export class VacunacionCovidComponent implements OnInit {
         this.existeEnPadron = true;
         this.noExisteEnPadron = false;
       }
-      if (this.edad_paciente >= 50) {
+      if (this.edad_paciente >= 47) {
         this.existeEnPadron = true;
         this.noExisteEnPadron = false;
       }
-      if (this.edad_paciente < 50) {
+      if (this.edad_paciente < 47) {
         this.existeEnPadron = false;
         this.noExisteEnPadron = true;
       }
